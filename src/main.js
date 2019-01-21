@@ -72,23 +72,24 @@ new Vue({
   template: '<App/>',
   created () {
     let config = {
-      /*  Alk firebase setting
-      apiKey: 'AIzaSyBqUfXzta0ZsTcwHUtZsX6azFScIdf2UUU',
-      authDomain: 'react-event.firebaseapp.com',
-      databaseURL: 'https://react-event.firebaseio.com',
-      projectId: 'react-event',
-      storageBucket: 'react-event.appspot.com',
-      messagingSenderId: '610338161838'
-        alk firebase end */
 
-      /* Danh's Veutify-template Firebase setting */
+      /* Danh's Veutify-template Firebase */
       apiKey: 'AIzaSyA6q3Cx9io25_OSYKgOZtAs1YrvugRG2bA',
       authDomain: 'vuetify-template-c69fb.firebaseapp.com',
       databaseURL: 'https://vuetify-template-c69fb.firebaseio.com',
       projectId: 'vuetify-template-c69fb',
       storageBucket: 'vuetify-template-c69fb.appspot.com',
       messagingSenderId: '361467220892'
-       /* Danh's Veutify-template Firebase setting  end */
+      /*  Danh's Veutify-template Firebase setting  end */
+
+       /* Clinic Firebase settings
+       apiKey: "AIzaSyB9VlaclsP5nyK0HM8-WWfchx6KOwtdtYU",
+       authDomain: "clinic-f47af.firebaseapp.com",
+       databaseURL: "https://clinic-f47af.firebaseio.com",
+       projectId: "clinic-f47af",
+       storageBucket: "clinic-f47af.appspot.com",
+       messagingSenderId: "363467074888"
+      /*  end Clinic Firebase settings */
     }
     firebase.initializeApp(config)
     this.$store.dispatch('setLoadin', true)

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Intro from '@/components/Intro'
-import Page1 from '@/components/Page1'
-import Page2 from '@/components/Page2'
+import Specials from '@/components/Specials'
+import Partner from '@/components/Partner'
 import Page3 from '@/components/Page3'
 import Page4 from '@/components/Page4'
 import Page5 from '@/components/Page5'
@@ -15,6 +15,7 @@ import Signin from '@/components/Signin'
 import Signup from '@/components/Signup'
 import Landing from '@/components/Landing'
 import Admin from '@/components/Admin'
+import Staff from '@/components/Staff'
 import store from '../store'
 
 Vue.use(Router)
@@ -53,21 +54,30 @@ export default new Router({
       }
     },
     {
+      path: '/staff',
+      name: 'Staff',
+      component: Staff,
+      beforeEnter: ifAuthenticated,
+      meta: {
+        adminRole: true
+      }
+    },
+    {
       path: '/intro',
       name: 'intro',
       component: Intro,
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/page1',
-      name: 'page1',
-      component: Page1,
+      path: '/specials',
+      name: 'Specials',
+      component: Specials,
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/page2',
-      name: 'Page2',
-      component: Page2,
+      path: '/Partner',
+      name: 'Partner',
+      component: Partner,
       beforeEnter: ifAuthenticated
     },
     {

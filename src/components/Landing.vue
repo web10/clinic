@@ -1,16 +1,48 @@
 <template>
 <div class="landingpage">
     <v-layout row wrap>
-          <v-flex xs8 md8>
+          <v-flex xs6 sm8 md9>
             <v-container text-xs-center>
-              <h1> Your Main App Title</h1>
-              <H2>"Your Message Motto Here"</H2><br>
-              <H3>Anything else here</H3>
-            </v-container>
+              <h1> MyHealth Clinic</h1>
+              <H2>"No Insurance? No Problem"</H2><br>
+
+<!--
+              <v-dialog
+
+                width="500"
+              >
+              <v-btn
+                slot="activator"
+                color="gold"
+                dark
+              >
+                Staff Login
+              </v-btn>
+
+              <v-card>
+                <v-card-title> Allure Staff Login </v-card-title>
+                <v-form ref="form" v-model="valid" lazy-validation>
+                  <v-card-text>
+                    <v-form>
+                      <v-alert :value="error.msg" type="error">
+                        {{error.msg}}
+                      </v-alert>
+                      <v-text-field  prepend-icon="person" v-model="email" label="Email" type="text" :rules="emailRule"></v-text-field>
+                      <v-text-field  prepend-icon="lock" v-model="password" label="Password" type="password" :counter="6" :rules="passwordRule"></v-text-field>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn color="yellow" @click="" :disabled="!valid" left light>Login</v-btn>
+                  </v-card-actions>
+                </v-form>
+              </v-card>
+            </v-dialog>
+-->            
+          </v-container>
           </v-flex>
-          <v-flex xs4 md4>
-            <v-card class="mx-5">
-              <v-tabs fixed-tabs>
+          <v-flex xs6 sm4 md3 round>
+            <v-card class="ma-2">
+              <v-tabs grow>
                 <v-tab>Sign In</v-tab>
                 <v-tab>Register</v-tab>
                 <v-tab-item>
@@ -25,7 +57,7 @@
                       </v-form>
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn color="primary" @click="signIn()" :disabled="!valid" left>Login</v-btn>
+                      <v-btn color="blue" light @click="signIn()" :disabled="!valid" left>Login</v-btn>
                     </v-card-actions>
                   </v-form>
                 </v-tab-item>
@@ -46,6 +78,7 @@
 </template>
 <script>
 import SignUp from './Signup'
+
 export default {
   name: 'LandingPage',
   components: {
@@ -106,3 +139,24 @@ export default {
   }
 }
 </script>
+
+<style>
+  .landingpage {
+    background-color: white;
+    background-size: cover;
+    background-image: url("../assets/bg.jpg");
+// not working to make div cover entire screen
+    height: 100%;
+    min-height: 500px;
+    border: #1A237E solid 3px;
+    padding: 5px;
+    border-radius: 10px;
+    color: #1A237E;
+
+
+  }
+
+  .round {
+    border-radius: 10px;
+  }
+</style>

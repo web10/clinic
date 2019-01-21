@@ -8,7 +8,7 @@
               <H2> {{user.firstName}} {{user.lastName}} </H2>
             </v-card-title>
             <span class="ma-5, text-xs-center" >
-              <img src="@/assets/avatar.png" height="180px" width="180px">
+              <img src="@/assets/avatar.png" height="100px" width="100px">
             </span>
             <image-uploader
               :debug="1"
@@ -26,46 +26,33 @@
           </v-layout>
         </v-card-media>
 
-        <v-list two-line>
+        <v-list>
+
+        <v-list-tile>
+          <v-list-tile-content>
+            <v-list-tile-title>Email: {{user.email}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-divider inset></v-divider>
           <v-list-tile>
-            <v-list-tile-action>
-              <v-icon color="indigo">phone</v-icon>
-            </v-list-tile-action>
-
             <v-list-tile-content>
-              <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-              <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
+              <v-list-tile-title>Mobile Phone: {{user.phoneNumber}}</v-list-tile-title>
             </v-list-tile-content>
+          </v-list-tile>
 
-            <v-list-tile-action>
-              <v-icon>chat</v-icon>
-            </v-list-tile-action>
+          <v-divider inset></v-divider>
+          <v-list-tile>
+            <v-list-tile-content>
+              <v-list-tile-title>Located at: {{user.location}} </v-list-tile-title>
+            </v-list-tile-content>
           </v-list-tile>
 
           <v-divider inset></v-divider>
 
           <v-list-tile>
-            <v-list-tile-action>
-              <v-icon color="indigo">mail</v-icon>
-            </v-list-tile-action>
-
             <v-list-tile-content>
-              <v-list-tile-title>{{user.email}}</v-list-tile-title>
-              <v-list-tile-sub-title>Personal</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-
-          <v-divider inset></v-divider>
-
-          <v-list-tile >
-            <v-list-tile-action>
-              <v-icon color="indigo">location_on</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>Located at</v-list-tile-title>
-              <v-list-tile-sub-title>Orlando, FL 79938</v-list-tile-sub-title>
+              <v-list-tile-title>Gender: {{user.gender}} </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>

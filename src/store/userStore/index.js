@@ -2,11 +2,14 @@ import firebase from 'firebase'
 export default {
   state: {
     user: null,
-    admin: null
+    admin: null,
+    role: null
+
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
+      state.role = payload.role
     },
     setAdmin (state, payload) {
       state.admin = 'superadmin'
@@ -20,7 +23,16 @@ export default {
     async signUp ({commit}, payload) {
       let user = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       var userId = firebase.auth().currentUser.uid
-      firebase.database().ref('/user_details/' + userId).set({firstName: payload.firstName, lastName: payload.lastName, mail: payload.email, 'role': 0}).then(snapshot => {
+      firebase.database().ref('/user_details/' + userId).set({
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        mail: payload.email,
+        'role': 0,
+        phoneNumber: '',
+        location: '',
+        picture: '',
+        gender: ''
+      }).then(snapshot => {
         return user
       })
     },
@@ -33,7 +45,8 @@ export default {
           var userId = firebase.auth().currentUser.uid
           firebase.database().ref('/user_details/' + userId).once('value').then(snapshot => {
             let data = snapshot.val()
-            user.role = payload.email === 'admin@gmail.com' ? 1 : data.role
+          //  user.role = payload.email === 'admin@gmail.com' ? 1 : data.role
+            user.role = payload.email === 'admin@gmail.com' ? 1 : 0
             user.firstName = data.firstName
             user.lastName = data.lastName
             resolve('done')
