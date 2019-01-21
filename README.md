@@ -1,4 +1,3 @@
-
 # vuetify-spa-template
 
 > test run of 1st template to see if we can start here for all apps
@@ -22,3 +21,5 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 =======
 # veutify-template
+=======
+# clinic
