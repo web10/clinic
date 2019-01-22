@@ -3,13 +3,13 @@
     <v-layout>
       <v-flex xs12>
         <h1 class="text-xs-center">
-          Specials
+          My Surgical History
         </h1>
         <h2 class="text-xs-center">
-          Current Specials
+          List them here.
         </h2><br/>
         <p class="text-sx-left">
-          list them here
+          more details
         </p>
       </v-flex>
     </v-layout>

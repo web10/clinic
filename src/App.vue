@@ -52,7 +52,7 @@
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon class="indigo--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon >
         <router-link to="/" style="cursor: pointer" class="hidden-sm-and-down" tag="span">
-          My Health App
+          eClinic
         </router-link>
       </v-toolbar-title>
 
@@ -94,7 +94,7 @@
     <v-footer app class="blue pa-3 indigo--text " light v-if="user">
       <v-layout justify-center row wrap>
         <div>
-          <strong>MyHealth App</strong> {{ new Date().getFullYear() }}
+          <strong>eClinic</strong> {{ new Date().getFullYear() }}
         </div>
       </v-layout>
     </v-footer>
@@ -120,12 +120,14 @@ export default {
     dialog: false,
     drawer: false,
     menuItems: [
-      { icon: 'home', text: 'Intro', name: 'intro', link: '/intro' },
-      { icon: 'star', text: 'Specials', name: 'specials', link: '/specials' },
-      { icon: 'work', text: 'Partner', name: 'partner', link: '/partner' },
-      { icon: 'content_copy', text: 'Page 3', name: 'page3', link: '/page3' },
-      { icon: 'content_copy', text: 'Page 4', name: 'page4', link: '/page4' },
-      { icon: 'content_copy', text: 'Page 5', name: 'page5', link: '/page5' }
+      { icon: 'home', text: 'Benefits', name: 'intro', link: '/intro' },
+      { icon: 'favorite', text: 'My Health', name: 'MedicalHx', link: '/medicalhx' },
+      { icon: 'work', text: 'My Surgeries', name: 'SurgicalHx', link: '/surgicalhx' },
+      { icon: 'format_color_fill', text: 'My Medications', name: 'Medications', link: '/medications' },
+      { icon: 'supervised_user_circle', text: 'My Family', name: 'page4', link: '/page4' },
+      { icon: 'desktop_windows', text: 'Consultations', name: 'page5', link: '/page5' },
+      { icon: 'folder_shared', text: 'My Visits', name: 'page5', link: '/page5' },
+      { icon: 'equilizer', text: 'My Labs', name: 'page5', link: '/page5' }
     ],
     dashItems: [
       { icon: 'person', text: 'Profile', name: 'profile', link: '/profile', auth: true },

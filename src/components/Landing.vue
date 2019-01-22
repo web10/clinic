@@ -3,7 +3,7 @@
     <v-layout row wrap>
           <v-flex xs6 sm8 md9>
             <v-container text-xs-center>
-              <h1> MyHealth Clinic</h1>
+              <h1> eClinic</h1>
               <H2>"No Insurance? No Problem"</H2><br>
 
 <!--
@@ -20,7 +20,7 @@
               </v-btn>
 
               <v-card>
-                <v-card-title> Allure Staff Login </v-card-title>
+                <v-card-title> eClinic Staff Login </v-card-title>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-card-text>
                     <v-form>
@@ -32,12 +32,12 @@
                     </v-form>
                   </v-card-text>
                   <v-card-actions>
-                    <v-btn color="yellow" @click="" :disabled="!valid" left light>Login</v-btn>
+                    <v-btn color="blue" @click="" :disabled="!valid" left light>Login</v-btn>
                   </v-card-actions>
                 </v-form>
               </v-card>
             </v-dialog>
--->            
+-->
           </v-container>
           </v-flex>
           <v-flex xs6 sm4 md3 round>
@@ -147,7 +147,7 @@ export default {
     background-image: url("../assets/bg.jpg");
 // not working to make div cover entire screen
     height: 100%;
-    min-height: 500px;
+    min-height: 600px;
     border: #1A237E solid 3px;
     padding: 5px;
     border-radius: 10px;

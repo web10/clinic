@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Intro from '@/components/Intro'
-import Specials from '@/components/Specials'
-import Partner from '@/components/Partner'
-import Page3 from '@/components/Page3'
+import Intro from '@/components/Members/Intro'
+import MedicalHx from '@/components/Members/MedicalHx'
+import SurgicalHx from '@/components/Members/SurgicalHx'
+import Medications from '@/components/Members/Medications'
 import Page4 from '@/components/Page4'
 import Page5 from '@/components/Page5'
 import Profile from '@/components/Profile'
@@ -69,21 +69,21 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/specials',
-      name: 'Specials',
-      component: Specials,
+      path: '/medicalhx',
+      name: 'MedicalHx',
+      component: MedicalHx,
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/Partner',
-      name: 'Partner',
-      component: Partner,
+      path: '/surgicalhx',
+      name: 'SurgicalHx',
+      component: SurgicalHx,
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/page3',
-      name: 'Page3',
-      component: Page3,
+      path: '/medications',
+      name: 'Medications',
+      component: Medications,
       beforeEnter: ifAuthenticated
     },
     {
