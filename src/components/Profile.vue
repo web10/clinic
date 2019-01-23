@@ -8,7 +8,8 @@
               <H2> {{user.firstName}} {{user.lastName}} </H2>
             </v-card-title>
             <span class="ma-5, text-xs-center" >
-              <img src="@/assets/avatar.png" height="100px" width="100px">
+              <!-- <img src="@/assets/avatar.png" height="100px" width="100px"> -->
+              <img :src="userImage" height="100px" width="100px">
             </span>
             <image-uploader
               :debug="1"
@@ -63,9 +64,31 @@
 <script>
 export default {
   name: 'Profile',
+  data () {
+    return {
+      hasImage: false,
+      image: null
+    }
+  },
   computed: {
     user () {
       return this.$store.state.userStore.user
+    },
+    userImage () {
+      return this.image ? this.image.dataUrl : require('../assets/avatar.png')
+    }
+  },
+  methods: {
+    setImage (file) {
+      this.hasImage = true
+      this.image = file
+    },
+    startImageResize () {
+      console.log('StartImageResize method')
+    },
+    endImageResize () {
+      console.log('EndImageResize method')
+      console.log(this.image)
     }
   }
 }
