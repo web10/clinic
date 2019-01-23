@@ -71,7 +71,7 @@
         </v-btn>
         <span>{{ item.text }}</span>
       </v-tooltip>
-      <span v-if="user">{{user.email}}, role: {{user.role}}</span>
+      <span v-if="user">{{user.email}}</span>
       <v-btn color="red" dark v-if="auth" @click="signOut()">Logout</v-btn>
     </v-toolbar>
 
@@ -124,10 +124,10 @@ export default {
       { icon: 'favorite', text: 'My Health', name: 'MedicalHx', link: '/medicalhx' },
       { icon: 'work', text: 'My Surgeries', name: 'SurgicalHx', link: '/surgicalhx' },
       { icon: 'format_color_fill', text: 'My Medications', name: 'Medications', link: '/medications' },
-      { icon: 'supervised_user_circle', text: 'My Family', name: 'page4', link: '/page4' },
-      { icon: 'desktop_windows', text: 'Consultations', name: 'page5', link: '/page5' },
-      { icon: 'folder_shared', text: 'My Visits', name: 'page5', link: '/page5' },
-      { icon: 'equilizer', text: 'My Labs', name: 'page5', link: '/page5' }
+      { icon: 'supervised_user_circle', text: 'My Family', name: 'FamilyHx', link: '/familyhx' },
+      { icon: 'desktop_windows', text: 'Consultations', name: 'Consultation', link: '/consultation' },
+      { icon: 'folder_shared', text: 'My Visits', name: 'Visits', link: '/visits' },
+      { icon: 'list_alt', text: 'My Labs', name: 'Labs', link: '/labs' }
     ],
     dashItems: [
       { icon: 'person', text: 'Profile', name: 'profile', link: '/profile', auth: true },

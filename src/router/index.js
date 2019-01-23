@@ -4,8 +4,10 @@ import Intro from '@/components/Members/Intro'
 import MedicalHx from '@/components/Members/MedicalHx'
 import SurgicalHx from '@/components/Members/SurgicalHx'
 import Medications from '@/components/Members/Medications'
-import Page4 from '@/components/Page4'
-import Page5 from '@/components/Page5'
+import FamilyHx from '@/components/Members/FamilyHx'
+import Consultation from '@/components/Members/Consultation'
+import Visits from '@/components/Members/Visits'
+import Labs from '@/components/Members/Labs'
 import Profile from '@/components/Profile'
 import Alerts from '@/components/Alerts'
 import Settings from '@/components/Settings'
@@ -87,15 +89,27 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/page4',
-      name: 'Page4',
-      component: Page4,
+      path: '/familyhx',
+      name: 'FamilyHx',
+      component: FamilyHx,
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/page5',
-      name: 'Page5',
-      component: Page5,
+      path: '/consultation',
+      name: 'Consultation',
+      component: Consultation,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/visits',
+      name: 'Visits',
+      component: Visits,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/labs',
+      name: 'Labs',
+      component: Labs,
       beforeEnter: ifAuthenticated
     },
     {
