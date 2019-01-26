@@ -27,7 +27,8 @@ import {
   VDataTable,
   VStepper,
   VProgressCircular,
-  VDivider
+  VDivider,
+  VCheckbox
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import { ImageUploader } from 'vue-image-upload-resize'
@@ -55,7 +56,8 @@ Vue.use(Vuetify, {
     VStepper,
     VProgressCircular,
     VDivider,
-    ImageUploader
+    ImageUploader,
+    VCheckbox
   }
 })
 
