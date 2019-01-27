@@ -39,7 +39,7 @@
             <v-flex xs12 sm6>
               <v-card class="pa-1 ma-1">
                 <h2 class="text-xs-center"> Drug Allergies </h2>
-                <v-checkbox 
+                <v-checkbox
                   label="No Known Drug Allergy"
                   v-model="nkda"
                   >
@@ -85,7 +85,7 @@
     name: 'medicationList',
     newMed: '',
     nkda: '',
-    data() {
+    data () {
       return {
         medList: [
           'atenolol',

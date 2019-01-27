@@ -52,7 +52,7 @@
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon class="indigo--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon >
         <router-link to="/" style="cursor: pointer" class="hidden-sm-and-down" tag="span">
-          eClinic
+          eClinic - branch: cloudfirestore
         </router-link>
       </v-toolbar-title>
 

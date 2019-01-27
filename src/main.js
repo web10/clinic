@@ -32,6 +32,7 @@ import {
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import { ImageUploader } from 'vue-image-upload-resize'
+// import FBadmin from 'firebase-admin'
 
 Vue.use(Vuetify, {
   components: {
@@ -73,25 +74,17 @@ new Vue({
   },
   template: '<App/>',
   created () {
+
+    /* Danh's Veutify-template Firebase real-time db setting */
     let config = {
 
-      /* Danh's Veutify-template Firebase */
       apiKey: 'AIzaSyA6q3Cx9io25_OSYKgOZtAs1YrvugRG2bA',
       authDomain: 'vuetify-template-c69fb.firebaseapp.com',
       databaseURL: 'https://vuetify-template-c69fb.firebaseio.com',
       projectId: 'vuetify-template-c69fb',
       storageBucket: 'vuetify-template-c69fb.appspot.com',
       messagingSenderId: '361467220892'
-      /*  Danh's Veutify-template Firebase setting  end */
 
-       /* Clinic Firebase settings
-       apiKey: "AIzaSyB9VlaclsP5nyK0HM8-WWfchx6KOwtdtYU",
-       authDomain: "clinic-f47af.firebaseapp.com",
-       databaseURL: "https://clinic-f47af.firebaseio.com",
-       projectId: "clinic-f47af",
-       storageBucket: "clinic-f47af.appspot.com",
-       messagingSenderId: "363467074888"
-      /*  end Clinic Firebase settings */
     }
     firebase.initializeApp(config)
     this.$store.dispatch('setLoadin', true)
@@ -106,6 +99,28 @@ new Vue({
         this.$router.replace('/')
       }
     })
+    /*  Danh's Veutify-template Firebase real-time db setting  end */
+
+
+
+    /* clinic app cloud firestore setting
+    let config = {
+      apiKey: "AIzaSyB9VlaclsP5nyK0HM8-WWfchx6KOwtdtYU",
+      authDomain: "clinic-f47af.firebaseapp.com",
+      databaseURL: "https://clinic-f47af.firebaseio.com",
+      projectId: "clinic-f47af",
+      storageBucket: "clinic-f47af.appspot.com",
+      messagingSenderId: "363467074888"
+    }
+
+    FBadmin.initializeApp({
+      credential: admin.credential.applicationDefault()
+
+    var db = FBadmin.firestore()
+    })
+
+    */
+
   },
   data () {
     return {
