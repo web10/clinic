@@ -9,7 +9,8 @@ export default new Vuex.Store(
       userStore: UserStore
     },
     state: {
-      loading: true,
+      // loading: true,
+      loading: false,
       user: {
         id: 'daadfd'
       }

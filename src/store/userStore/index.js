@@ -85,6 +85,7 @@ export default {
     signOut ({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
+      firebase.database().goOffline() 
     }
   }
 }
