@@ -11,7 +11,8 @@
                 <v-card-text>
                   <v-list>
                     <v-list-tile
-                      v-for="med in medList">
+                      v-for="(med, index) in medList"
+                      :key="index">
                       <v-list-tile-content>
                         <v-list-tile-title v-text="med"></v-list-tile-title>
                       </v-list-tile-content>
@@ -48,7 +49,8 @@
                 <v-card-text>
                   <v-list>
                     <v-list-tile
-                      v-for="allergy in allergiesList">
+                      v-for="(allergy, index) in allergiesList"
+                      :key="index">
                       <v-list-tile-content>
                         <v-list-tile-title v-text="allergy"></v-list-tile-title>
                       </v-list-tile-content>
