@@ -52,7 +52,7 @@
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon class="indigo--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon >
         <router-link to="/" style="cursor: pointer" class="hidden-sm-and-down" tag="span">
-          eClinic
+          eClinic - firestoreDB
         </router-link>
       </v-toolbar-title>
 
@@ -81,7 +81,7 @@
           </v-flex>
           <v-flex sm12 lg11>
             <main>
-              <div class="pa-3" v-if="user"></div>
+              <div class="pa-4" v-if="user"></div>
               <router-view v-if="!loading"></router-view>
               <v-progress-circular indeterminate color="primary" style="margin-top: 10em;margin-left: 48em;" v-if="loading">
               </v-progress-circular>

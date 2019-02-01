@@ -100,23 +100,44 @@ export default {
       ]
     }
   },
+  computed: {
+    getUser () {
+      return !!this.$store.getters.getUser
+    }
+  },
+  watch: {
+    getUser (val) {
+      if (val === true) {
+        //watch if user value changed to true then redirect
+        this.$router.push('/intro')
+      }
+    }
+  },
   methods: {
     signIn () {
       if (this.valid) {
-        this.$store.dispatch('setLoadin', true)
-        this.$store.dispatch('signIn', {'email': this.email, 'password': this.password})
-        .then(user => {
-          console.log('Login the user')
-        }, error => {
-          this.$store.dispatch('setLoadin', false)
-          this.error.msg = error.message
-          setTimeout(() => {
-            this.error.msg = ''
-          }, 2000)
-        })
+        const user = {
+          email: this.email,
+          password: this.password
+        }
+        this.$store.dispatch('signIn', user)
+        // it's better to keep this logic inside actions in store
+
+        // this.$store.dispatch('setLoadin', true)
+        // this.$store.dispatch('signIn', {'email': this.email, 'password': this.password})
+        // .then(user => {
+        //   console.log('Login the user')
+        // }, error => {
+        //   this.$store.dispatch('setLoadin', false)
+        //   this.error.msg = error.message
+        //   setTimeout(() => {
+        //     this.error.msg = ''
+        //   }, 2000)
+        // })
       }
     },
     signUp () {
+      // same as for signIn
       if (this.valid) {
         this.$store.dispatch('setLoadin', true)
         this.$store.dispatch('signUp', {
@@ -145,15 +166,13 @@ export default {
     background-color: white;
     background-size: cover;
     background-image: url("../assets/bg.jpg");
-// not working to make div cover entire screen
+    /* not working to make div cover entire screen */
     height: 100%;
     min-height: 600px;
     border: #1A237E solid 3px;
     padding: 5px;
     border-radius: 10px;
     color: #1A237E;
-
-
   }
 
   .round {

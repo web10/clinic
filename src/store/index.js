@@ -9,15 +9,27 @@ export default new Vuex.Store(
       userStore: UserStore
     },
     state: {
-      // loading: true,
       loading: false,
-      user: {
-        id: 'daadfd'
-      }
+      error: null
+      // user: {
+      //   id: 'daadfd'
+      // }
     },
     mutations: {
       setLoadin (state, payload) {
         state.loading = payload
+      },
+      // Many dev's prefer to give a names for mutation in uppercase format, it's improve readability
+      // Added mutation for a storing an errors globally
+      'SET_ERROR'(state, payload) {
+        state.error = payload;
+        // for autoclear errors, can delete it
+        setTimeout(() => {
+          state.error = null;
+        }, 5000)
+      },
+      'CLEAR_ERROR'(state) {
+        state.error = null;
       }
     },
     actions: {

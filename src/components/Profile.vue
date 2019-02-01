@@ -62,6 +62,7 @@
   </v-layout>
 </template>
 <script>
+
 export default {
   name: 'Profile',
   data () {
@@ -74,6 +75,7 @@ export default {
     user () {
       return this.$store.state.userStore.user
     },
+    // so if image is present in user object we'll show it, otherwise - show default picture
     userImage () {
       return this.image ? this.image.dataUrl : require('../assets/avatar.png')
     }
@@ -84,12 +86,23 @@ export default {
       this.image = file
     },
     startImageResize () {
+      // you can delete unused methods from image uploader
       console.log('StartImageResize method')
     },
     endImageResize () {
-      console.log('EndImageResize method')
-      console.log(this.image)
+      this.$store.dispatch('setUserImage', this.image)
     }
+  },
+  created() {
+    this.image = this.$store.getters.getUser.picture
   }
 }
 </script>
+
+<style scoped>
+
+  .card__media img {
+    object-fit: contain;
+  }
+
+</style>

@@ -74,13 +74,13 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        e1: 0
-      }
+export default {
+  data () {
+    return {
+      e1: 0
     }
   }
+}
 </script>
 
 <style>
