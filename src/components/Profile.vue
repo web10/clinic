@@ -93,7 +93,7 @@ export default {
       this.$store.dispatch('setUserImage', this.image)
     }
   },
-  created() {
+  created () {
     this.image = this.$store.getters.getUser.picture
   }
 }

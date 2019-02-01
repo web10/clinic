@@ -108,21 +108,20 @@ export default {
       // })
     },
     // just updating users 'picture' property by passing image object from uploader
-    setUserImage({commit}, payload) {
+    setUserImage( {commit}, payload) {
       const userId = firebase.auth().currentUser.uid
-      
       commit('SET_ERROR', null)
       db.collection('users').where('id', '==', userId).get()
        .then((snap) => {
-        snap.forEach((doc) => {
-          doc.ref.update({
-            picture: payload
+          snap.forEach((doc) => {
+            doc.ref.update({
+              picture: payload
+            })
           })
         })
-      })
-      .catch(error => {
-        commit('SET_ERROR', error)
-      })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
     },
     /* old setUser to real time database
     setUser ({commit}, payload) {
@@ -205,7 +204,6 @@ export default {
     */
     signOut ({commit}) {
       firebase.auth().signOut()
-      // commit('setUser', null)
       commit('UNSET_USER')
       firebase.database().goOffline()
     }

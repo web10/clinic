@@ -4,40 +4,8 @@
           <v-flex xs6 sm8 md9>
             <v-container text-xs-center>
               <h1> eClinic</h1>
-              <H2>"No Insurance? No Problem"</H2><br>
+              <H2>"Your Health Re-imagined"</H2><br>
 
-<!--
-              <v-dialog
-
-                width="500"
-              >
-              <v-btn
-                slot="activator"
-                color="gold"
-                dark
-              >
-                Staff Login
-              </v-btn>
-
-              <v-card>
-                <v-card-title> eClinic Staff Login </v-card-title>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                  <v-card-text>
-                    <v-form>
-                      <v-alert :value="error.msg" type="error">
-                        {{error.msg}}
-                      </v-alert>
-                      <v-text-field  prepend-icon="person" v-model="email" label="Email" type="text" :rules="emailRule"></v-text-field>
-                      <v-text-field  prepend-icon="lock" v-model="password" label="Password" type="password" :counter="6" :rules="passwordRule"></v-text-field>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-btn color="blue" @click="" :disabled="!valid" left light>Login</v-btn>
-                  </v-card-actions>
-                </v-form>
-              </v-card>
-            </v-dialog>
--->
           </v-container>
           </v-flex>
           <v-flex xs6 sm4 md3 round>
@@ -135,7 +103,9 @@ export default {
         //   }, 2000)
         // })
       }
-    },
+    }
+/* redundant signUp, already imported from signUp component
+    ,
     signUp () {
       // same as for signIn
       if (this.valid) {
@@ -157,6 +127,7 @@ export default {
         })
       }
     }
+    */
   }
 }
 </script>
@@ -166,7 +137,6 @@ export default {
     background-color: white;
     background-size: cover;
     background-image: url("../assets/bg.jpg");
-    /* not working to make div cover entire screen */
     height: 100%;
     min-height: 600px;
     border: #1A237E solid 3px;
@@ -174,7 +144,6 @@ export default {
     border-radius: 10px;
     color: #1A237E;
   }
-
   .round {
     border-radius: 10px;
   }

@@ -44,7 +44,7 @@
                 <v-layout row>
                   <v-flex xs12>
 
-                    <v-btn color="yellow" light @click="signUp()" :disabled="!valid">Sign Up</v-btn>
+                    <v-btn color="blue" light @click="signUp()" :disabled="!valid">Sign Up</v-btn>
                   </v-flex>
                 </v-layout>
 
@@ -89,6 +89,7 @@ export default {
           password: this.password})
         .then(user => {
           console.log('Signup the user')
+          this.$store.dispatch('setLoadin', false)
         }, error => {
           this.$store.dispatch('setLoadin', false)
           this.error.msg = error.message
