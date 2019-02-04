@@ -12,7 +12,7 @@
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
           <h2 class="text-xs-center">Health Problems</h2>
-          <v-div v-for="item in medicalHxCheckList" class="pa-2">
+          <v-div v-for="item in medicalHxCheckList" :key="item.name" class="pa-2">
             <input type="checkbox" name="item.name" :key="item.name" value="item.name" class="margin_right">{{ item.name }}
           </v-div>
           <v-spacer></v-spacer>
@@ -28,10 +28,10 @@
         <v-card class="pa-2 ma-2">
           <h2 class="text-xs-center">Mental Health</h2>
 
-          <v-div v-for="item in mentalHxCheckList" class="pa-2">
+          <v-div v-for="item in mentalHxCheckList" :key="item.name" class="pa-2">
             <input type="checkbox" name="item.name" :key="item.name" value="item.name" class="margin_right">{{ item.name }}
           </v-div>
-          <v-div v-for="item in mentalHxCheckList">
+          <v-div v-for="item in mentalHxCheckList" :key="item.name">
             <v-checkbox :label="item.name" :key="index"></v-checkbox>
           </v-div>
           <v-card-action>
@@ -42,7 +42,7 @@
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
           <h2 class="text-xs-center">Any Cancer?</h2>
-          <v-div v-for="item in cancerHxCheckList">
+          <v-div v-for="item in cancerHxCheckList" :key="item.name">
             <v-checkbox :label="item.name" :key="item.name" class="ma-0 pa-0"></v-checkbox>
           </v-div>
           <v-card-action>

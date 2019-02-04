@@ -11,7 +11,7 @@
     <v-layout>
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
-          <v-div v-for="item in familyHxCheckList">
+          <v-div v-for="item in familyHxCheckList" :key="item.name">
             <v-checkbox :label="item.name" :key="index"></v-checkbox>
           </v-div>
           <v-card-action>

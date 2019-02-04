@@ -20,7 +20,6 @@
               :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
               capture="environment"
               @input="setImage"
-              @onUpload="startImageResize"
               @onComplete="endImageResize">
             </image-uploader>
           </v-layout>
@@ -39,7 +38,7 @@
             <v-list-tile-content>
               <v-list-tile-title>
                 Mobile Phone:
-                <input v-model="phoneNumber" placeholder="my phone number">
+                <input v-model="user.phoneNumber" placeholder="my phone number">
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -49,7 +48,7 @@
             <v-list-tile-content>
               <v-list-tile-title>
                 Located at:
-                <input v-model="location" placeholder="my location">
+                <input v-model="user.location" placeholder="my location">
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -60,11 +59,17 @@
             <v-list-tile-content>
               <v-list-tile-title>
                 Gender:
-                <input v-model="gender" placeholder="my gender">
+                <!-- I think here better add radio buttons -->
+                <input v-model="user.gender" placeholder="my gender">
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
+        <!-- you need a button to trigger updateProfile action or 
+        if you don't want to use buttons - then you can trigger this action on input change event 
+        but be carefull it can cause prefomance issue if you won't use debounce
+        the simplest is to use a button -->
+        <v-btn color="success" @click="updateProfile">Save</v-btn>
       </v-card>
     </v-flex>
   </v-layout>
@@ -76,40 +81,35 @@ export default {
   data () {
     return {
       hasImage: false,
-      image: null,
-      phoneNumber: null,
-      gender: null,
-      location: null
+      user: {
+        picture: null,
+        phoneNumber: null,
+        gender: null,
+        location: null
+      }
     }
   },
   computed: {
-    user () {
-      return this.$store.state.userStore.user
-    },
-    // so if image is present in user object we'll show it, otherwise - show default picture
     userImage () {
-      return this.image ? this.image.dataUrl : require('../assets/avatar.png')
+      return this.user.picture ? this.user.picture.dataUrl : require('../assets/avatar.png')
     }
   },
   methods: {
     setImage (file) {
       this.hasImage = true
-      this.image = file
-    },
-    startImageResize () {
-      // you can delete unused methods from image uploader
-      console.log('StartImageResize method')
+      this.user.picture = file
     },
     endImageResize () {
-      this.$store.dispatch('setUserImage', this.image)
+      this.$store.dispatch('setUserImage', this.user.picture)
+    },
+    // call update method and pass user object with new values
+    updateProfile () {
+      this.$store.dispatch('updateUser', this.user)
     }
   },
   created () {
-    this.image = this.$store.getters.getUser.picture
-    this.phoneNumber = this.$store.getters.getUser.phoneNumber
-    this.gender = this.$store.getters.getUser.gender
-    this.location = this.$store.getters.getUser.location
-  //  console.log(user)
+    // on component create - load users data from DB
+    this.user = this.$store.getters.getUser
   }
 }
 </script>
