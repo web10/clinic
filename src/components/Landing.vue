@@ -76,7 +76,7 @@ export default {
   watch: {
     getUser (val) {
       if (val === true) {
-        //watch if user value changed to true then redirect
+        // watch if user value changed to true then redirect
         this.$router.push('/intro')
       }
     }

@@ -1,17 +1,78 @@
 <template>
-  <v-container fluid>
+  <v-card>
     <v-layout>
       <v-flex xs12>
-        <h1 class="text-xs-center">
-          My Family History
-        </h1>
-        <h2 class="text-xs-center">
-          Conditions
-        </h2><br/>
-        <p class="text-sx-left">
-          who?
-        </p>
+        <div class="text-xs-center">
+          <h1 > My Family's History </h1>
+          <p class="center">You are at risk for getting some genetic conditions. Let us know what runs in the family so we can help you screen.</p>
+        </div>
       </v-flex>
     </v-layout>
-  </v-container>
+    <v-layout>
+      <v-flex xs12 m4>
+        <v-card class="pa-2 ma-2">
+          <v-div v-for="item in familyHxCheckList">
+            <v-checkbox :label="item.name" :key="index"></v-checkbox>
+          </v-div>
+          <v-card-action>
+            <v-btn>Save</v-btn>
+          </v-card-action>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-card>
 </template>
+
+<script>
+  export default {
+    name: 'FamilyHx',
+    data () {
+      return {
+        familyHxCheckList: [
+          { 'name': 'Asthma' },
+          { 'name': 'Diabetes' },
+          { 'name': 'Back Pain' },
+          { 'name': 'Hypertension' },
+          { 'name': 'Rheumatoid Arthritis' },
+          { 'name': 'Kidney Stones' },
+          { 'name': 'Gallstones' },
+          { 'name': 'Reflux/ Gastritis' },
+          { 'name': 'Ulcers' },
+          { 'name': 'Cholesterol' },
+          { 'name': 'Valley Fever' },
+          { 'name': 'Arthritis' },
+          { 'name': 'Autoimmune' },
+          { 'name': 'Lupus' },
+          { 'name': 'Thyroid Problems' },
+          { 'name': 'Heart Attack' },
+          { 'name': 'Heart Failure' },
+          { 'name': 'Heart Disease' },
+          { 'name': 'Hepatitis' },
+          { 'name': 'HIV/ AIDS' },
+          { 'name': 'Stroke' },
+          { 'name': 'Overweight' },
+          { 'name': 'Inflammatory Bowels' },
+          { 'name': 'Irritable Bowels' },
+          { 'name': 'Depression' },
+          { 'name': 'Anxiety' },
+          { 'name': 'Bipolar' },
+          { 'name': 'Schizophrenia' },
+          { 'name': 'Stress' },
+          { 'name': 'Insomnia' },
+          { 'name': 'Cancer' }
+        ]
+      }
+    }
+  }
+</script>
+
+<style>
+  .margin_right {
+    margin-right: 5px;
+  },
+  .border {
+    border-style: 1 px solid blue;
+    margin: 5 px;
+    padding: 5 px;
+  }
+</style>

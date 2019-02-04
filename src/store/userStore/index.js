@@ -71,20 +71,29 @@ export default {
     },  */
     setUser ({commit}, payload) {
       const userId = payload.uid
-
       db.collection('users').where('id', '==', userId).get()
       .then(querySnapshot => {
         const user = {
           id: payload.uid,
           email: payload.email,
-          role: payload.email === 'admin@gmail.com' ? 1 : 0
+          /* set all users as admin for now */
+          role: 1,
+          /*
+          role: payload.email === 'admin@gmail.com' ? 1 : 0,
+          */
+          phoneNumber: payload.phoneNumber,
+          location: payload.location,
+          gender: payload.gender
         }
+
         querySnapshot.forEach(doc => {
           const data = doc.data()
           user.firstName = data.firstName
           user.lastName = data.lastName
           user.picture = data.picture
-
+          user.phoneNumber = data.phoneNumber
+          user.location = data.location
+          user.gender = data.gender
           commit('setUser', user)
         })
       })
@@ -108,12 +117,12 @@ export default {
       // })
     },
     // just updating users 'picture' property by passing image object from uploader
-    setUserImage( {commit}, payload) {
+    setUserImage ({commit}, payload) {
       const userId = firebase.auth().currentUser.uid
       commit('SET_ERROR', null)
       db.collection('users').where('id', '==', userId).get()
        .then((snap) => {
-          snap.forEach((doc) => {
+         snap.forEach((doc) => {
             doc.ref.update({
               picture: payload
             })

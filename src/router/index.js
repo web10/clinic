@@ -235,9 +235,8 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    //handle all others routes
+    // handle all others routes
     next()
-  } 
+  }
 })
-
 export default router

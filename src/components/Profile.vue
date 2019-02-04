@@ -8,7 +8,6 @@
               <H2> {{user.firstName}} {{user.lastName}} </H2>
             </v-card-title>
             <span class="ma-5, text-xs-center" >
-              <!-- <img src="@/assets/avatar.png" height="100px" width="100px"> -->
               <img :src="userImage" height="100px" width="100px">
             </span>
             <image-uploader
@@ -38,14 +37,20 @@
         <v-divider inset></v-divider>
           <v-list-tile>
             <v-list-tile-content>
-              <v-list-tile-title>Mobile Phone: {{user.phoneNumber}}</v-list-tile-title>
+              <v-list-tile-title>
+                Mobile Phone:
+                <input v-model="phoneNumber" placeholder="my phone number">
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
           <v-divider inset></v-divider>
           <v-list-tile>
             <v-list-tile-content>
-              <v-list-tile-title>Located at: {{user.location}} </v-list-tile-title>
+              <v-list-tile-title>
+                Located at:
+                <input v-model="location" placeholder="my location">
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -53,7 +58,10 @@
 
           <v-list-tile>
             <v-list-tile-content>
-              <v-list-tile-title>Gender: {{user.gender}} </v-list-tile-title>
+              <v-list-tile-title>
+                Gender:
+                <input v-model="gender" placeholder="my gender">
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -68,7 +76,10 @@ export default {
   data () {
     return {
       hasImage: false,
-      image: null
+      image: null,
+      phoneNumber: null,
+      gender: null,
+      location: null
     }
   },
   computed: {
@@ -95,6 +106,10 @@ export default {
   },
   created () {
     this.image = this.$store.getters.getUser.picture
+    this.phoneNumber = this.$store.getters.getUser.phoneNumber
+    this.gender = this.$store.getters.getUser.gender
+    this.location = this.$store.getters.getUser.location
+  //  console.log(user)
   }
 }
 </script>
