@@ -11,7 +11,7 @@
     <v-layout>
       <v-flex xs12 m6>
         <v-card class="pa-2 ma-2">
-          <v-div v-for="item in surgeryHxCheckList">
+          <v-div v-for="(item, index) in surgeryHxCheckList" :key="index">
             <v-checkbox :label="item.name" :key="index"></v-checkbox>
           </v-div>
           <v-card-action>
@@ -50,10 +50,11 @@
 <style>
   .margin_right {
     margin-right: 5px;
-  },
+  }
+
   .border {
-    border-style: 1 px solid blue;
-    margin: 5 px;
-    padding: 5 px;
+    border-style: 1px solid blue;
+    margin: 5px;
+    padding: 5px;
   }
 </style>

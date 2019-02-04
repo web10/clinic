@@ -21,6 +21,9 @@ export default {
     },
     'UNSET_USER' (state) {
       state.user = null
+    },
+    'UPDATE_USER' (state, payload) {
+      state.user = payload
     }
   },
   actions: {
@@ -76,14 +79,20 @@ export default {
         const user = {
           id: payload.uid,
           email: payload.email,
+
+          // !!!
+          // you call this action from main.js file and pass a firebase user object as a payload
+          // so you can't access something like - "location: payload.location" because it's not there
+          // !!!
+
           /* set all users as admin for now */
-          role: 1,
+          // role: 1,
           /*
           role: payload.email === 'admin@gmail.com' ? 1 : 0,
           */
-          phoneNumber: payload.phoneNumber,
-          location: payload.location,
-          gender: payload.gender
+          // phoneNumber: payload.phoneNumber,
+          // location: payload.location,
+          // gender: payload.gender
         }
 
         querySnapshot.forEach(doc => {
@@ -115,6 +124,36 @@ export default {
       //     })
       //   }
       // })
+    },
+    updateUser ({commit, getters}, payload) {
+      const user = getters.getUser;
+
+      const updatedUser =  {
+        ...user, 
+        gender: payload.gender,
+        phoneNumber: payload.phoneNumber,
+        location: payload.location
+      }
+      
+      // you can write db.collection('users').doc(user.id).update({...}) but
+      // for this you need to save a user's document id same as firebase.user.uid
+      // for now it's different and we can access it as I do it below
+      db.collection('users').where('id', '==', user.id).get()
+        .then((snap) => {
+          snap.forEach((doc) => {
+            doc.ref.update({
+              gender: payload.gender,
+              phoneNumber: payload.phoneNumber,
+              location: payload.location
+            })
+          })
+        })
+        .then(() => {
+          commit('UPDATE_USER', updatedUser)
+          // you can also add some global message property and add here message on success
+          // and show it on UI after profile update
+        })
+        .catch((error) => commit('SET_ERROR', error))
     },
     // just updating users 'picture' property by passing image object from uploader
     setUserImage ({commit}, payload) {
