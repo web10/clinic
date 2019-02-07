@@ -2,10 +2,28 @@
 <div class="landingpage">
     <v-layout row wrap>
           <v-flex xs6 sm8 md9>
-            <v-container text-xs-center>
-              <h1> eClinic</h1>
-              <H2>"Your Health Re-imagined"</H2><br>
-
+            <v-container text-xs-center class="pa-1">
+              <h1> SHC Partner</h1>
+              <H2>"Your Health Re-imagined"</H2>
+            <!--
+              <v-list>
+                <v-list-tile v-for="item in benefitsList" :key="item.title">
+                  </v-list-tile-action>
+                    <v-icon v-if="item.icon" color="pink">star</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title v-text="item.title"></v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            -->
+          </v-container>
+          <v-container class="px-1 mx-5 benefits" text-md-left>
+              <ul v-for="item in benefitsList" :key="item.title">
+                <li>
+                  {{item.title}}
+                </li>
+              </ul>
           </v-container>
           </v-flex>
           <v-flex xs6 sm4 md3 round>
@@ -54,6 +72,13 @@ export default {
   },
   data () {
     return {
+      benefitsList: [
+        {"title": 'Take back control of your care'},
+        {"title": 'Text your team any time'},
+        {"title": 'Save money'},
+        {"title": 'Less waiting'}
+
+      ],
       valid: true,
       error: { msg: '' },
       email: '',
@@ -104,35 +129,17 @@ export default {
         // })
       }
     }
-/* redundant signUp, already imported from signUp component
-    ,
-    signUp () {
-      // same as for signIn
-      if (this.valid) {
-        this.$store.dispatch('setLoadin', true)
-        this.$store.dispatch('signUp', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password})
-        .then(user => {
-          console.log('Signup the user')
-        }, error => {
-          this.$store.dispatch('setLoadin', false)
-          this.error.msg = error.message
-          var that = this
-          setTimeout(function () {
-            that.error.msg = ''
-          }, 2000)
-        })
-      }
-    }
-    */
   }
 }
 </script>
 
 <style>
+  h1 {
+    font-size: 4em;
+  }
+  h2 {
+    font-size: 3em;
+  }
   .landingpage {
     background-color: white;
     background-size: cover;
@@ -146,5 +153,13 @@ export default {
   }
   .round {
     border-radius: 10px;
+  }
+  .benefits {
+    font-size: 2em;
+    /* not working yet
+    font-family: 'Fahkwang', sans-serif; */
+    }
+  .redborder {
+    border-style: red 3px solid;
   }
 </style>
