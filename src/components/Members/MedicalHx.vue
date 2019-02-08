@@ -28,11 +28,11 @@
         <v-card class="pa-2 ma-2">
           <h2 class="text-xs-center">Mental Health</h2>
 
-          <v-div v-for="item in mentalHxCheckList" :key="item.name" class="pa-2">
-            <input type="checkbox" name="item.name" :key="item.name" value="item.name" class="margin_right">{{ item.name }}
+          <v-div v-for="item in mentalHxCheckList" :key="item.Diagnosis" class="pa-2">
+            <input type="checkbox" name="item.Diagnosis" :key="item.Diagnosis" Dx="item.Diagnosis" class="margin_right">{{ item.Diagnosis }}
           </v-div>
-          <v-div v-for="item in mentalHxCheckList" :key="item.name">
-            <v-checkbox :label="item.name" :key="index"></v-checkbox>
+          <v-div v-for="item in mentalHxCheckList" :key="item.Diagnosis">
+            <v-checkbox :label="item.Diagnosis" :key="index"></v-checkbox>
           </v-div>
           <v-card-action>
             <v-btn>Save</v-btn>
@@ -42,8 +42,8 @@
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
           <h2 class="text-xs-center">Any Cancer?</h2>
-          <v-div v-for="item in cancerHxCheckList" :key="item.name">
-            <v-checkbox :label="item.name" :key="item.name" class="ma-0 pa-0"></v-checkbox>
+          <v-div v-for="item in cancerHxCheckList" :key="item.Diagnosis">
+            <v-checkbox :label="item.Diagnosis" :key="item.Diagnosis" class="ma-0 pa-0"></v-checkbox>
           </v-div>
           <v-card-action>
             <v-btn>Save</v-btn>
@@ -51,7 +51,6 @@
         </v-card>
       </v-flex>
     </v-layout>
-
   </v-card>
 </template>
 
@@ -61,50 +60,52 @@
     data () {
       return {
         medicalHxCheckList: [
-          { 'name': 'Asthma' },
-          { 'name': 'Diabetes' },
-          { 'name': 'Back Pain' },
-          { 'name': 'Hypertension' },
-          { 'name': 'Rheumatoid Arthritis' },
-          { 'name': 'Kidney Stones' },
-          { 'name': 'Gallstones' },
-          { 'name': 'Reflux/ Gastritis' },
-          { 'name': 'Ulcers' },
-          { 'name': 'Cholesterol' },
-          { 'name': 'Valley Fever' },
-          { 'name': 'Arthritis' },
-          { 'name': 'Autoimmune' },
-          { 'name': 'Lupus' },
-          { 'name': 'Thyroid Problems' },
-          { 'name': 'Heart Attack' },
-          { 'name': 'Heart Failure' },
-          { 'name': 'Heart Disease' },
-          { 'name': 'Hepatitis' },
-          { 'name': 'HIV/ AIDS' },
-          { 'name': 'Stroke' },
-          { 'name': 'Overweight' },
-          { 'name': 'Inflammatory Bowels' },
-          { 'name': 'Irritable Bowels' }
+          { 'Diagnosis': 'Asthma', 'Dx': 'Asthma' },
+          { 'Diagnosis': 'Diabetes', 'Dx': 'Diabetes' },
+          { 'Diagnosis': 'Back Pain', 'Dx': 'Back Pain' },
+          { 'Diagnosis': 'Hypertension', 'Dx': 'HTN' },
+          { 'Diagnosis': 'Rheumatoid Arthritis', 'Dx': 'RA' },
+          { 'Diagnosis': 'Kidney Stones', 'Dx': 'Kidney Stones' },
+          { 'Diagnosis': 'Gallstones', 'Dx': 'Gallstones' },
+          { 'Diagnosis': 'Reflux/ Gastritis', 'Dx': 'GERD' },
+          { 'Diagnosis': 'Ulcers', 'Dx': 'PUD' },
+          { 'Diagnosis': 'Cholesterol', 'Dx': 'Dyslipidemia' },
+          { 'Diagnosis': 'Valley Fever', 'Dx': 'Coccidiomycosis' },
+          { 'Diagnosis': 'Arthritis', 'Dx': 'DJD' },
+          { 'Diagnosis': 'Autoimmune', 'Dx': 'Autoimmune' },
+          { 'Diagnosis': 'Lupus', 'Dx': 'SLE' },
+          { 'Diagnosis': 'Thyroid Problems', 'Dx': 'Thyroid' },
+          { 'Diagnosis': 'Heart Attack', 'Dx': 'MI' },
+          { 'Diagnosis': 'Heart Failure', 'Dx': 'CHF' },
+          { 'Diagnosis': 'Heart Disease', 'Dx': 'CAD' },
+          { 'Diagnosis': 'Hepatitis', 'Dx': 'Hepatitis' },
+          { 'Diagnosis': 'HIV/ AIDS', 'Dx': 'HIV' },
+          { 'Diagnosis': 'Stroke', 'Dx': 'CVA' },
+          { 'Diagnosis': 'Overweight', 'Dx': 'Obesity' },
+          { 'Diagnosis': 'Eczema', 'Dx': 'Eczema' },
+          { 'Diagnosis': 'Inflammatory Bowels', 'Dx': 'IBD' },
+          { 'Diagnosis': 'Irritable Bowels', 'Dx': 'IBS' }
         ],
         mentalHxCheckList: [
-          { 'name': 'Depression' },
-          { 'name': 'Anxiety' },
-          { 'name': 'Bipolar' },
-          { 'name': 'Schizophrenia' },
-          { 'name': 'Stress' },
-          { 'name': 'Insomnia' }
+          { 'Diagnosis': 'Depression', 'Dx': 'Depression' },
+          { 'Diagnosis': 'Anxiety', 'Dx': 'Anxiety' },
+          { 'Diagnosis': 'Bipolar', 'Dx': 'Bipolar' },
+          { 'Diagnosis': 'Schizophrenia', 'Dx': 'Schizophrenia' },
+          { 'Diagnosis': 'Stress', 'Dx': 'Stress' },
+          { 'Diagnosis': 'Insomnia', 'Dx': 'Insomnia' }
         ],
         cancerHxCheckList: [
-          { 'name': 'Breast' },
-          { 'name': 'Ovary' },
-          { 'name': 'Uterus' },
-          { 'name': 'Colon' },
-          { 'name': 'Prostate' },
-          { 'name': 'Bone' },
-          { 'name': 'Leukemia' },
-          { 'name': 'Skin' },
-          { 'name': 'Melanoma' },
-          { 'name': 'Lung' }
+          { 'Diagnosis': 'Breast', 'Dx': 'Breast CA' },
+          { 'Diagnosis': 'Ovaries', 'Dx': 'Ovarian CA' },
+          { 'Diagnosis': 'Testicles', 'Dx': 'Testicular CA' },
+          { 'Diagnosis': 'Uterus', 'Dx': 'Uterine CA' },
+          { 'Diagnosis': 'Colon', 'Dx': 'Colon CA' },
+          { 'Diagnosis': 'Prostate', 'Dx': 'Prostate CA' },
+          { 'Diagnosis': 'Bone', 'Dx': 'Bone CA' },
+          { 'Diagnosis': 'Leukemia', 'Dx': 'Leukemia' },
+          { 'Diagnosis': 'Skin', 'Dx': 'Skin CA' },
+          { 'Diagnosis': 'Melanoma', 'Dx': 'Melanoma' },
+          { 'Diagnosis': 'Lung', 'Dx': 'Lung CA' }
         ],
 
       }
