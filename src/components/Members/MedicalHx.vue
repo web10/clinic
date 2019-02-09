@@ -2,23 +2,25 @@
   <v-card>
     <v-layout class="blue lighten-3">
       <v-flex xs12>
-        <div class="text-xs-center">
-          <h1 > My Medical History </h1>
-          <p class="center">Enter any medical problems you have had so that your doctor can help you manage them.</p>
+        <div> <!--
+        <div class="text-xs-center"> -->
+          <h3 class="pa-2"> Medical History - Enter any medical problems you have had so that your doctor can help you manage them. </h3>
         </div>
       </v-flex>
     </v-layout>
     <v-layout class="blue lighten-3">
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
-          <h2 class="text-xs-center">Health Problems</h2>
+          <h3 class="text-xs-center">Health Problems</h3>
+          <!--
           <v-div v-for="item in medicalHxCheckList" :key="item.name" class="pa-2">
-            <input type="checkbox" name="item.name" :key="item.name" value="item.name" class="margin_right">{{ item.name }}
+            <input type="checkbox" name="item.Diagnosis" :key="item.name" value="item.Diagnosis" class="margin_right">{{ item.Diagnosis }}
           </v-div>
+        -->
           <v-spacer></v-spacer>
-          <!-- <v-div v-for="item in medicalHxCheckList">
-            <v-checkbox :label="item.name" :key="index"></v-checkbox>
-          </v-div> -->
+          <v-div v-for="item in medicalHxCheckList">
+            <v-checkbox :label="item.Diagnosis" :key="index"></v-checkbox>
+          </v-div>
           <v-card-action>
             <v-btn>Save</v-btn>
           </v-card-action>
@@ -26,11 +28,12 @@
       </v-flex>
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
-          <h2 class="text-xs-center">Mental Health</h2>
-
+          <h3 class="text-xs-center">Mental Health</h3>
+<!--
           <v-div v-for="item in mentalHxCheckList" :key="item.Diagnosis" class="pa-2">
             <input type="checkbox" name="item.Diagnosis" :key="item.Diagnosis" Dx="item.Diagnosis" class="margin_right">{{ item.Diagnosis }}
           </v-div>
+-->
           <v-div v-for="item in mentalHxCheckList" :key="item.Diagnosis">
             <v-checkbox :label="item.Diagnosis" :key="index"></v-checkbox>
           </v-div>
@@ -41,7 +44,7 @@
       </v-flex>
       <v-flex xs12 m4>
         <v-card class="pa-2 ma-2">
-          <h2 class="text-xs-center">Any Cancer?</h2>
+          <h3 class="text-xs-center">Any Cancer?</h3>
           <v-div v-for="item in cancerHxCheckList" :key="item.Diagnosis">
             <v-checkbox :label="item.Diagnosis" :key="item.Diagnosis" class="ma-0 pa-0"></v-checkbox>
           </v-div>
