@@ -5,7 +5,7 @@
         <v-card-media height="200px">
           <v-layout column fill-height>
             <v-card-title>
-              <H2> {{user.firstName}} {{user.lastName}} </H2>
+              <h2> {{user.firstName}} {{user.lastName}} </h2>
             </v-card-title>
             <span class="ma-5, text-xs-center" >
               <img :src="userImage" height="100px" width="100px">
@@ -92,6 +92,9 @@ export default {
   computed: {
     userImage () {
       return this.user.picture ? this.user.picture.dataUrl : require('../assets/avatar.png')
+    },
+    getUser () {
+      return this.$store.getters.getUser
     }
   },
   methods: {
@@ -107,9 +110,18 @@ export default {
       this.$store.dispatch('updateUser', this.user)
     }
   },
+  watch: {
+    getUser (val) {
+      if(val) {
+        this.user = this.getUser
+      }
+    }
+  },
   created () {
     // on component create - load users data from DB
-    this.user = this.$store.getters.getUser
+    if (this.getUser) {
+      this.user = this.getUser
+    }
   }
 }
 </script>

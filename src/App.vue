@@ -1,33 +1,19 @@
 <template>
   <v-app id="inspire" light>
+    <!-- !!! it's will better to keep this file simple and outsource this markup in different components -->
+    <v-navigation-drawer 
+      clipped fixed 
+      v-model="drawer" 
+      app width="200" 
+      v-if="auth" 
+      mobile-break-point="900">
 
-    <v-navigation-drawer
-      clipped
-      fixed
-      v-model="drawer"
-      app
-      width="200"
-      v-if="auth"
-
-      mobile-break-point="900"
-    >
       <v-list dense class="removepaddings">
-        <div v-for="item in menuItems" >
-        <!-- remove this item heading layout? -->
-      <v-layout
-        v-if="item.heading"
-        :key="item.heading"
-        row
-        align-center
-
-      >
-      </v-layout>
-
+        <div v-for="(item, index) in menuItems" :key="index">
           <v-list-tile
-            v-else
-            :key="item.text"
-            :to="item.link"
-             class="indigo--text">
+            :key="item.text" 
+            :to="item.link" 
+            class="indigo--text">
             <v-list-tile-action>
               <v-icon class="bl--text">{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -38,9 +24,9 @@
             </v-list-tile-content>
           </v-list-tile>
         </div>
-      </v-list >
+      </v-list>
     </v-navigation-drawer>
-
+    
     <v-toolbar
       color="blue"
       class="indigo--text"
@@ -59,12 +45,16 @@
       <v-spacer></v-spacer>
 
       <!-- dashboard buttons start -->
-      <v-tooltip bottom v-for="item in adminItems" :key="item.name" v-if="user && user.role == '1'">
-        <v-btn icon slot="activator" :to="item.link" v-if="auth == item.auth" >
-          <v-icon class="indigo--text">{{ item.icon }}</v-icon>
-        </v-btn>
-        <span>{{ item.text }}</span>
-      </v-tooltip>
+      <!-- !!! it's an antipattern and really a bad practice to use v-if with v-for. I changed it a bit-->
+      <template v-if="user && user.role == '1'">
+        <v-tooltip bottom v-for="item in adminItems" :key="item.name">
+          <v-btn icon slot="activator" :to="item.link" v-if="auth == item.auth" >
+            <v-icon class="indigo--text">{{ item.icon }}</v-icon>
+          </v-btn>
+          <span>{{ item.text }}</span>
+        </v-tooltip>
+      </template>
+      
       <v-tooltip bottom v-for="item in dashItems" :key="item.name" >
         <v-btn icon slot="activator" :to="item.link" v-if="auth == item.auth" >
           <v-icon class="indigo--text">{{ item.icon }}</v-icon>
@@ -74,21 +64,36 @@
       <span v-if="user">{{user.email}}</span>
       <v-btn color="red" dark v-if="auth" @click="signOut()">Logout</v-btn>
     </v-toolbar>
-
+    <!-- if you will add all this specific markup before router-view - then all your pages will inherit this and customization will be a really hard -->
+    <!-- I think it's better to delete v-if="loading" from router-view it can sometimes hide all user's content if loading will buggy. Better to show some overlay and loader on it -->
+    <v-content>
       <v-container fluid>
-        <v-layout>
-          <v-flex sm3 hidden-sm-and-down v-if="user">
-          </v-flex>
+        <!-- global notifications -->
+        <error-notification></error-notification>
+        <notifications group="base" />
+
+        <router-view v-if="!loading"></router-view>
+        
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          class="progress-circular" 
+          indeterminate 
+          color="primary" 
+          v-if="loading"></v-progress-circular>
+        <!-- <v-layout>
+          <v-flex sm3 hidden-sm-and-down v-if="user"></v-flex>
           <v-flex sm12 lg11>
             <main>
               <div class="pa-4" v-if="user"></div>
               <router-view v-if="!loading"></router-view>
-              <v-progress-circular indeterminate color="primary" style="margin-top: 10em;margin-left: 48em;" v-if="loading">
-              </v-progress-circular>
+              <v-progress-circular indeterminate color="primary" style="margin-top: 10em;margin-left: 48em;" v-if="loading"></v-progress-circular>
             </main>
           </v-flex>
-        </v-layout>
+        </v-layout> -->
       </v-container>
+    </v-content>
+
     <v-spacer></v-spacer>
 
     <v-footer app class="blue pa-3 indigo--text " light v-if="user">
@@ -103,17 +108,23 @@
 </template>
 
 <script>
+import ErrorNotification from '@/components/layout/ErrorNotification'
+
 export default {
+  components: {
+    ErrorNotification
+  },
   computed: {
     loading () {
       return this.$store.state.loading
     },
     user () {
-      return this.$store.state.userStore.user
+      return this.$store.getters.getUser
     },
     auth () {
-      let user = this.$store.state.userStore.user
-      return !!user
+      // let user = this.$store.getters.getUser
+      // return !!user
+      return !!this.user
     }
   },
   data: () => ({
@@ -166,4 +177,10 @@ export default {
     padding-bottom: 0px;
   }
 
+  .progress-circular {
+    position: fixed;
+    right: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 </style>

@@ -11,7 +11,6 @@ export default new Vuex.Store (
     state: {
       loading: false,
       error: null
-
     },
     mutations: {
       setLoadin (state, payload) {
@@ -35,6 +34,7 @@ export default new Vuex.Store (
         commit ('setLoadin', payload)
       }
     },
-    getters: {}
+    getters: {
+    }
   }
 )
