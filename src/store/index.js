@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import UserStore from './userStore'
+import AdminStore from './adminStore'
 Vue.use (Vuex)
 
 export default new Vuex.Store (
   {
     modules: {
-      userStore: UserStore
+      userStore: UserStore,
+      adminStore: AdminStore
     },
     state: {
       loading: false,

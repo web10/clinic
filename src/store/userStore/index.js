@@ -9,7 +9,7 @@ import db from '@/config/firebaseInit'
 export default {
   state: {
     user: null,
-    admin: null,
+    // admin: null,
     role: null
   },
   mutations: {
@@ -17,9 +17,9 @@ export default {
       state.user = payload
       state.role = payload.role
     },
-    setAdmin (state, payload) {
-      state.admin = 'superadmin'
-    },
+    // setAdmin (state, payload) {
+    //   state.admin = 'superadmin'
+    // },
     'UNSET_USER' (state) {
       state.user = null
     },
@@ -164,33 +164,6 @@ export default {
         })
 
       commit('SAVE_MEDICAL_HISTORY', payload)
-    },
-    getAllUse ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        db.collection('users').get('value').then(snapshot => {
-          let userList = []
-          let value = snapshot.val()
-          var user = firebase.auth().currentUser
-          for (let key in value) {
-            if (user.email !== value[key].email) {
-              userList.push({id: key, ...value[key]})
-            }
-          }
-          resolve(userList)
-        })
-      })
-    },
-    makeAdmin ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        let role = payload.role === 1 ? 0 : 1
-        db.collection('users').doc(payload.id).set({...payload, role: role}).then(error => {
-          if (error) {
-            reject(error)
-          } else {
-            resolve(payload)
-          }
-        })
-      })
     },
     signOut ({commit}) {
       firebase.auth().signOut()

@@ -26,7 +26,7 @@
             {{ key }}
           </v-tab>
           <v-tab-item
-            v-for="(tab, index) in medicalHistory"
+            v-for="(tab, key, index) in medicalHistory"
             :key="index"
             class="items-list"
           >
@@ -35,7 +35,8 @@
                 <v-card-text>
                   <v-layout row wrap>
                     <v-flex xs12 sm6 md4 lg3 v-for="(item, index) in tab"  :key="index">
-                          <v-checkbox :label="item.diagnosis" v-model="tab[index].checked"></v-checkbox>
+                      <!-- loop through object and assign v-model for every specific checkbox -->
+                      <v-checkbox :label="item.diagnosis" v-model="tab[index].checked"></v-checkbox>
                     </v-flex>
                   </v-layout>
                 </v-card-text>
@@ -53,6 +54,7 @@
 
 <script>
 import medHistory from '@/store/staticData/medHistory.js'
+import { mapState } from 'vuex'
 
   export default {
     name: 'MedicalHx',
@@ -63,23 +65,24 @@ import medHistory from '@/store/staticData/medHistory.js'
       }
     },
     computed: {
-      userMedicalHistory () {
-        return this.$store.getters.getUser.medicalHistory
-      },
+      ...mapState({
+        user: state => state.userStore.user,
+      })
       // orderedMedicalList: function () {
       //   return _.sortBy(this.medicalHxCheckList, 'name')
       // }
     },
     watch: {
-      userMedicalHistory (val) {
+      // user is async and we can't access medicalHistory instantly
+      user (val) {
         if(val) {
-          this.medicalHistory = this.userMedicalHistory
+          this.medicalHistory = this.user.medicalHistory
         }
       }
     },
     created() {
-      if(this.userMedicalHistory) {
-        this.medicalHistory = this.userMedicalHistory
+      if(this.user) {
+        this.medicalHistory = this.user.medicalHistory
       }
     },
     methods: {
