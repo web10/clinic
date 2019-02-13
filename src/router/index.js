@@ -165,16 +165,16 @@ const router = new Router({
 
 // runs for each route and checkes the condition
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requireAuth)) {
-     if(!store.getters.getUser) {
-      next({
+  if (to.matched.some(record => record.meta.requireAuth)) {
+     if (!store.getters.getUser) {
+      next ({
         path: '/',
         query: {
           redirect: to.fullPath
         }
-      });
+      })
     } else {
-      next();
+      next()
     }
   } else if (to.matched.some(record => record.meta.requireGuest)) {
     if(store.getters.getUser) {
@@ -185,13 +185,13 @@ router.beforeEach((to, from, next) => {
         query: {
           redirect: to.fullPath
         }
-      });
+      })
     } else {
-      next();
+      next()
     }
   } else if (to.matched.some(record => record.meta.requireAdmin)) {
     // check this condition
-    if(store.state.user.role || store.state.user.email === 'admin@gmail.com') {
+    if (store.state.user.role || store.state.user.email === 'admin@gmail.com') {
       next({
         // redirect where you want
         path: '/admin',
@@ -200,11 +200,11 @@ router.beforeEach((to, from, next) => {
         }
       });
     } else {
-      next();
+      next ()
     }
   } else {
     // handle all others routes
-    next()
+    next ()
   }
 })
 export default router
