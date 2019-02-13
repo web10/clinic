@@ -6,6 +6,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import router from './router'
 import store from './store'
+import Notifications from 'vue-notification'
 import {
   Vuetify,
   VApp,
@@ -61,6 +62,7 @@ Vue.use(Vuetify, {
     VCheckbox
   }
 })
+Vue.use(Notifications)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 // new Vue({

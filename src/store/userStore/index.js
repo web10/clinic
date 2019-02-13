@@ -1,5 +1,6 @@
 // first line imports only base functionality from firebase
-// second - an suth package
+// second - an auth package
+import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import db from '@/config/firebaseInit'
@@ -8,7 +9,7 @@ import db from '@/config/firebaseInit'
 export default {
   state: {
     user: null,
-    admin: null,
+    // admin: null,
     role: null
   },
   mutations: {
@@ -16,14 +17,17 @@ export default {
       state.user = payload
       state.role = payload.role
     },
-    setAdmin (state, payload) {
-      state.admin = 'superadmin'
-    },
+    // setAdmin (state, payload) {
+    //   state.admin = 'superadmin'
+    // },
     'UNSET_USER' (state) {
       state.user = null
     },
     'UPDATE_USER' (state, payload) {
       state.user = payload
+    },
+    'SAVE_MEDICAL_HISTORY' (state, payload) {
+      state.user.medicalHistory = payload
     }
   },
   actions: {
@@ -55,44 +59,13 @@ export default {
         return user
       })
     },
-    /* old signup to real-time database
-    async signUp ({commit}, payload) {
-      let user = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-      var userId = firebase.auth().currentUser.uid
-      firebase.database().ref('/user_details/' + userId).set({
-        firstName: payload.firstName,
-        lastName: payload.lastName,
-        mail: payload.email,
-        'role': 0,
-        phoneNumber: '',
-        location: '',
-        picture: '',
-        gender: ''
-      }).then(snapshot => {
-        return user
-      })
-    },  */
     setUser ({commit}, payload) {
       const userId = payload.uid
       db.collection('users').where('id', '==', userId).get()
       .then(querySnapshot => {
         const user = {
           id: payload.uid,
-          email: payload.email,
-
-          // !!!
-          // you call this action from main.js file and pass a firebase user object as a payload
-          // so you can't access something like - "location: payload.location" because it's not there
-          // !!!
-
-          /* set all users as admin for now */
-          // role: 1,
-          /*
-          role: payload.email === 'admin@gmail.com' ? 1 : 0,
-          */
-          // phoneNumber: payload.phoneNumber,
-          // location: payload.location,
-          // gender: payload.gender
+          email: payload.email
         }
 
         querySnapshot.forEach(doc => {
@@ -103,27 +76,10 @@ export default {
           user.phoneNumber = data.phoneNumber
           user.location = data.location
           user.gender = data.gender
+          user.medicalHistory = data.medicalHistory
           commit('setUser', user)
         })
       })
-
-      // return new Promise((resolve, reject) => {
-      //   if (payload) {
-      //     let user = {
-      //       email: payload.email
-      //     }
-      //     var userId = firebase.auth().currentUser.uid
-      //     db.collection('users').doc(userId).get('value').then(snapshot => {
-      //       let data = snapshot.val()
-      //     //  user.role = payload.email === 'admin@gmail.com' ? 1 : data.role
-      //       user.role = payload.email === 'admin@gmail.com' ? 1 : 0
-      //       user.firstName = data.firstName
-      //       user.lastName = data.lastName
-      //       resolve('done')
-      //       commit('setUser', user)
-      //     })
-      //   }
-      // })
     },
     updateUser ({commit, getters}, payload) {
       const user = getters.getUser;
@@ -149,6 +105,12 @@ export default {
           })
         })
         .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'User was successfully updated!'
+          })
+
           commit('UPDATE_USER', updatedUser)
           // you can also add some global message property and add here message on success
           // and show it on UI after profile update
@@ -167,89 +129,42 @@ export default {
             })
           })
         })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Image was successfully saved!'
+          })
+        })
         .catch(error => {
           commit('SET_ERROR', error)
         })
     },
-    /* old setUser to real time database
-    setUser ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        if (payload) {
-          let user = {
-            email: payload.email
-          }
-          var userId = firebase.auth().currentUser.uid
-          firebase.database().ref('/user_details/' + userId).once('value').then(snapshot => {
-            let data = snapshot.val()
-          //  user.role = payload.email === 'admin@gmail.com' ? 1 : data.role
-            user.role = payload.email === 'admin@gmail.com' ? 1 : 0
-            user.firstName = data.firstName
-            user.lastName = data.lastName
-            resolve('done')
-            commit('setUser', user)
+    saveMedicalHistory ({commit}, payload) {
+      const userId = firebase.auth().currentUser.uid
+
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              medicalHistory: payload
+            })
           })
-        }
-      })
-    },
-    */
-    getAllUse ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        db.collection('users').get('value').then(snapshot => {
-          let userList = []
-          let value = snapshot.val()
-          var user = firebase.auth().currentUser
-          for (let key in value) {
-            if (user.email !== value[key].email) {
-              userList.push({id: key, ...value[key]})
-            }
-          }
-          resolve(userList)
         })
-      })
-    },
-    /* old getAllUse to real-time database
-    getAllUse ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        firebase.database().ref('/user_details').once('value').then(snapshot => {
-          let userList = []
-          let value = snapshot.val()
-          var user = firebase.auth().currentUser
-          for (let key in value) {
-            if (user.email !== value[key].email) {
-              userList.push({id: key, ...value[key]})
-            }
-          }
-          resolve(userList)
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes was successfully saved!'
+          })
         })
-      })
-    },
-    */
-    makeAdmin ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        let role = payload.role === 1 ? 0 : 1
-        db.collection('users').doc(payload.id).set({...payload, role: role}).then(error => {
-          if (error) {
-            reject(error)
-          } else {
-            resolve(payload)
-          }
+        .catch(error => {
+          commit('SET_ERROR', error)
         })
-      })
+
+      commit('SAVE_MEDICAL_HISTORY', payload)
     },
-    /* old makeAdmin to read-time database
-    makeAdmin ({commit}, payload) {
-      return new Promise((resolve, reject) => {
-        let role = payload.role === 1 ? 0 : 1
-        firebase.database().ref('/user_details/' + payload.id).set({...payload, role: role}).then(error => {
-          if (error) {
-            reject(error)
-          } else {
-            resolve(payload)
-          }
-        })
-      })
-    },
-    */
     signOut ({commit}) {
       firebase.auth().signOut()
       commit('UNSET_USER')

@@ -1,23 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Intro from '@/components/Members/Intro'
-import MedicalHx from '@/components/Members/MedicalHx'
-import SurgicalHx from '@/components/Members/SurgicalHx'
-import Medications from '@/components/Members/Medications'
-import FamilyHx from '@/components/Members/FamilyHx'
-import Consultation from '@/components/Members/Consultation'
-import Visits from '@/components/Members/Visits'
-import Labs from '@/components/Members/Labs'
-import Profile from '@/components/Profile'
-import Alerts from '@/components/Alerts'
-import Settings from '@/components/Settings'
-import Messages from '@/components/Messages'
-import Help from '@/components/Help'
-import Signin from '@/components/Signin'
-import Signup from '@/components/Signup'
-import Landing from '@/components/Landing'
-import Admin from '@/components/Admin'
-import Staff from '@/components/Staff'
 import store from '../store'
 
 Vue.use(Router)
@@ -27,7 +9,9 @@ const router = new Router({
     {
       path: '/',
       name: 'LandingPage',
-      component: Landing,
+      // it's for code splitting with webpack. In this case routes will be loaded asynchronously and bundle.js file will be less
+      // special comments in 'import' tell webpack how to name a chunk
+      component: () => import(/* webpackChunkName: "landing" */ '@/components/Landing.vue'),
       meta: {
         requireGuest: true
       }
@@ -35,7 +19,7 @@ const router = new Router({
     {
       path: '/admin',
       name: 'Admin',
-      component: Admin,
+      component: () => import('@/components/Admin.vue'),
       meta: {
         requireAuth: true
       }
@@ -43,7 +27,7 @@ const router = new Router({
     {
       path: '/staff',
       name: 'Staff',
-      component: Staff,
+      component: () => import('@/components/Staff.vue'),
       meta: {
         requireAuth: true
       }
@@ -51,7 +35,7 @@ const router = new Router({
     {
       path: '/intro',
       name: 'intro',
-      component: Intro,
+      component: () => import('@/components/Members/Intro.vue'),
       meta: {
         requireAuth: true
       }
@@ -59,7 +43,7 @@ const router = new Router({
     {
       path: '/medicalhx',
       name: 'MedicalHx',
-      component: MedicalHx,
+      component: () => import('@/components/Members/MedicalHx.vue'),
       meta: {
         requireAuth: true
       }
@@ -67,7 +51,7 @@ const router = new Router({
     {
       path: '/surgicalhx',
       name: 'SurgicalHx',
-      component: SurgicalHx,
+      component: () => import('@/components/Members/SurgicalHx.vue'),
       meta: {
         requireAuth: true
       }
@@ -75,7 +59,7 @@ const router = new Router({
     {
       path: '/medications',
       name: 'Medications',
-      component: Medications,
+      component: () => import('@/components/Members/Medications.vue'),
       meta: {
         requireAuth: true
       }
@@ -83,7 +67,7 @@ const router = new Router({
     {
       path: '/familyhx',
       name: 'FamilyHx',
-      component: FamilyHx,
+      component: () => import('@/components/Members/FamilyHx.vue'),
       meta: {
         requireAuth: true
       }
@@ -91,7 +75,7 @@ const router = new Router({
     {
       path: '/consultation',
       name: 'Consultation',
-      component: Consultation,
+      component: () => import('@/components/Members/Consultation.vue'),
       meta: {
         requireAuth: true
       }
@@ -99,7 +83,7 @@ const router = new Router({
     {
       path: '/visits',
       name: 'Visits',
-      component: Visits,
+      component: () => import('@/components/Members/Visits.vue'),
       meta: {
         requireAuth: true
       }
@@ -107,7 +91,7 @@ const router = new Router({
     {
       path: '/labs',
       name: 'Labs',
-      component: Labs,
+      component: () => import('@/components/Members/Labs.vue'),
       meta: {
         requireAuth: true
       }
@@ -115,7 +99,7 @@ const router = new Router({
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile,
+      component: () => import('@/components/Profile.vue'),
       meta: {
         requireAuth: true
       }
@@ -123,7 +107,7 @@ const router = new Router({
     {
       path: '/alerts',
       name: 'Alerts',
-      component: Alerts,
+      component: () => import('@/components/Alerts.vue'),
       meta: {
         requireAuth: true
       }
@@ -131,7 +115,7 @@ const router = new Router({
     {
       path: '/settings',
       name: 'Settings',
-      component: Settings,
+      component: () => import('@/components/Settings.vue'),
       meta: {
         requireAuth: true
       }
@@ -139,7 +123,7 @@ const router = new Router({
     {
       path: '/messages',
       name: 'Messages',
-      component: Messages,
+      component: () => import('@/components/Messages.vue'),
       meta: {
         requireAuth: true
       }
@@ -147,7 +131,7 @@ const router = new Router({
     {
       path: '/help',
       name: 'Help',
-      component: Help,
+      component: () => import('@/components/Help.vue'),
       meta: {
         requireAuth: true
       }
@@ -155,7 +139,7 @@ const router = new Router({
     {
       path: '/signin',
       name: 'Signin',
-      component: Signin,
+      component: () => import('@/components/Signin.vue'),
       meta: {
         requireAuth: true
       }
@@ -163,7 +147,7 @@ const router = new Router({
     {
       path: '/signup',
       name: 'Signup',
-      component: Signup,
+      component: () => import('@/components/Signup.vue'),
       meta: {
         requireGuest: true
       }
@@ -171,35 +155,10 @@ const router = new Router({
   ]
 })
 
-// const ifAuthenticated = (to, from, next) => {
-//   next()
-  // console.log('dd')
-  // if(store.getters.getUser) {
-  //   console.log('router, user is Auth')
-  //   next()
-  // } else {
-  //   console.log('router, user is NOT Auth')
-  //   next('/')
-  // }
-  // if (store.state.userStore.user) {
-  //   if (to.meta.adminRole) {
-  //     if (store.state.userStore.user.role || store.state.userStore.user.email === 'admin@gmail.com') {
-  //       next()
-  //     } else {
-  //       next(from.path)
-  //     }
-  //   } else {
-  //     next()
-  //   }
-  // } else {
-  //   next('/')
-  // }
-// }
-
 // runs for each route and checkes the condition
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requireAuth)) {
-    if(!store.getters.getUser) {
+     if(!store.getters.getUser) {
       next({
         path: '/',
         query: {
@@ -210,7 +169,8 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else if (to.matched.some(record => record.meta.requireGuest)) {
-    if(!!store.getters.getUser) {
+    if(store.getters.getUser) {
+      console.log(store.getters.getUser)
       next({
         // maybe you want to change this behaviour, now it's will redirect to home page
         path: '/intro',
