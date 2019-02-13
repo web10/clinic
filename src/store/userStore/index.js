@@ -4,13 +4,11 @@ import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import db from '@/config/firebaseInit'
-// import router from '../../router'
 
 export default {
   state: {
     user: null,
-    // admin: null,
-    role: null
+//    role: null, role has been moved to be inside user object
   },
   mutations: {
     setUser (state, payload) {
@@ -76,6 +74,7 @@ export default {
           user.phoneNumber = data.phoneNumber
           user.location = data.location
           user.gender = data.gender
+          user.role = data.role
           user.medicalHistory = data.medicalHistory
           commit('setUser', user)
         })
@@ -85,12 +84,12 @@ export default {
       const user = getters.getUser;
 
       const updatedUser =  {
-        ...user, 
+        ...user,
         gender: payload.gender,
         phoneNumber: payload.phoneNumber,
         location: payload.location
       }
-      
+
       // you can write db.collection('users').doc(user.id).update({...}) but
       // for this you need to save a user's document id same as firebase.user.uid
       // for now it's different and we can access it as I do it below

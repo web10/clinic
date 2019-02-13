@@ -1,9 +1,10 @@
 <template>
 <div class="landingpage">
-    <v-layout row wrap>
+    <v-layout row wrap >
           <v-flex xs6 sm8 md9>
             <v-container text-xs-center class="pa-1">
-              <h1> SHC Partner</h1>
+              <h1> eClinic App</h1>
+              <h4> by SHC Partner </h4>
               <H2>"Your Health Re-imagined"</H2>
             <!--
               <v-list>
@@ -114,19 +115,6 @@ export default {
           password: this.password
         }
         this.$store.dispatch('signIn', user)
-        // it's better to keep this logic inside actions in store
-
-        // this.$store.dispatch('setLoadin', true)
-        // this.$store.dispatch('signIn', {'email': this.email, 'password': this.password})
-        // .then(user => {
-        //   console.log('Login the user')
-        // }, error => {
-        //   this.$store.dispatch('setLoadin', false)
-        //   this.error.msg = error.message
-        //   setTimeout(() => {
-        //     this.error.msg = ''
-        //   }, 2000)
-        // })
       }
     }
   }

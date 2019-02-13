@@ -1,76 +1,77 @@
 <template>
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-card-media height="200px">
-          <v-layout column fill-height>
-            <v-card-title>
-              <h2> {{user.firstName}} {{user.lastName}} </h2>
-            </v-card-title>
-            <span class="ma-5, text-xs-center" >
-              <img :src="userImage" height="100px" width="100px">
-            </span>
-            <image-uploader
-              :debug="1"
-              :maxWidth="512"
-              :quality="0.7"
-              :autoRotate=true
-              outputFormat="verbose"
-              :preview=false
-              :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
-              capture="environment"
-              @input="setImage"
-              @onComplete="endImageResize">
-            </image-uploader>
-          </v-layout>
-        </v-card-media>
+        <v-card class="pa-2">
+          <v-card-media height="200px">
+            <v-layout column fill-height>
+              <v-card-title>
+                <h2> {{user.firstName}} {{user.lastName}} </h2>
+              </v-card-title>
+              <span class="ma-5, text-xs-center" >
+                <img :src="userImage" height="100px" width="100px">
+              </span>
+              <image-uploader
+                :debug="1"
+                :maxWidth="512"
+                :quality="0.7"
+                :autoRotate=true
+                outputFormat="verbose"
+                :preview=false
+                :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
+                capture="environment"
+                @input="setImage"
+                @onComplete="endImageResize">
+              </image-uploader>
+            </v-layout>
+          </v-card-media>
 
-        <v-list>
+          <v-list>
 
-        <v-list-tile>
-          <v-list-tile-content>
-            <v-list-tile-title>Email: {{user.email}}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-
-        <v-divider inset></v-divider>
           <v-list-tile>
             <v-list-tile-content>
-              <v-list-tile-title>
-                Mobile Phone:
-                <input v-model="user.phoneNumber" placeholder="my phone number">
-              </v-list-tile-title>
+              <v-list-tile-title>Email: {{user.email}}, role: {{user.role}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
           <v-divider inset></v-divider>
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>
-                Located at:
-                <input v-model="user.location" placeholder="my location">
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  Mobile Phone:
+                  <input v-model="user.phoneNumber" placeholder="my phone number">
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
 
-          <v-divider inset></v-divider>
+            <v-divider inset></v-divider>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  Located at:
+                  <input v-model="user.location" placeholder="my location">
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
 
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>
-                Gender:
-                <!-- I think here better add radio buttons -->
-                <input v-model="user.gender" placeholder="my gender">
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-        <!-- you need a button to trigger updateProfile action or 
-        if you don't want to use buttons - then you can trigger this action on input change event 
-        but be carefull it can cause prefomance issue if you won't use debounce
-        the simplest is to use a button -->
-        <v-btn color="success" @click="updateProfile">Save</v-btn>
-      </v-card>
+            <v-divider inset></v-divider>
+
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  Gender:
+                  <!-- I think here better add radio buttons -->
+                  <input v-model="user.gender" placeholder="my gender">
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+          <!-- you need a button to trigger updateProfile action or
+          if you don't want to use buttons - then you can trigger this action on input change event
+          but be carefull it can cause prefomance issue if you won't use debounce
+          the simplest is to use a button -->
+          <v-btn color="success" @click="updateProfile">Save</v-btn>
+        </v-card>
+
     </v-flex>
   </v-layout>
 </template>

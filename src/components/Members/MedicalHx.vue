@@ -3,7 +3,7 @@
     <v-layout pb-4>
       <v-flex xs12>
         <div class="text-xs-center">
-          <h1> My Medical History </h1>
+          <h3> My Medical History </h3>
           <p class="center">Enter any medical problems you have had so that your doctor can help you manage them.</p>
         </div>
       </v-flex>

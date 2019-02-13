@@ -33,9 +33,11 @@ export default {
             email: data.mail,
             role: data.role
           }
-          if(user.id !== currentUser.uid) {
-            userList.push(user)
-          }
+          userList.push(user)
+//        comment out,  will push all users to list including me
+//          if(user.id !== currentUser.uid) {
+//            userList.push(user)
+//          }
         })
         commit('GET_USERS', userList)
       })
@@ -46,7 +48,7 @@ export default {
       db.collection('users').where('id', '==', payload.id).get()
       .then((snap) => {
         snap.forEach((doc) => {
-          const updatedRole = payload.role === 0 ? 1 : 0 
+          const updatedRole = payload.role === 0 ? 1 : 0
           user.role = updatedRole
           doc.ref.update({
             role: updatedRole

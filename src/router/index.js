@@ -19,7 +19,7 @@ const router = new Router({
     {
       path: '/admin',
       name: 'Admin',
-      component: () => import('@/components/Admin.vue'),
+      component: () => import('@/components/Staff/Admin.vue'),
       meta: {
         requireAuth: true
       }
@@ -27,7 +27,15 @@ const router = new Router({
     {
       path: '/staff',
       name: 'Staff',
-      component: () => import('@/components/Staff.vue'),
+      component: () => import('@/components/Staff/Staff.vue'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
+      path: '/schedule',
+      name: 'Schedule',
+      component: () => import('@/components/Staff/Schedule.vue'),
       meta: {
         requireAuth: true
       }
@@ -131,7 +139,7 @@ const router = new Router({
     {
       path: '/help',
       name: 'Help',
-      component: () => import('@/components/Help.vue'),
+      component: () => import('@/components/Members/Help.vue'),
       meta: {
         requireAuth: true
       }

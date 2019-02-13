@@ -1,6 +1,15 @@
 <template>
   <v-container>
-    <h1> Welcome to eClinic!</h1>
+    <h2> Welcome to eClinic!</h2>
+    <h3> "Your Health Reimagined"</h3>
+    <v-spacer></v-spacer>
+    <p>You are among the founding members, so settle in, fill out your medical history on the left hand, then let us know how we can better serve you!
+    </p>
+    <h3>Updates:</h3>
+    <ul>
+      <li>Feb 11, 2019: Adding your medical records history</li>
+      <li>Feb 13, 2019: Looking to add your messenger so you can contact your healthcare time any time.</li>
+    </ul>
   </v-container>
   <!--
   <v-stepper v-model="e1" light>
