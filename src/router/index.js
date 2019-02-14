@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store'
+import store from '@/store'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 Vue.use(Router)
 
@@ -21,7 +23,7 @@ const router = new Router({
       name: 'Admin',
       component: () => import('@/components/Staff/Admin.vue'),
       meta: {
-        requireAuth: true
+        requireAdmin: true
       }
     },
     {
@@ -166,7 +168,7 @@ const router = new Router({
 // runs for each route and checkes the condition
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requireAuth)) {
-     if(!store.getters.getUser) {
+    if(!firebase.auth().currentUser) {
       next({
         path: '/',
         query: {
@@ -177,10 +179,8 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else if (to.matched.some(record => record.meta.requireGuest)) {
-    if(store.getters.getUser) {
-      console.log(store.getters.getUser)
+    if(firebase.auth().currentUser) {
       next({
-        // maybe you want to change this behaviour, now it's will redirect to home page
         path: '/intro',
         query: {
           redirect: to.fullPath
@@ -191,10 +191,9 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requireAdmin)) {
     // check this condition
-    if(store.state.user.role || store.state.user.email === 'admin@gmail.com') {
+    if(firebase.auth().currentUser.email !== 'admin@test.com') {
       next({
-        // redirect where you want
-        path: '/admin',
+        path: '/intro',
         query: {
           redirect: to.fullPath
         }

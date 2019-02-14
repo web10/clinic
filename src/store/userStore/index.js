@@ -4,6 +4,7 @@ import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import db from '@/config/firebaseInit'
+import medHistory from '../staticData/medHistory'
 
 export default {
   state: {
@@ -51,6 +52,7 @@ export default {
         'role': 0,
         phoneNumber: '',
         location: '',
+        medicalHistory: medHistory,
         picture: '',
         gender: ''
       }).then(snapshot => {
