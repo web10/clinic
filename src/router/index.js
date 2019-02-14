@@ -174,9 +174,9 @@ router.beforeEach((to, from, next) => {
         query: {
           redirect: to.fullPath
         }
-      });
+      })
     } else {
-      next();
+      next()
     }
   } else if (to.matched.some(record => record.meta.requireGuest)) {
     if(firebase.auth().currentUser) {
@@ -185,9 +185,9 @@ router.beforeEach((to, from, next) => {
         query: {
           redirect: to.fullPath
         }
-      });
+      })
     } else {
-      next();
+      next()
     }
   } else if (to.matched.some(record => record.meta.requireAdmin)) {
     // check this condition
@@ -199,11 +199,11 @@ router.beforeEach((to, from, next) => {
         }
       });
     } else {
-      next();
+      next ()
     }
   } else {
     // handle all others routes
-    next()
+    next ()
   }
 })
 export default router

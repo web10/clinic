@@ -74,10 +74,10 @@ export default {
   data () {
     return {
       benefitsList: [
-        {"title": 'Take back control of your care'},
-        {"title": 'Text your team any time'},
-        {"title": 'Save money'},
-        {"title": 'Less waiting'}
+        {'title': 'Take back control of your care'},
+        {'title': 'Text your team any time'},
+        {'title': 'Save money'},
+        {'title': 'Less waiting'}
 
       ],
       valid: true,
