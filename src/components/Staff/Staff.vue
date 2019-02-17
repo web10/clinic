@@ -22,13 +22,16 @@
         Patient List
       </v-tab>
       <v-tab ripple>
-        Consults
+        Consults Inbox
       </v-tab>
       <v-tab ripple>
-        Feedbacks
+        MD Inbox
       </v-tab>
       <v-tab ripple>
-        Support
+        Feedback Inbox
+      </v-tab>
+      <v-tab ripple>
+        Support Inbox
       </v-tab>
       <v-tab ripple>
         Referrals
@@ -68,6 +71,14 @@
         <v-card flat>
           <v-card-text>
             Medical Consults from patients come through here.  Then we can triage to see if we can take care of it or schedule for patient to come in.
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            MD Consults (messages forwarded from staff for official text consult with doctors)
+            We may charge for these consult messages.
           </v-card-text>
         </v-card>
       </v-tab-item>
