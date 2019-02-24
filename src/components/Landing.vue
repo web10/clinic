@@ -4,7 +4,7 @@
           <v-flex xs6 sm8 md9>
             <v-container text-xs-center class="pa-1">
               <h1> eClinic App</h1>
-              <h4> by SHC Partner </h4>
+              <h4> by SHC Partners </h4>
               <H2>"Your Health Re-imagined"</H2>
             <!--
               <v-list>

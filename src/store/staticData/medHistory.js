@@ -1,5 +1,5 @@
 export default {
-  'Health Problems': [
+  '1. Health Problems': [
     {
       diagnosis: 'Asthma',
       dx: 'Asthma',
@@ -102,7 +102,7 @@ export default {
       checked: false
     }
   ],
-  'Mental Health': [
+  '2. Mental Health': [
     {
       diagnosis: 'Depression',
       dx: 'Depression',
@@ -129,7 +129,7 @@ export default {
       chaked: false
     }
   ],
-  'Any Cancer?': [
+  '3. Any Cancer?': [
     {
       diagnosis: 'Breast',
       dx: 'Breast CA',

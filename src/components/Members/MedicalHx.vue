@@ -4,7 +4,7 @@
       <v-flex xs12>
         <div class="text-xs-center">
           <h3> My Medical History </h3>
-          <p class="center">Enter any medical problems you have had so that your doctor can help you manage them.</p>
+          <p >We make it easy for you to get in touch with a your doctor.  First thing is to let us know what medical problems you have had in the past or present.</p>
         </div>
       </v-flex>
     </v-layout>
@@ -15,7 +15,7 @@
           color="blue"
           dark
           slider-color="white"
-          show-arrows=""
+          show-arrows="true"
         >
           <v-tabs-slider color="yellow"></v-tabs-slider>
           <v-tab

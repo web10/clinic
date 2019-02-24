@@ -5,20 +5,18 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import db from '@/config/firebaseInit'
 import medHistory from '../staticData/medHistory'
+import surgHistory from '../staticData/surgHistory'
 
 export default {
   state: {
     user: null,
-//    role: null, role has been moved to be inside user object
+
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
       state.role = payload.role
     },
-    // setAdmin (state, payload) {
-    //   state.admin = 'superadmin'
-    // },
     'UNSET_USER' (state) {
       state.user = null
     },
@@ -27,6 +25,9 @@ export default {
     },
     'SAVE_MEDICAL_HISTORY' (state, payload) {
       state.user.medicalHistory = payload
+    },
+    'SAVE_SURGICAL_HISTORY' (state, payload) {
+      state.user.surgicalHistory = payload
     }
   },
   actions: {
@@ -53,6 +54,7 @@ export default {
         phoneNumber: '',
         location: '',
         medicalHistory: medHistory,
+        surgicalHistory: surgHistory,
         picture: '',
         gender: ''
       }).then(snapshot => {
@@ -78,6 +80,7 @@ export default {
           user.gender = data.gender
           user.role = data.role
           user.medicalHistory = data.medicalHistory
+          user.surgicalHistory = data.surgicalHistory
           commit('setUser', user)
         })
       })
@@ -141,6 +144,31 @@ export default {
           commit('SET_ERROR', error)
         })
     },
+    saveSurgicalHistory ({commit}, payload) {
+      const userId = firebase.auth().currentUser.uid
+
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              surgicalHistory: payload
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes was successfully saved!'
+          })
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
+
+      commit('SAVE_SURGICAL_HISTORY', payload)
+    },
     saveMedicalHistory ({commit}, payload) {
       const userId = firebase.auth().currentUser.uid
 
@@ -166,6 +194,7 @@ export default {
 
       commit('SAVE_MEDICAL_HISTORY', payload)
     },
+
     signOut ({commit}) {
       firebase.auth().signOut()
       commit('UNSET_USER')
