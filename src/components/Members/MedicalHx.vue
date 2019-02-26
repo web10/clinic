@@ -15,7 +15,7 @@
           color="blue"
           dark
           slider-color="white"
-          show-arrows="true"
+          show-arrows
         >
           <v-tabs-slider color="yellow"></v-tabs-slider>
           <v-tab

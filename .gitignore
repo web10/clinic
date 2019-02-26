@@ -9,7 +9,6 @@ yarn-error.log*
 .firebaserc
 firebase.json
 firestore.indexes.json
-src/config/firebaseInit.js
 
 # Editor directories and files
 .idea

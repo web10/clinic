@@ -12,13 +12,12 @@
     <v-layout>
       <v-flex xs12 m6>
         <v-card class="pa-2 ma-2">
-
           <form @submit.prevent="saveSurgicalHistory" id="surgicalhxform">
             <v-card flat>
               <v-card-text>
                 <v-layout row wrap>
-                  <v-flex xs12 sm6 md4 lg3 v-for="(item, index) in surgeryHistory"  :key="index">
-                    <v-checkbox :label="item.name" v-model="surgeryHistory[index].checked"></v-checkbox>
+                  <v-flex xs12 sm6 md4 lg3 v-for="(item, index) in surgicalHistory"  :key="index">
+                    <v-checkbox :label="item.name" v-model="surgicalHistory[index].checked"></v-checkbox>
                   </v-flex>
                 </v-layout>
               </v-card-text>

@@ -18,18 +18,18 @@
       <v-tab ripple>
         My Notes
       </v-tab>
-      <v-tab ripple>
+      <!-- <v-tab ripple>
         Patient List
-      </v-tab>
+      </v-tab> -->
       <v-tab ripple>
         Consults Inbox
       </v-tab>
-      <v-tab ripple>
+      <!-- <v-tab ripple>
         MD Inbox
-      </v-tab>
-      <v-tab ripple>
+      </v-tab> -->
+      <!-- <v-tab ripple>
         Feedback Inbox
-      </v-tab>
+      </v-tab> -->
       <v-tab ripple>
         Support Inbox
       </v-tab>
@@ -41,10 +41,24 @@
           <v-card-text>
             <h2>My Notes/ To do List</h2>
             <p>need to add a user's wiki here</p>
+            
+            <template v-for="ticket in tickets('Help')">
+              <v-card class="mb-2" :key="ticket.id">
+                <v-card-title primary-title>
+                  <div>
+                    <p>User ID : {{ticket.createdByUserId}}</p>
+                    <p>Inbox : {{ticket.inbox}}</p>
+                    <h3 class="headline mb-0">{{ ticket.title }}</h3>
+                    <div>{{ ticket.messages[ticket.messages.length - 1].message }}</div>
+                  </div>
+                </v-card-title>
+              </v-card>
+            </template>
+
           </v-card-text>
         </v-card>
       </v-tab-item>
-      <v-tab-item>
+      <!-- <v-tab-item>
         <v-layout row wrap align-end>
           <v-flex xs12>
             <template>
@@ -66,7 +80,7 @@
             </template>
           </v-flex>
         </v-layout>
-      </v-tab-item>
+      </v-tab-item> -->
       <v-tab-item>
         <v-card flat>
           <v-card-text>
@@ -74,21 +88,21 @@
           </v-card-text>
         </v-card>
       </v-tab-item>
-      <v-tab-item>
+      <!-- <v-tab-item>
         <v-card flat>
           <v-card-text>
             MD Consults (messages forwarded from staff for official text consult with doctors)
             We may charge for these consult messages.
           </v-card-text>
         </v-card>
-      </v-tab-item>
-      <v-tab-item>
+      </v-tab-item> -->
+      <!-- <v-tab-item>
         <v-card flat>
           <v-card-text>
             Feedback Inbox - Here is where we can collect the feedbacks from patients to see how we can improve on the app/service.
           </v-card-text>
         </v-card>
-      </v-tab-item>
+      </v-tab-item> -->
       <v-tab-item>
         <v-card flat>
           <v-card-text>
@@ -138,9 +152,14 @@ export default {
   },
   created () {
     this.$store.dispatch('getAllUse')
+    
+    this.$store.dispatch('getTickets')
+    console.log(this.tickets)
   },
   methods: {
-
+    tickets(inbox) {
+      return this.$store.getters.getTickets.filter(ticket => ticket.inbox === inbox)
+    }
   }
 }
 </script>
