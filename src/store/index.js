@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import UserStore from './userStore'
 import AdminStore from './adminStore'
-import ChatModule from './chatModule'
+//import ChatModule from './chatModule'
 Vue.use (Vuex)
 
 export default new Vuex.Store (
@@ -10,7 +10,7 @@ export default new Vuex.Store (
     modules: {
       userStore: UserStore,
       adminStore: AdminStore,
-      chatModule: ChatModule
+//      chatModule: ChatModule
     },
     state: {
       loading: false,
