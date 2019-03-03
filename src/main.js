@@ -30,7 +30,8 @@ import {
   VStepper,
   VProgressCircular,
   VDivider,
-  VCheckbox
+  VCheckbox,
+  VParallax
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import ImageUploader from 'vue-image-upload-resize'
@@ -59,7 +60,8 @@ Vue.use(Vuetify, {
     VProgressCircular,
     VDivider,
     ImageUploader,
-    VCheckbox
+    VCheckbox,
+    VParallax
   }
 })
 Vue.use(Notifications)

@@ -1,74 +1,114 @@
 <template>
   <v-container>
-    <h2> Welcome to eClinic!</h2>
-    <h3> "Your Health Reimagined"</h3>
-    <v-spacer></v-spacer>
-    <p>You are among the founding members, so settle in, fill out your medical history on the left hand, then let us know how we can better serve you!
-    </p>
-    <h3>Updates:</h3>
-    <ul>
-      <li>Feb 11, 2019: Adding your medical records history</li>
-      <li>Feb 13, 2019: Looking to add your messenger so you can contact your healthcare time any time.</li>
-    </ul>
+    <h3> Welcome to SHC Direct Care - brought to you by SHC Parters</h3>
+    <hr>
+    <h3>Your Benefits</h3>
+    <v-container grid-list-md>
+    <v-layout row wrap>
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Primary Care</h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Unlimited Access to your team</li>
+              <li>Personalized Physician Care</li>
+              <li>Patient Care Instructions</li>
+              <li>Common In-Office Labs <b>FREE</b></li>
+              <li>Common In-Office Procedures <b>FREE</b></li>
+              <li>Urgent Care Procedures <b>FREE</b></li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Work and School physicals</h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Sports Physicals</li>
+              <li>Employment Related Physicals</li>
+              <li>DOT Physicals</li>
+              <li>TB Screening</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Urgent Care</h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Infection Treatments</li>
+              <li>Injury Care</li>
+              <li>X-rays</li>
+              <li>Splinting</li>
+              <li>Antibiotics</li>
+              <li>Rapid Diagnostic Tests</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Skin Care</h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Skin Tag Removals</li>
+              <li>Acne Care</li>
+              <li>Skin Biopsies</li>
+              <li>Discounts on Laser Treatment</li>
+              <li>Discounts on Skin Rejuvenation Procedures</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Weight Management</h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Periodic labs</li>
+              <li>Personal coaching/training</li>
+              <li>Dietary counseling</li>
+              <li>Dietary meal options</li>
+              <li>Phentermine management</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4 >
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Personal Fitness</h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Initial assessment and consultation</li>
+              <li>Personal coaching and guidance</li>
+              <li>Health surveillence parellel to training</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+    </v-layout>
   </v-container>
-  <!--
-  <v-stepper v-model="e1" light>
-    <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Welcome!</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 2" step="2">Total Control</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 3" step="3">Transparency</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 4" step="4">Less Waiting</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 5" step="5">Lower Cost</v-stepper-step>
-    </v-stepper-header>
-
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card class="cardstyle" height="200px">
-          <H1> Welcome to eClinic</h1>
-          <h4> "Your Healthcare, Reimagined" </h4>
-        </v-card>
-        <v-btn color="blue" light @click="e1 = 2" >  Continue </v-btn>
-        <v-btn flat>Cancel</v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="2">
-        <v-card  class="cardstyle"  height="200px"  >
-
-        </v-card>
-        <v-btn  color="blue" light  @click="e1 = 3"  >  Continue </v-btn>
-        <v-btn flat> Cancel </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="3">
-        <v-card class="cardstyle" height="200px">
-
-        </v-card>
-        <v-btn color="blue" light @click="e1 = 4"  >  Continue  </v-btn>
-        <v-btn flat> Cancel </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="4">
-        <v-card class="cardstyle" height="200px" >
-
-        </v-card>
-        <v-btn color="blue" light @click="e1 = 5"> Continue </v-btn>
-        <v-btn flat>Cancel</v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="5">
-        <v-card class="cardstyle" height="200px">
-
-        </v-card>
-        <v-btn buttonstyle light @click="e1 = 1"> Continue </v-btn>
-
-      </v-stepper-content>
-
-    </v-stepper-items>
-  </v-stepper>
+  </v-container>
 </template>
 
 <script>
@@ -89,13 +129,8 @@ export default {
     border-radius: 5px;
     padding: 10px;
   }
-
   .buttonstyle {
     background-color: yellow;
-
   }
 
-  .h1 {
-  color: red;
-  }
 </style>

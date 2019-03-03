@@ -152,7 +152,7 @@ const router = new Router({
       name: 'Signin',
       component: () => import('@/components/Signin.vue'),
       meta: {
-        requireAuth: true
+        requireGuest: true
       }
     },
     {

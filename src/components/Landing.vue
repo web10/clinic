@@ -1,63 +1,64 @@
 <template>
-<div class="landingpage">
+<div>
+  <v-parallax
+  height="300"
+  src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+  >
+  <v-layout
+  align-center
+  column
+  justify-center
+  class="blue--text"
+>
+  <h1 class="display-2 font-weight-thin mb-3">SHC Direct Care</h1>
+  <h4 class="subheading">Get Direct Access to All Your Health Needs</h4>
+</v-layout>
+
+
+</v-parallax>
+
     <v-layout row wrap >
-          <v-flex xs6 sm8 md9>
-            <v-container text-xs-center class="pa-1">
-              <h1> eClinic App</h1>
-              <h4> by SHC Partners </h4>
-              <H2>"Your Health Re-imagined"</H2>
-            <!--
-              <v-list>
-                <v-list-tile v-for="item in benefitsList" :key="item.title">
-                  </v-list-tile-action>
-                    <v-icon v-if="item.icon" color="pink">star</v-icon>
-                  </v-list-tile-action>
-                  <v-list-tile-content>
-                    <v-list-tile-title v-text="item.title"></v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
-            -->
+          <v-flex xs12>
+            <!-- <v-container text-xs-center class="pa-1">
+              <h2> SHC Direct Care</h2>
+              <h3> by SHC Partners</h3>
           </v-container>
-          <v-container class="px-1 mx-5 benefits" text-md-left>
+           <v-container class="px-1 mx-5 benefits" text-md-left>
               <ul v-for="item in benefitsList" :key="item.title">
                 <li>
                   {{item.title}}
                 </li>
               </ul>
-          </v-container>
-          </v-flex>
-          <v-flex xs6 sm4 md3 round>
-            <v-card class="ma-2">
-              <v-tabs grow>
-                <v-tab>Sign In</v-tab>
-                <v-tab>Register</v-tab>
-                <v-tab-item>
-                  <v-form ref="form" v-model="valid" lazy-validation>
-                    <v-card-text>
-                      <v-form>
-                        <v-alert :value="error.msg" type="error">
-                          {{error.msg}}
-                        </v-alert>
-                        <v-text-field  prepend-icon="person" v-model="email" label="Email" type="text" :rules="emailRule"></v-text-field>
-                        <v-text-field  prepend-icon="lock" v-model="password" label="Password" type="password" :counter="6" :rules="passwordRule"></v-text-field>
-                      </v-form>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-btn color="blue" light @click="signIn()" :disabled="!valid" left>Login</v-btn>
-                    </v-card-actions>
-                  </v-form>
-                </v-tab-item>
-                <v-tab-item>
-                  <v-card>
-                    <v-card-text>
-                      <v-container>
-                        <sign-up/>
-                      </v-container>
-                    </v-card-text>
-                  </v-card>
-                </v-tab-item>
-              </v-tabs>
+          </v-container> -->
+            <v-card class="ma-1">
+              <v-card-title primary-title class="lighten-4 light-blue">
+                <h2>Get Direct Access To Your Healthcare Team</h2>
+              </v-card-title>
+              <v-card-content class="pa-1">
+                <ul class="px-5">
+                  <li>Unlimited Access to your team</li>
+                  <li>Personalized Physician Care</li>
+                  <li>Patient Care Instructions</li>
+                  <li>Common In-Office Labs <b>FREE</b></li>
+                  <li>Common In-Office Procedures <b>FREE</b></li>
+                  <li>Urgent Care Procedures <b>FREE</b></li>
+                </ul>
+              </v-card-content>
+            </v-card>
+            <v-card class="ma-1">
+              <v-card-title primary-title class="lighten-4 light-blue">
+                <h2>Services Included</h2>
+              </v-card-title>
+              <v-card-content class="pa-1">
+                <ul class="px-5">
+                  <li>Routine Medical Care for Adult, Pediatri, and Women</li>
+                  <li>Physical Exam for School, Sports, Camps</li>
+                  <li>Physical Exam for Pre-Emploment, DOT, Life Insurance</li>
+                  <li>Management of Allergies, Asthma, Dieabetes, Hypertension, and many others</li>
+                  <li>Derm Clinic</li>
+                  <li>Travel Medicine</li>
+                </ul>
+              </v-card-content>
             </v-card>
           </v-flex>
         </v-layout>
@@ -122,21 +123,14 @@ export default {
 </script>
 
 <style>
-  h1 {
-    font-size: 4em;
-  }
-  h2 {
-    font-size: 3em;
-  }
+
   .landingpage {
     background-color: white;
     background-size: cover;
     background-image: url("../assets/bg.jpg");
     height: 100%;
     min-height: 600px;
-    border: #1A237E solid 3px;
-    padding: 5px;
-    border-radius: 10px;
+
     color: #1A237E;
   }
   .round {
@@ -146,8 +140,18 @@ export default {
     font-size: 2em;
     /* not working yet
     font-family: 'Fahkwang', sans-serif; */
-    }
+  }
+  .card {
+    background-color: 0, 30, 1, 0.5;
+    border-radius: 10px;
+    border-style: red 3px solid;
+  }
   .redborder {
     border-style: red 3px solid;
   }
+  .card-title {
+    background-color: light-blue;
+  }
+
+
 </style>

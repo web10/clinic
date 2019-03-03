@@ -33,12 +33,12 @@
       light
       app
       clipped-left
-      v-if="user"
+
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon class="indigo--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon >
         <router-link to="/" style="cursor: pointer" class="hidden-sm-and-down" tag="span">
-          eClinic
+          <span class="white--text">SHC Direct Care</span>
         </router-link>
       </v-toolbar-title>
 
@@ -73,6 +73,28 @@
       </v-tooltip>
       <span v-if="user">{{user.email}}, role: {{user.role}}</span>
       <v-btn color="red" dark v-if="auth" @click="signOut()">Logout</v-btn>
+
+      <!-- temp login button with popup -->
+
+
+      <router-link to="/signin" style="cursor: pointer">
+        <v-btn color="green" dark v-show="!auth">Login</v-btn>
+      </router-link>
+
+      <!-- V-Dialog - once I get this to show up, move the Signin/Register functions from Landing Page to here
+      <div class="text-xs-center">
+        <v-dialog v-model="dialog" width="500" >
+          <template v-slot:activator="{ on }">
+            <v-btn color="green" dark v-on="on">Login</v-btn>
+          </template>
+          <v-card class="pa-2">
+              move Signin and Register tabs to here from landing page
+          </v-card>
+        </v-dialog>
+      </div>
+      -->
+
+
     </v-toolbar>
     <!-- if you will add all this specific markup before router-view - then all your pages will inherit this and customization will be a really hard -->
     <v-content>
@@ -99,7 +121,7 @@
     <v-footer app class="blue pa-3 indigo--text " light v-if="user">
       <v-layout justify-center row wrap>
         <div>
-          <strong>eClinic</strong> {{ new Date().getFullYear() }}
+          <strong>SHC Direct Care</strong> {{ new Date().getFullYear() }}
         </div>
       </v-layout>
     </v-footer>
@@ -128,6 +150,7 @@ export default {
   data: () => ({
     dialog: false,
     drawer: false,
+    dialog: false,
     menuItems: [
       { icon: 'home', text: 'Benefits', name: 'intro', link: '/intro' },
       { icon: 'favorite', text: 'My Health', name: 'MedicalHx', link: '/medicalhx' },

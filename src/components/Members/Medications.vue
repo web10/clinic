@@ -2,12 +2,12 @@
   <v-container fluid >
     <v-layout>
       <v-flex xs12>
-        <h1 class="text-xs-center">  My Medications </h1>
+        <h3 class="text-xs-center">  My Medications </h3>
         <v-container fluid class="container">
           <v-layout>
             <v-flex xs12 sm6>
-              <v-card class="pa-1 ma-1">
-                <h2 class="text-xs-center"> Current Medications </h2>
+              <v-card class="pa-1 ma-1" height="100%">
+                <h3 class="text-xs-center"> Current Medications </h3>
                 <v-card-text>
                   <v-list>
                     <v-list-tile
@@ -38,8 +38,8 @@
               </v-card>
             </v-flex>
             <v-flex xs12 sm6>
-              <v-card class="pa-1 ma-1">
-                <h2 class="text-xs-center"> Drug Allergies </h2>
+              <v-card class="pa-1 ma-1" height="100%">
+                <h3 class="text-xs-center"> Drug Allergies </h3>
                 <v-checkbox
                   label="No Known Drug Allergy"
                   v-model="nkda"
