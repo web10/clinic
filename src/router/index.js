@@ -7,6 +7,7 @@ import 'firebase/firestore'
 Vue.use(Router)
 
 const router = new Router({
+
   routes: [
     {
       path: '/',
@@ -191,7 +192,8 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requireAdmin)) {
     // check this condition
-    if(firebase.auth().currentUser.email !== 'admin@test.com') {
+    if(firebase.auth().currentUser.email !== 'danhnguyenmd@gmail.com') {
+    // if(user.role == 2) {
       next({
         path: '/intro',
         query: {
