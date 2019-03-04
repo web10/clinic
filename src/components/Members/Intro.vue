@@ -1,14 +1,13 @@
 <template>
   <v-container>
-    <h3> Welcome to SHC Direct Care - brought to you by SHC Parters</h3>
+    <h3> Your Current SHC Direct Care Benefits- brought to you by SHC Parters</h3>
     <hr>
-    <h3>Your Benefits</h3>
     <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex xs12 md6 lg4>
         <v-card class="ma-1" height="100%">
           <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Primary Care</h3>
+            <h3>Primary Care - <span class="green--text">Covered</span></h3>
           </v-card-title>
           <v-card-content class="pa-1">
             <ul class="px-5">
@@ -26,13 +25,16 @@
       <v-flex xs12 md6 lg4>
         <v-card class="ma-1" height="100%">
           <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Work and School physicals</h3>
+            <h3>Work and School Physicals - <span class="green--text">Covered</span></h3>
           </v-card-title>
           <v-card-content class="pa-1">
             <ul class="px-5">
               <li>Sports Physicals</li>
-              <li>Employment Related Physicals</li>
+              <li>New Job Physicals</li>
+              <li>Annual Physical Requirements</li>
               <li>DOT Physicals</li>
+              <li>Work and School Excuse Notes for Illness</li>
+              <li>Return to Work/School Notes</li>
               <li>TB Screening</li>
             </ul>
           </v-card-content>
@@ -42,7 +44,7 @@
       <v-flex xs12 md6 lg4>
         <v-card class="ma-1" height="100%">
           <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Urgent Care</h3>
+            <h3>Urgent Care - <span class="green--text">Covered</span></h3>
           </v-card-title>
           <v-card-content class="pa-1">
             <ul class="px-5">
@@ -60,15 +62,14 @@
       <v-flex xs12 md6 lg4>
         <v-card class="ma-1" height="100%">
           <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Skin Care</h3>
+            <h3>Skin Care - <span class="green--text">Covered</span></h3>
           </v-card-title>
           <v-card-content class="pa-1">
             <ul class="px-5">
               <li>Skin Tag Removals</li>
               <li>Acne Care</li>
               <li>Skin Biopsies</li>
-              <li>Discounts on Laser Treatment</li>
-              <li>Discounts on Skin Rejuvenation Procedures</li>
+              <li>Warts and Molluscum</li>
             </ul>
           </v-card-content>
         </v-card>
@@ -77,15 +78,34 @@
       <v-flex xs12 md6 lg4>
         <v-card class="ma-1" height="100%">
           <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Weight Management</h3>
+            <h3>Skin Esthetics - <span class="green--text">Discounts</span></h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Facials</li>
+              <li>Microderm Abrasions</li>
+              <li>Microneedling</li>
+              <li>Photofacials</li>
+              <li>Hair Removal</li>
+              <li>Laser Treatment for Blemishes</li>
+              <li>Microblading - coming soon</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Weight Management - <span class="red--text">Coming Soon</span></h3>
           </v-card-title>
           <v-card-content class="pa-1">
             <ul class="px-5">
               <li>Periodic labs</li>
-              <li>Personal coaching/training</li>
-              <li>Dietary counseling</li>
-              <li>Dietary meal options</li>
-              <li>Phentermine management</li>
+              <li>Personal Coaching</li>
+              <li>Dietary Counseling</li>
+              <li>Healthy Meal Plans</li>
+              <li>Phentermine Management</li>
             </ul>
           </v-card-content>
         </v-card>
@@ -94,13 +114,28 @@
       <v-flex xs12 md6 lg4 >
         <v-card class="ma-1" height="100%">
           <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Personal Fitness</h3>
+            <h3>Personal Fitness - <span class="red--text">Coming Soon</span></h3>
           </v-card-title>
           <v-card-content class="pa-1">
             <ul class="px-5">
               <li>Initial assessment and consultation</li>
               <li>Personal coaching and guidance</li>
               <li>Health surveillence parellel to training</li>
+              <li>Massage Therapy</li>
+            </ul>
+          </v-card-content>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 lg4 >
+        <v-card class="ma-1" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Eye Care - <span class="red--text">Coming Soon</span></h3>
+          </v-card-title>
+          <v-card-content class="pa-1">
+            <ul class="px-5">
+              <li>Annual Optometry Exam</li>
+              <li>Discount on eyeglasses</li>
             </ul>
           </v-card-content>
         </v-card>

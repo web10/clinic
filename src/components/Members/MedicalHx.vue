@@ -68,9 +68,7 @@ import { mapState } from 'vuex'
       ...mapState({
         user: state => state.userStore.user,
       })
-      // orderedMedicalList: function () {
-      //   return _.sortBy(this.medicalHxCheckList, 'name')
-      // }
+
     },
     watch: {
       // user is async and we can't access medicalHistory instantly

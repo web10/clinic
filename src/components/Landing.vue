@@ -1,21 +1,47 @@
 <template>
-<div>
-  <v-parallax
-  height="300"
-  src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
-  >
-  <v-layout
-  align-center
-  column
-  justify-center
-  class="blue--text"
->
-  <h1 class="display-2 font-weight-thin mb-3">SHC Direct Care</h1>
-  <h4 class="subheading">Get Direct Access to All Your Health Needs</h4>
-</v-layout>
-
-
-</v-parallax>
+  <div class="landingpage">
+    <v-layout  class="darkblue--text" row wrap>
+      <v-flex xs12 md6 lg8 >
+        <v-container>
+          <h1 class="display-2 font-weight-thin mb-3">SHC Direct Care</h1>
+          <h4 class="subheading">Get Direct Access to All Your Total Care</h4>
+        </v-container>
+      </v-flex>
+      <v-flex xs12 md6 lg4>
+        <v-card class="ma-2">
+          <v-tabs grow>
+            <v-tab>Sign In</v-tab>
+            <v-tab>Register</v-tab>
+            <v-tab-item>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-card-text>
+                  <v-form>
+                    <v-alert :value="error.msg" type="error">
+                      {{error.msg}}
+                    </v-alert>
+                    <v-text-field  prepend-icon="person" v-model="email" label="Email" type="text" :rules="emailRule"></v-text-field>
+                    <v-text-field  prepend-icon="lock" v-model="password" label="Password" type="password" :counter="6" :rules="passwordRule"></v-text-field>
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn color="blue" light @click="signIn()" :disabled="!valid" left>Login</v-btn>
+                </v-card-actions>
+              </v-form>
+            </v-tab-item>
+            <v-tab-item>
+              <v-card>
+                <v-card-text>
+                  <v-container>
+                    <sign-up/>
+                  </v-container>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+          </v-tabs>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-parallax>
 
     <v-layout row wrap >
           <v-flex xs12>
@@ -30,40 +56,12 @@
                 </li>
               </ul>
           </v-container> -->
-            <v-card class="ma-1">
-              <v-card-title primary-title class="lighten-4 light-blue">
-                <h2>Get Direct Access To Your Healthcare Team</h2>
-              </v-card-title>
-              <v-card-content class="pa-1">
-                <ul class="px-5">
-                  <li>Unlimited Access to your team</li>
-                  <li>Personalized Physician Care</li>
-                  <li>Patient Care Instructions</li>
-                  <li>Common In-Office Labs <b>FREE</b></li>
-                  <li>Common In-Office Procedures <b>FREE</b></li>
-                  <li>Urgent Care Procedures <b>FREE</b></li>
-                </ul>
-              </v-card-content>
-            </v-card>
-            <v-card class="ma-1">
-              <v-card-title primary-title class="lighten-4 light-blue">
-                <h2>Services Included</h2>
-              </v-card-title>
-              <v-card-content class="pa-1">
-                <ul class="px-5">
-                  <li>Routine Medical Care for Adult, Pediatri, and Women</li>
-                  <li>Physical Exam for School, Sports, Camps</li>
-                  <li>Physical Exam for Pre-Emploment, DOT, Life Insurance</li>
-                  <li>Management of Allergies, Asthma, Dieabetes, Hypertension, and many others</li>
-                  <li>Derm Clinic</li>
-                  <li>Travel Medicine</li>
-                </ul>
-              </v-card-content>
-            </v-card>
+
           </v-flex>
         </v-layout>
   </div>
 </template>
+
 <script>
 import SignUp from './Signup'
 
@@ -123,14 +121,12 @@ export default {
 </script>
 
 <style>
-
   .landingpage {
     background-color: white;
     background-size: cover;
     background-image: url("../assets/bg.jpg");
     height: 100%;
     min-height: 600px;
-
     color: #1A237E;
   }
   .round {
@@ -152,6 +148,4 @@ export default {
   .card-title {
     background-color: light-blue;
   }
-
-
 </style>

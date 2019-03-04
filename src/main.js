@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import './plugins/vuetify'
 import App from './App'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -31,7 +32,8 @@ import {
   VProgressCircular,
   VDivider,
   VCheckbox,
-  VParallax
+  VParallax,
+  VCalendar
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import ImageUploader from 'vue-image-upload-resize'
@@ -61,7 +63,8 @@ Vue.use(Vuetify, {
     VDivider,
     ImageUploader,
     VCheckbox,
-    VParallax
+    VParallax,
+    VCalendar
   }
 })
 Vue.use(Notifications)
