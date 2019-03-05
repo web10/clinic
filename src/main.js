@@ -33,7 +33,8 @@ import {
   VDivider,
   VCheckbox,
   VParallax,
-  VCalendar
+  VCalendar,
+  VSelect
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import ImageUploader from 'vue-image-upload-resize'
@@ -64,7 +65,8 @@ Vue.use(Vuetify, {
     ImageUploader,
     VCheckbox,
     VParallax,
-    VCalendar
+    VCalendar,
+    VSelect
   }
 })
 Vue.use(Notifications)
