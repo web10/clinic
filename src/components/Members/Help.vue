@@ -8,19 +8,33 @@
       should trigger a new support ticket that can be closed on the staff page.
       when staff replies, it should be sent to user's Inbox, not back to this "help" or "support" inbox
     </h4>
-    <form>
-      <v-text-field
-        v-model="title"
-        label="Title"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="body"
-        label="Please discribe a problem here ... "
-        required
-      ></v-text-field>
-      <v-btn @click="createTicket">submit</v-btn>
-  </form>
+
+    <v-layout justify-center mt-5>
+      <v-flex xs6>
+        <v-form @submit.prevent="createTicket">
+          <!-- TODO Delete later -->
+          <v-select
+            :items="inboxes"
+            v-model="inbox"
+            label="Categories"
+          ></v-select>
+
+          <v-text-field
+            v-model="title"
+            label="Title"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="body"
+            label="Please discribe a problem here ... "
+            required
+          ></v-text-field>
+          <v-btn type="submit">Submit</v-btn>
+        </v-form>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 </template>
 
@@ -29,12 +43,17 @@ export default {
   data() {
     return {
       title: '',
-      body: ''
+      body: '',
+      inbox: 'Help',
+      inboxes: [
+        'Help',
+        'Consultation'
+      ]
     }
   },
   methods: {
     createTicket() {
-      this.$store.dispatch('createTicket', {title: this.title, body: this.body})
+      this.$store.dispatch('createTicket', {title: this.title, body: this.body, inbox: this.inbox})
     }
   }
 }

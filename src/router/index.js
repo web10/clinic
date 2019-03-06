@@ -35,6 +35,14 @@ const router = new Router({
       }
     },
     {
+      path: '/staff/:id',
+      name: 'ticket-show',
+      component: () => import('@/components/Staff/TicketShow.vue'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
       path: '/schedule',
       name: 'Schedule',
       component: () => import('@/components/Staff/Schedule.vue'),

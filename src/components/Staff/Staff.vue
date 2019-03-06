@@ -15,9 +15,9 @@
       dark
       slider-color="yellow"
     >
-      <v-tab ripple>
+      <!-- <v-tab ripple>
         My Notes
-      </v-tab>
+      </v-tab> -->
       <!-- <v-tab ripple>
         Patient List
       </v-tab> -->
@@ -36,28 +36,15 @@
       <v-tab ripple>
         Referrals
       </v-tab>
-      <v-tab-item>
+      <!-- <v-tab-item>
         <v-card flat>
           <v-card-text>
             <h2>My Notes/ To do List</h2>
             <p>need to add a user's wiki here</p>
             
-            <template v-for="ticket in tickets('Help')">
-              <v-card class="mb-2" :key="ticket.id">
-                <v-card-title primary-title>
-                  <div>
-                    <p>User ID : {{ticket.createdByUserId}}</p>
-                    <p>Inbox : {{ticket.inbox}}</p>
-                    <h3 class="headline mb-0">{{ ticket.title }}</h3>
-                    <div>{{ ticket.messages[ticket.messages.length - 1].message }}</div>
-                  </div>
-                </v-card-title>
-              </v-card>
-            </template>
-
           </v-card-text>
         </v-card>
-      </v-tab-item>
+      </v-tab-item> -->
       <!-- <v-tab-item>
         <v-layout row wrap align-end>
           <v-flex xs12>
@@ -85,7 +72,43 @@
         <v-card flat>
           <v-card-text>
             Medical Consults from patients come through here.  Then we can triage to see if we can take care of it or schedule for patient to come in.
-          </v-card-text>
+            <!-- TODO move to component later -->
+            <!-- <template v-for="ticket in tickets('Consultation')">
+              <router-link :key="ticket.id" :to="{ path: `staff/${ticket.id}` }" tag="div">
+                <v-card class="ticket mb-2 text-center">
+                  <v-card-title primary-title>
+                    <div>
+                      <p class="mb-1">User ID : {{ticket.createdByUserId}}</p>
+                      <p class="mb-1">Inbox : {{ticket.inbox}}</p>
+                      <h3 class="headline mb-0">Title: {{ ticket.title }}</h3>
+                      <span>Resolved: {{ ticket.resolved }}</span>
+                      <div>Last message: {{ ticket.messages[ticket.messages.length - 1].message }}</div>
+                    </div>
+                  </v-card-title>
+                </v-card>
+              </router-link>
+            </template> -->
+            </v-card-text>
+            
+            <v-list two-line>
+              <template v-for="(ticket, index) in tickets('Consultation')">
+                <v-list-tile :key="ticket.id" avatar ripple @click="$router.push(`staff/${ticket.id}`)">
+                  <v-list-tile-avatar>
+                    <img :src="ticket.avatar">
+                  </v-list-tile-avatar>
+                  <v-list-tile-content>
+                    <v-list-tile-title>From: {{ ticket.creatorFullName }}</v-list-tile-title>
+                    <v-list-tile-sub-title class="text--primary">{{ ticket.title }}</v-list-tile-sub-title>
+                    <v-list-tile-sub-title>{{ ticket.messages[ticket.messages.length - 1].message }}</v-list-tile-sub-title>
+                  </v-list-tile-content>
+                  <v-list-tile-action>
+                    <v-list-tile-action-text>{{ ticket.createdAt.seconds | moment("from", "now") }}</v-list-tile-action-text>
+                    <v-icon color="green lighten-1" v-if="ticket.resolved">done</v-icon>
+                  </v-list-tile-action>
+                </v-list-tile>
+                <v-divider v-if="index + 1 < tickets('Consultation').length" :key="`divider-${index}`"></v-divider>
+              </template>
+            </v-list>
         </v-card>
       </v-tab-item>
       <!-- <v-tab-item>
@@ -112,6 +135,21 @@
               <li>Do your best to help them learn how to use the app.</li>
               <li>Then let us know if there are bugs we need to fix.</li>
             </ol>
+            <!-- TODO move to component later -->
+            <template v-for="ticket in tickets('Help')">
+              <v-card class="mb-2" :key="ticket.id">
+                <v-card-title primary-title>
+                  <div>
+                    <p>User ID : {{ticket.createdByUserId}}</p>
+                    <p>Inbox : {{ticket.inbox}}</p>
+                    <h3 class="headline mb-0">{{ ticket.title }}</h3>
+                    <span>{{ ticket.resolved }}</span>
+                    <div>Last message: {{ ticket.messages[ticket.messages.length - 1].message }}</div>
+                  </div>
+                </v-card-title>
+              </v-card>
+            </template>
+
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -154,7 +192,7 @@ export default {
     this.$store.dispatch('getAllUse')
     
     this.$store.dispatch('getTickets')
-    console.log(this.tickets)
+    // console.log(this.tickets)
   },
   methods: {
     tickets(inbox) {
@@ -163,3 +201,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.ticket {
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.20);
+  }
+}
+</style>

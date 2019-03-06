@@ -30,7 +30,8 @@ import {
   VStepper,
   VProgressCircular,
   VDivider,
-  VCheckbox
+  VCheckbox,
+  VSelect
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import ImageUploader from 'vue-image-upload-resize'
@@ -59,11 +60,14 @@ Vue.use(Vuetify, {
     VProgressCircular,
     VDivider,
     ImageUploader,
-    VCheckbox
+    VCheckbox,
+    VSelect
   }
 })
 Vue.use(Notifications)
 Vue.config.productionTip = false
+
+Vue.use(require('vue-moment'));
 
 // I found this implementation of wrapping a Vue instanse in firebase callback usefull
 // when I place it in created hook, strange bugs sometimes happends
