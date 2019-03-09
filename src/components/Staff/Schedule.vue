@@ -2,6 +2,8 @@
   <v-container class="text-sm-left text-md-center">
     <template>
       <h3> Calendar 1 </h3>
+
+      <!-- Calendar controls -->
       <v-layout wrap>
         <v-flex sm4 xs12 class="text-sm-left text-xs-center">
           <v-btn @click="$refs.calendar.prev()">
@@ -18,6 +20,8 @@
             <v-icon right dark> keyboard_arrow_right </v-icon>
           </v-btn>
         </v-flex>
+
+        <!-- Calendar 1-->
         <v-flex xs12 class="mb-3">
           <v-sheet height="500">
             <v-calendar
@@ -153,17 +157,17 @@
         { text: 'Custom Weekly', value: 'custom-weekly' }
       ],
       // for calendar 2
-      today: '2019-01-10',
+      today: '2019-03-08',
       tracked: {
-       '2019-01-09': [23, 45, 10],
-       '2019-01-08': [10],
-       '2019-01-07': [0, 78, 5],
-       '2019-01-06': [0, 0, 50],
-       '2019-01-05': [0, 10, 23],
-       '2019-01-04': [2, 90],
-       '2019-01-03': [10, 32],
-       '2019-01-02': [80, 10, 10],
-       '2019-01-01': [20, 25, 10]
+       '2019-03-01': [23, 45, 10],
+       '2019-03-02': [10],
+       '2019-03-04': [0, 78, 5],
+       '2019-03-05': [0, 0, 50],
+       '2019-03-06': [0, 10, 23],
+       '2019-03-07': [2, 90],
+       '2019-03-08': [10, 32],
+       '2019-03-09': [80, 10, 10],
+       '2019-03-10': [20, 25, 10]
      },
      colors: ['#1867c0', '#fb8c00', '#000000'],
      category: ['Development', 'Meetings', 'Slacking'],
