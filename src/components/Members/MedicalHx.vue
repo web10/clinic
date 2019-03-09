@@ -66,25 +66,25 @@ import { mapState } from 'vuex'
     },
     computed: {
       ...mapState({
-        user: state => state.userStore.user,
+        user: state => state.userStore.user
       })
 
     },
     watch: {
       // user is async and we can't access medicalHistory instantly
       user (val) {
-        if(val) {
+        if (val) {
           this.medicalHistory = this.user.medicalHistory
         }
       }
     },
-    created() {
-      if(this.user) {
+    created () {
+      if (this.user) {
         this.medicalHistory = this.user.medicalHistory
       }
     },
     methods: {
-      saveMedicalHistory() {
+      saveMedicalHistory () {
         this.$store.dispatch('saveMedicalHistory', this.medicalHistory)
       }
     }

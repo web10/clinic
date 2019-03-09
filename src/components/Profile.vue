@@ -199,7 +199,7 @@ export default {
   },
   watch: {
     getUser (val) {
-      if(val) {
+      if (val) {
         this.user = this.getUser
       }
     }
