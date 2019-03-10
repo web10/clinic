@@ -110,7 +110,6 @@ export default {
         })
         .then(() => {
           Vue.notify({
-            group: 'base',
             type: 'success',
             text: 'User was successfully updated!'
           })
@@ -135,7 +134,6 @@ export default {
         })
         .then(() => {
           Vue.notify({
-            group: 'base',
             type: 'success',
             text: 'Image was successfully saved!'
           })
@@ -158,7 +156,6 @@ export default {
         })
         .then(() => {
           Vue.notify({
-            group: 'base',
             type: 'success',
             text: 'Changes was successfully saved!'
           })
@@ -183,7 +180,6 @@ export default {
         })
         .then(() => {
           Vue.notify({
-            group: 'base',
             type: 'success',
             text: 'Changes was successfully saved!'
           })

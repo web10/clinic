@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout>
+    <v-layout mb-4>
       <v-flex class="text-xs-right">
         <router-link to="/staff" tag="div">
           <v-btn
@@ -13,9 +13,35 @@
     </v-layout>
     <v-layout justify-center>
       <v-flex lg6>
-        <h1 class="mb-3">{{ticket.title}}</h1>
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Title: {{ticket.title}}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <!-- redirect ticket btn -->
+          <v-menu bottom left v-if="hasPermision">
+            <v-btn
+              slot="activator"
+              dark
+              icon
+            >
+              <v-icon>reply</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile
+                v-for="(item, i) in avaliableInboxes"
+                :key="i"
+                @click="redirectTicket(item)"
+              >
+                <v-list-tile-title>{{ item }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+          <!-- close ticket btn-->
+          <v-btn dark icon @click="closeTicket" v-if="hasPermision">
+            <v-icon :color="ticket.resolved ? 'green' : 'white'">check_circle</v-icon>
+          </v-btn>
+        </v-toolbar>
         <div class="messenger">
-          <div class="messenger__container">
+          <div class="messenger__container" ref="messengerWindow">
             <div v-for="(message, index) in ticket.messages" :key="index" class="message">
               <div class="message__info">
                 <span class="message__sender">{{ message.senderName }}</span>
@@ -32,7 +58,7 @@
                 outline
                 v-model="message"
               ></v-text-field>
-              <v-btn @click="sendMessage(ticket.id)" color="success">Send</v-btn>
+              <v-btn @click="sendMessage(ticket.id)" color="success" :disabled="ticket.resolved">Send</v-btn>
             </div>  
           </form>
         </div>
@@ -42,13 +68,18 @@
 </template>
 
 <script>
-import db from '@/config/firebaseInit'
+// import db from '@/config/firebaseInit'
 import { mapState } from 'vuex'
+import { setTimeout } from 'timers';
 
 export default {
   name: 'ticket-show',
   data() {
     return {
+      inboxes: [
+        'Help',
+        'Consultation'
+      ],
       message: ''
     }
   },
@@ -57,25 +88,58 @@ export default {
       ticket: state => state.chatModule.ticket,
     }),
     user() {
+      // TODO load USER on page load
       return this.$store.getters.getUser
+    },
+    hasPermision() {
+      // only staff and admin can redirect message
+      if(this.user) {
+        return !!this.user.role
+      }
+    },
+    avaliableInboxes() {
+      // return all inboxes exept current
+      return this.inboxes.filter(inbox => inbox != this.ticket.inbox)
+    }
+  },
+  watch: {
+    ticket(val) {
+      if(val) {
+        // wait for loading tickets and then scroll down after DOM update
+        this.$nextTick(() => this.scrollToEnd() )
+      }
     }
   },
   created() {
-    // load a ticket from by id
+    this.$store.dispatch('getTickets')
+    // load a ticket by id
     const ticketId = this.$route.params.id
     this.$store.dispatch('getTicket', ticketId)
   },
   methods: {
-    sendMessage(ticketId) {
-      const currentMessage = {
-        senderId: this.user.id,
-        message: this.message,
-        createdAt: new Date(),
-        senderName: this.user.firstName,
+    redirectTicket(inbox) {
+      this.$store.dispatch('updateTicket', {ticket: this.ticket, fieldName: 'inbox', value: inbox})
+    },
+    closeTicket() {
+      if(this.ticket.resolved) { 
+        this.$notify('Ticket already resolved');
+        return
       }
+      this.$store.dispatch('updateTicket', {ticket: this.ticket, fieldName: 'resolved', value: true})
+    },
+    sendMessage(ticketId) {
+      if(!this.message) { return }
 
-      this.$store.dispatch('sendMessage', {currentMessage, ticketId})
-    }
+      this.$store.dispatch('sendMessage', {message: this.message, ticketId})
+        .then(() => {
+          this.message = ''
+          this.scrollToEnd()
+        })
+    },
+    scrollToEnd() {
+      const messengerWindow = this.$refs.messengerWindow
+      messengerWindow.scrollTop = messengerWindow.scrollHeight
+    },
   }
 }
 </script>
@@ -87,14 +151,12 @@ export default {
   border-radius: .5rem;
 
   &__container {
+    max-height: 400px;
+    overflow-y: auto;
   }
 }
 
 .message {
-  // display: flex;
-  // background-color: lightblue;
-  // padding: .5rem;
-  // border-radius: .5rem;
   
   &__info {
     display: flex;
@@ -112,5 +174,9 @@ export default {
     font-size: .8rem;
     color: gray;
   }
+}
+
+.resolved {
+  color: green;
 }
 </style>

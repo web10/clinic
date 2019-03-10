@@ -91,23 +91,7 @@
             </v-card-text>
             
             <v-list two-line>
-              <template v-for="(ticket, index) in tickets('Consultation')">
-                <v-list-tile :key="ticket.id" avatar ripple @click="$router.push(`staff/${ticket.id}`)">
-                  <v-list-tile-avatar>
-                    <img :src="ticket.avatar">
-                  </v-list-tile-avatar>
-                  <v-list-tile-content>
-                    <v-list-tile-title>From: {{ ticket.creatorFullName }}</v-list-tile-title>
-                    <v-list-tile-sub-title class="text--primary">{{ ticket.title }}</v-list-tile-sub-title>
-                    <v-list-tile-sub-title>{{ ticket.messages[ticket.messages.length - 1].message }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                  <v-list-tile-action>
-                    <v-list-tile-action-text>{{ ticket.createdAt.seconds | moment("from", "now") }}</v-list-tile-action-text>
-                    <v-icon color="green lighten-1" v-if="ticket.resolved">done</v-icon>
-                  </v-list-tile-action>
-                </v-list-tile>
-                <v-divider v-if="index + 1 < tickets('Consultation').length" :key="`divider-${index}`"></v-divider>
-              </template>
+              <tickets-list :tickets="tickets('Consultation')"></tickets-list>
             </v-list>
         </v-card>
       </v-tab-item>
@@ -135,22 +119,10 @@
               <li>Do your best to help them learn how to use the app.</li>
               <li>Then let us know if there are bugs we need to fix.</li>
             </ol>
-            <!-- TODO move to component later -->
-            <template v-for="ticket in tickets('Help')">
-              <v-card class="mb-2" :key="ticket.id">
-                <v-card-title primary-title>
-                  <div>
-                    <p>User ID : {{ticket.createdByUserId}}</p>
-                    <p>Inbox : {{ticket.inbox}}</p>
-                    <h3 class="headline mb-0">{{ ticket.title }}</h3>
-                    <span>{{ ticket.resolved }}</span>
-                    <div>Last message: {{ ticket.messages[ticket.messages.length - 1].message }}</div>
-                  </div>
-                </v-card-title>
-              </v-card>
-            </template>
-
           </v-card-text>
+            <v-list two-line>
+              <tickets-list :tickets="tickets('Help')"></tickets-list>
+            </v-list>
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -167,6 +139,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import TicketsList from './TicketsList'
 
 export default {
   data () {
@@ -182,6 +155,9 @@ export default {
       ]
     }
   },
+  components: {
+    TicketsList
+  },
   computed: {
       ...mapState({
         adminList: state => state.adminStore.users,
@@ -190,9 +166,7 @@ export default {
   },
   created () {
     this.$store.dispatch('getAllUse')
-    
     this.$store.dispatch('getTickets')
-    // console.log(this.tickets)
   },
   methods: {
     tickets(inbox) {

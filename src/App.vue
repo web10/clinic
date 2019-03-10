@@ -79,7 +79,7 @@
       <v-container fluid>
         <!-- global notifications -->
         <error-notification></error-notification>
-        <notifications group="base" />
+        <notifications />
 
         <router-view></router-view>
 

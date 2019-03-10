@@ -11,27 +11,39 @@
 
     <v-layout justify-center mt-5>
       <v-flex xs6>
-        <v-form @submit.prevent="createTicket">
-          <!-- TODO Delete later -->
-          <v-select
-            :items="inboxes"
-            v-model="inbox"
-            label="Categories"
-          ></v-select>
+        <v-card>
+          <v-toolbar color="primary" dark>
+            <v-toolbar-title>Create a ticket</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <!-- <v-btn icon>
+              <v-icon>search</v-icon>
+            </v-btn> -->
+        </v-toolbar>
 
-          <v-text-field
-            v-model="title"
-            label="Title"
-            required
-          ></v-text-field>
+          <v-card-text>
+            <v-form @submit.prevent="createTicket">
+            <!-- TODO Delete later -->
+            <v-select
+              :items="inboxes"
+              v-model="inbox"
+              label="Inbox"
+            ></v-select>
 
-          <v-text-field
-            v-model="body"
-            label="Please discribe a problem here ... "
-            required
-          ></v-text-field>
-          <v-btn type="submit">Submit</v-btn>
-        </v-form>
+            <v-text-field
+              v-model="title"
+              label="Title"
+              required
+            ></v-text-field>
+
+            <v-text-field
+              v-model="body"
+              label="Please discribe a problem here ... "
+              required
+            ></v-text-field>
+            <v-btn type="submit" color="success" class="ml-0">Submit</v-btn>
+          </v-form>
+          </v-card-text>
+        </v-card>
       </v-flex>
     </v-layout>
 
