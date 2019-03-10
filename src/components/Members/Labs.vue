@@ -5,12 +5,10 @@
         <h1 class="text-xs-center">
           My Test Results
         </h1>
-        <h2 class="text-xs-center">
-          Log Test Results Here
-        </h2><br/>
-        <p class="text-sx-left">
-          table of results, click to review details of each visit
-        </p>
+        <h3 class="text-xs-center red--text">
+          You do not have any lab results.
+        </h3><br/>
+
       </v-flex>
     </v-layout>
   </v-container>

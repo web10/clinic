@@ -90,7 +90,7 @@
             </template> -->
             </v-card-text>
             
-            <v-list two-line>
+            <v-list two-line class="messenger-body">
               <tickets-list :tickets="tickets('Consultation')"></tickets-list>
             </v-list>
         </v-card>
@@ -120,7 +120,7 @@
               <li>Then let us know if there are bugs we need to fix.</li>
             </ol>
           </v-card-text>
-            <v-list two-line>
+            <v-list two-line class="messenger-body">
               <tickets-list :tickets="tickets('Help')"></tickets-list>
             </v-list>
         </v-card>

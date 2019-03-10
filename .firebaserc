@@ -1,5 +1,5 @@
 {
   "projects": {
-    "testing": "upwork-health-app"
+    "default": "clinic-f47af"
   }
 }

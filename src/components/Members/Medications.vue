@@ -1,14 +1,34 @@
 <template>
-  <v-container fluid >
-    <v-layout>
-      <v-flex xs12>
-        <h1 class="text-xs-center">  My Medications </h1>
+  <v-container>
+    <v-layout row wrap>
+      <v-flex>
+        <span class="headline"><b> Medications: </b> Let us know your current medications and allergies. </span>
         <v-container fluid class="container">
-          <v-layout>
-            <v-flex xs12 sm6>
-              <v-card class="pa-1 ma-1">
-                <h2 class="text-xs-center"> Current Medications </h2>
+          <v-layout row wrap>
+            <v-flex sm12 md6>
+              <v-card class="card" >
+                <v-card-title >
+
+                  <v-layout>
+                    <v-flex xs12 md4>
+                    <h3>New Medication:</h3>
+                    </v-flex>
+                    <v-flex xs12 md6>
+                      <v-text-field
+                        single-line="true"
+                        v-model="newMed"
+                        box
+                        label="medication name">
+                      </v-text-field>
+                    </v-flex>
+                    <v-flex xs12 md2>
+                      <v-btn color="blue">Add</v-btn>
+                    </v-flex>
+                  </v-layout>
+                </v-card-title>
+                <hr>
                 <v-card-text>
+                  <h3 class="text-xs-center"> My Current Medications </h3>
                   <v-list>
                     <v-list-tile
                       v-for="(med, index) in medList"
@@ -22,31 +42,34 @@
                     </v-list-tile>
                   </v-list>
                 </v-card-text>
-                <v-container class="pa-2">
-                <hr>
-                  <h3 class="ma-2 "> Add New Medication: </h3>
-                  <v-text-field
-                    outline="true"
-                    single-line="true"
-                    v-model="newMed"
-                    label="medication name"
-                    class="mx-3"
-                    counter="20">
-                  </v-text-field>
-                  <v-btn color="blue">Add New Medicine</v-btn>
-                </v-container>
               </v-card>
             </v-flex>
-            <v-flex xs12 sm6>
-              <v-card class="pa-1 ma-1">
-                <h2 class="text-xs-center"> Drug Allergies </h2>
-                <v-checkbox
-                  label="No Known Drug Allergy"
-                  v-model="nkda"
-                  >
-                </v-checkbox>
-
+            <v-flex sm12 md6>
+              <v-card class="card">
+                <v-card-title>
+                 <v-layout row wrap>
+                   <v-flex xs12 md4>
+                     <h3>New Allergy:</h3>
+                   </v-flex>
+                    <v-flex xs12 md6>
+                      <v-text-field
+                        single-line="true"
+                        v-model="newAllergy"
+                        box
+                        label="medication name">
+                      </v-text-field>
+                    </v-flex>
+                    <v-flex xs12 md2>
+                      <v-btn color="blue">Add</v-btn>
+                    </v-flex>
+                  </v-layout>
+                </v-card-title>
+                <hr>
                 <v-card-text>
+                  <div class="text-xs-center">
+                    <h3 > My Drug Allergies </h3>
+                    <v-checkbox label="No Known Drug Allergy" v-model="nkda"> </v-checkbox>
+                  </div>
                   <v-list>
                     <v-list-tile
                       v-for="(allergy, index) in allergiesList"
@@ -60,19 +83,6 @@
                     </v-list-tile>
                   </v-list>
                 </v-card-text>
-                <v-container class="pa-2">
-                <hr>
-                  <h3 class="ma-2 "> Add New Allergy: </h3>
-                  <v-text-field
-                    outline="true"
-                    single-line="true"
-                    v-model="newMed"
-                    label="allergic to what?"
-                    class="mx-3"
-                    counter="20">
-                  </v-text-field>
-                  <v-btn color="blue">Add Allergy</v-btn>
-                </v-container>
               </v-card>
             </v-flex>
           </v-layout>
@@ -86,6 +96,7 @@
   export default {
     name: 'medicationList',
     newMed: '',
+    newAllergy: '',
     nkda: '',
     data () {
       return {
@@ -103,9 +114,10 @@
 </script>
 
   <style>
-    .container {
-      border-style: 1px blue;
-      bg-color: lightblue;
+    .card {
+      border-radius: 10px;
+      height: 100%;
+      margin: 5px;
     }
     .bglightblue {
       background-color: lightblue;

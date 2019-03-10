@@ -15,11 +15,11 @@
             :to="item.link"
             class="indigo--text">
             <v-list-tile-action>
-              <v-icon class="bl--text">{{ item.icon }}</v-icon>
+              <v-icon class="bl--text"></v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>
-                {{ item.text }}
+               {{ item.text }}
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -38,7 +38,7 @@
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon class="indigo--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon >
         <router-link to="/" style="cursor: pointer" class="hidden-sm-and-down" tag="span">
-          eClinic
+          <span class="white--text">SHC Direct Care</span>
         </router-link>
       </v-toolbar-title>
 
@@ -73,6 +73,12 @@
       </v-tooltip>
       <span v-if="user">{{user.email}}, role: {{user.role}}</span>
       <v-btn color="red" dark v-if="auth" @click="signOut()">Logout</v-btn>
+
+      <!-- no longer using button to signup page
+      <router-link to="/signin" style="cursor: pointer">
+        <v-btn color="green" dark v-show="!auth">Login</v-btn>
+      </router-link> -->
+
     </v-toolbar>
     <!-- if you will add all this specific markup before router-view - then all your pages will inherit this and customization will be a really hard -->
     <v-content>
@@ -99,7 +105,7 @@
     <v-footer app class="blue pa-3 indigo--text " light v-if="user">
       <v-layout justify-center row wrap>
         <div>
-          <strong>eClinic</strong> {{ new Date().getFullYear() }}
+          <strong>SHC Direct Care</strong> {{ new Date().getFullYear() }}
         </div>
       </v-layout>
     </v-footer>
@@ -126,7 +132,6 @@ export default {
     }
   },
   data: () => ({
-    dialog: false,
     drawer: false,
     menuItems: [
       { icon: 'home', text: 'Benefits', name: 'intro', link: '/intro' },
@@ -178,5 +183,10 @@ export default {
     right: 50%;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .messenger-body {
+    max-height: 500px;
+    overflow-y: auto;
   }
 </style>

@@ -10,7 +10,7 @@
           </v-btn>
         </v-toolbar>
 
-        <v-list two-line>
+        <v-list two-line class="messenger-body">
           <template v-for="(ticket, index) in userTickets">
             <v-list-tile :key="ticket.id" avatar ripple @click="$router.push(`staff/${ticket.id}`)">
               <v-list-tile-avatar>
@@ -36,10 +36,6 @@
 
 <script>
   export default {
-    data() {
-      return {
-      }
-    },
     computed: {
       user() {
         return this.$store.getters.getUser

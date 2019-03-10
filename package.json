@@ -1,19 +1,15 @@
 {
   "name": "vuetify-spa-template",
   "version": "1.0.0",
-  "description": "test run of 1st template to see if we can start here for all apps",
-  "author": "Danh Nguyen <danh1975@yahoo.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev"
   },
   "dependencies": {
     "firebase": "^5.3.0",
-    "firebase-admin": "^7.0.0",
-    "firebase-functions": "^2.2.0",
     "http2": "^3.3.7",
     "vue": "^2.5.2",
     "vue-image-upload-resize": "^1.1.6",
@@ -67,21 +63,25 @@
     "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
+    "vuetify-loader": "^1.0.5",
     "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.11.2",
     "webpack-merge": "^4.1.0"
   },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "description": "Clinic App by SHC Partner",
+  "author": "Danh Nguyen <danh1975@yahoo.com>",
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  }
 }

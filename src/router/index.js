@@ -7,6 +7,7 @@ import 'firebase/firestore'
 Vue.use(Router)
 
 const router = new Router({
+
   routes: [
     {
       path: '/',
@@ -159,7 +160,7 @@ const router = new Router({
       name: 'Signin',
       component: () => import('@/components/Signin.vue'),
       meta: {
-        requireAuth: true
+        requireGuest: true
       }
     },
     {
@@ -175,8 +176,8 @@ const router = new Router({
 
 // runs for each route and checkes the condition
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requireAuth)) {
-    if(!firebase.auth().currentUser) {
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    if (!firebase.auth().currentUser) {
       next({
         path: '/',
         query: {
@@ -187,7 +188,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else if (to.matched.some(record => record.meta.requireGuest)) {
-    if(firebase.auth().currentUser) {
+    if (firebase.auth().currentUser) {
       next({
         path: '/intro',
         query: {
@@ -199,19 +200,20 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requireAdmin)) {
     // check this condition
-    if(firebase.auth().currentUser.email !== 'admin@test.com') {
+    if (firebase.auth().currentUser.email !== 'danhnguyenmd@gmail.com') {
+    // if(user.role == 2) {
       next({
         path: '/intro',
         query: {
           redirect: to.fullPath
         }
-      });
+      })
     } else {
-      next ()
+      next()
     }
   } else {
     // handle all others routes
-    next ()
+    next()
   }
 })
 export default router

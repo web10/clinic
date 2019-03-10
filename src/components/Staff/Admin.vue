@@ -95,10 +95,9 @@ export default {
     }
   },
   computed: {
-      ...mapState({
-        userList: state => state.adminStore.users,
-      }
-    )
+    ...mapState({
+      userList: state => state.adminStore.users
+    })
   },
   created () {
     this.$store.dispatch('getAllUse')

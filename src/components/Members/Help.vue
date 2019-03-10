@@ -1,12 +1,10 @@
 <template>
   <v-container>
-    <h4 class="text-sm-left text-md-center">
+    <h2 class="text-sm-left text-md-center">
       Help Page
-
-      messenger to be placed Here
-      messages should attach the current logged in user, time stamped then forwarded to the Support Inbox in Staff page.
-      should trigger a new support ticket that can be closed on the staff page.
-      when staff replies, it should be sent to user's Inbox, not back to this "help" or "support" inbox
+    </h2>
+    <h4 class="text-sm-left text-md-center">
+      Replies will be sent to your Inbox and a copy forwarded to your email address.
     </h4>
 
     <v-layout justify-center mt-5>
@@ -31,13 +29,13 @@
 
             <v-text-field
               v-model="title"
-              label="Title"
+              label="Problem"
               required
             ></v-text-field>
 
             <v-text-field
               v-model="body"
-              label="Please discribe a problem here ... "
+              label="Please give details ... "
               required
             ></v-text-field>
             <v-btn type="submit" color="success" class="ml-0">Submit</v-btn>
@@ -46,7 +44,6 @@
         </v-card>
       </v-flex>
     </v-layout>
-
   </v-container>
 </template>
 
