@@ -4,7 +4,7 @@
       <v-flex xs12>
         <div class="text-xs-center">
           <h1 > My Family's History </h1>
-          <p class="center">You are at risk for getting some genetic conditions. Let us know what runs in the family so we can help you screen.</p>
+          <p class="center">Some diseases can run in the family. Let us know what other family members have so we can help you screen potential problems for you.</p>
         </div>
       </v-flex>
     </v-layout>
