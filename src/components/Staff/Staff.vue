@@ -41,7 +41,7 @@
           <v-card-text>
             <h2>My Notes/ To do List</h2>
             <p>need to add a user's wiki here</p>
-            
+
           </v-card-text>
         </v-card>
       </v-tab-item> -->
@@ -89,7 +89,7 @@
               </router-link>
             </template> -->
             </v-card-text>
-            
+
             <v-list two-line class="messenger-body">
               <tickets-list :tickets="tickets('Consultation')"></tickets-list>
             </v-list>
@@ -138,6 +138,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapState } from 'vuex'
 import TicketsList from './TicketsList'
 

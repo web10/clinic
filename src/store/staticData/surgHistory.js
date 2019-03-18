@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default [
   {'name': 'back', dx: 'back surgery', checked: false},
   {'name': 'appendix', dx: 'appendectomy', checked: false},

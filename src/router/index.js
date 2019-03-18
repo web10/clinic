@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
@@ -53,7 +54,7 @@ const router = new Router({
     },
     {
       path: '/intro',
-      name: 'intro',
+      name: 'Intro',
       component: () => import('@/components/Members/Intro.vue'),
       meta: {
         requireAuth: true

@@ -1,5 +1,4 @@
-// first line imports only base functionality from firebase
-// second - an auth package
+/* eslint-disable */
 import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -28,7 +27,35 @@ export default {
     },
     'SAVE_SURGICAL_HISTORY' (state, payload) {
       state.user.surgicalHistory = payload
-    }
+    },
+    'SAVE_MEDICATION' (state, payload) {
+       //{medicine: selectedMedDetails[0], userInput: this.$refs.mediRefName.searchInput}
+      if(!state.user.medications){
+         console.log("no medication selected ")
+         state.user.medications.push(payload)
+         console.log("state.user.medications:: ", state.user.medications )
+       }
+       else {
+         state.user.medications.push(payload)
+         console.log("state.user.medications: ", state.user.medications )
+       }
+    },
+    'DEL_MEDICATION' (state, payload) {
+      state.user.medications.splice(payload.index, 1);
+    },
+    'SAVE_ALLERGY' (state, payload) {
+      //payload: { allergyDrug: { 'generic': 'ibuprofen', 'brandNames': [ 'Motrin', 'Advil']}, drugReaction: this.reaction, userAllergyInput: ''}
+      if(!state.user.allergies){
+        state.user.allergies.push(payload)
+        console.log("state.user.allergies: ", state.user.allergies )
+      }
+      else{
+        state.user.allergies.push(payload)
+      }
+   },
+   'DEL_ALLERGY' (state, payload) {
+    state.user.allergies.splice(payload.index, 1);
+  }
   },
   actions: {
     signIn ({commit}, payload) {
@@ -55,6 +82,8 @@ export default {
         location: '',
         medicalHistory: medHistory,
         surgicalHistory: surgHistory,
+        medications: [],
+        allergies: [],
         picture: '',
         gender: ''
       }).then(snapshot => {
@@ -81,6 +110,8 @@ export default {
           user.role = data.role
           user.medicalHistory = data.medicalHistory
           user.surgicalHistory = data.surgicalHistory
+          user.medications = data.medications
+          user.allergies = data.allergies
           commit('setUser', user)
         })
       })
@@ -110,6 +141,7 @@ export default {
         })
         .then(() => {
           Vue.notify({
+            group: 'base',
             type: 'success',
             text: 'User was successfully updated!'
           })
@@ -134,6 +166,7 @@ export default {
         })
         .then(() => {
           Vue.notify({
+            group: 'base',
             type: 'success',
             text: 'Image was successfully saved!'
           })
@@ -156,6 +189,7 @@ export default {
         })
         .then(() => {
           Vue.notify({
+            group: 'base',
             type: 'success',
             text: 'Changes was successfully saved!'
           })
@@ -167,12 +201,14 @@ export default {
       commit('SAVE_SURGICAL_HISTORY', payload)
     },
     saveMedicalHistory ({commit}, payload) {
+      console.log("payload: ", payload)
       const userId = firebase.auth().currentUser.uid
 
       commit('SET_ERROR', null)
       db.collection('users').where('id', '==', userId).get()
        .then((snap) => {
          snap.forEach((doc) => {
+           console.log("doc:", doc)
             doc.ref.update({
               medicalHistory: payload
             })
@@ -180,6 +216,7 @@ export default {
         })
         .then(() => {
           Vue.notify({
+            group: 'base',
             type: 'success',
             text: 'Changes was successfully saved!'
           })
@@ -190,7 +227,114 @@ export default {
 
       commit('SAVE_MEDICAL_HISTORY', payload)
     },
+    saveMedication ({commit}, payload) {
+      //{medicine: selectedMedDetails[0], userInput: this.$refs.mediRefName.searchInput}
+      console.log("commit: ", payload)
+      const userId = firebase.auth().currentUser.uid
 
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              medications: firebase.firestore.FieldValue.arrayUnion(payload)
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes was successfully saved!'
+          })
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
+
+      commit('SAVE_MEDICATION', payload)
+    },
+    delMedication ({commit}, payload) {
+      //{brand: "", geners: ""}
+      console.log("commit del: ", payload.index)
+      const userId = firebase.auth().currentUser.uid
+
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              medications: firebase.firestore.FieldValue.arrayRemove(payload.deleteMedication)
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes were successfully saved!'
+          })
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
+
+      commit('DEL_MEDICATION', payload)
+    },
+    saveAllergy ({commit}, payload) {
+      //{ medicine: { 'generic': 'ibuprofen', 'brandNames': [ 'Motrin', 'Advil']}, reaction: this.reaction, userAllergyInput: ''}
+      console.log("commit allergy: ", payload)
+      const userId = firebase.auth().currentUser.uid
+
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              allergies: firebase.firestore.FieldValue.arrayUnion(payload)
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes was successfully saved!'
+          })
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
+
+      commit('SAVE_ALLERGY', payload)
+    },
+    delAllergyMedication ({commit}, payload) {
+      //{ deleteAllergyMedication, index }
+      console.log("commit del: ", payload.index)
+      const userId = firebase.auth().currentUser.uid
+
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              allergies: firebase.firestore.FieldValue.arrayRemove(payload.deleteAllergyMedication)
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes were successfully saved!'
+          })
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
+
+      commit('DEL_ALLERGY', payload)
+    },
     signOut ({commit}) {
       firebase.auth().signOut()
       commit('UNSET_USER')
