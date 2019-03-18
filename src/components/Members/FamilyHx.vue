@@ -70,7 +70,7 @@
 <style>
   .margin_right {
     margin-right: 5px;
-  },
+  }
   .border {
     border-style: 1 px solid blue;
     margin: 5 px;
