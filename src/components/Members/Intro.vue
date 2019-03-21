@@ -147,7 +147,9 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
+  name: 'Intro',
   data () {
     return {
       e1: 0

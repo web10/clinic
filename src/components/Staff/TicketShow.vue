@@ -59,7 +59,7 @@
                 v-model="message"
               ></v-text-field>
               <v-btn @click="sendMessage(ticket.id)" color="success" :disabled="ticket.resolved">Send</v-btn>
-            </div>  
+            </div>
           </form>
         </div>
       </v-flex>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 // import db from '@/config/firebaseInit'
 import { mapState } from 'vuex'
 import { setTimeout } from 'timers';
@@ -121,7 +122,7 @@ export default {
       this.$store.dispatch('updateTicket', {ticket: this.ticket, fieldName: 'inbox', value: inbox})
     },
     closeTicket() {
-      if(this.ticket.resolved) { 
+      if(this.ticket.resolved) {
         this.$notify('Ticket already resolved');
         return
       }
@@ -157,7 +158,7 @@ export default {
 }
 
 .message {
-  
+
   &__info {
     display: flex;
     justify-content: space-between;

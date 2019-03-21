@@ -33,6 +33,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import surgeryHxCheckList from '@/store/staticData/surgHistory.js'
 import { mapState } from 'vuex'
 

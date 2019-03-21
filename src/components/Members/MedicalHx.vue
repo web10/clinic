@@ -53,6 +53,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import medHistory from '@/store/staticData/medHistory.js'
 import { mapState } from 'vuex'
 

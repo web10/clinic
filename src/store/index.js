@@ -1,8 +1,9 @@
+/* eslint-disable */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import UserStore from './userStore'
 import AdminStore from './adminStore'
-import ChatModule from './chatModule'
+// import ChatModule from './chatModule'
 Vue.use(Vuex)
 
 export default new Vuex.Store(
@@ -10,7 +11,7 @@ export default new Vuex.Store(
     modules: {
       userStore: UserStore,
       adminStore: AdminStore,
-      chatModule: ChatModule
+//      chatModule: ChatModule
     },
     state: {
       loading: false,
@@ -24,6 +25,7 @@ export default new Vuex.Store(
       // Added mutation for a storing an errors globally
       'SET_ERROR'(state, payload) {
         state.error = payload
+        console.log("err: ", state.error)
         // for autoclear errors, can delete it
         setTimeout(() => {
           state.error = null
@@ -37,6 +39,8 @@ export default new Vuex.Store(
       setLoadin({commit}, payload) {
         commit('setLoadin', payload)
       }
+    },
+    getters: {
     }
   }
 )

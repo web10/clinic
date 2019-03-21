@@ -137,6 +137,7 @@
 </template>
 
 <script>
+/* eslint-disable */
   export default {
     data: () => ({
       // for calendar 1

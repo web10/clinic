@@ -114,6 +114,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import ErrorNotification from '@/components/layout/ErrorNotification'
 
 export default {

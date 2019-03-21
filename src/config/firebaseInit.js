@@ -1,14 +1,15 @@
+/* eslint-disable */
 import firebase from 'firebase'
 import 'firebase/firestore'
 
 const firebaseApp = firebase.initializeApp({
   // Oleg local db settings
-  apiKey: 'AIzaSyBoQXhol8RKRR5sjdjpnRHri9GsfNNcEzQ',
-  authDomain: 'upwork-health-app.firebaseapp.com',
-  databaseURL: 'https://upwork-health-app.firebaseio.com',
-  projectId: 'upwork-health-app',
-  storageBucket: 'upwork-health-app.appspot.com',
-  messagingSenderId: '266774888215'
+  // apiKey: 'AIzaSyBoQXhol8RKRR5sjdjpnRHri9GsfNNcEzQ',
+  // authDomain: 'upwork-health-app.firebaseapp.com',
+  // databaseURL: 'https://upwork-health-app.firebaseio.com',
+  // projectId: 'upwork-health-app',
+  // storageBucket: 'upwork-health-app.appspot.com',
+  // messagingSenderId: '266774888215'
 
   // Danh's local db settings
   // apiKey: 'AIzaSyB9VlaclsP5nyK0HM8-WWfchx6KOwtdtYU',
@@ -17,6 +18,13 @@ const firebaseApp = firebase.initializeApp({
   // projectId: 'clinic-f47af',
   // storageBucket: 'clinic-f47af.appspot.com',
   // messagingSenderId: '363467074888'
+  //Anjali local db settings
+  apiKey: "AIzaSyBBbhc4GcsLU2DzQx164G9Wk-Keuff5M6s",
+    authDomain: "healthapp-df24f.firebaseapp.com",
+    databaseURL: "https://healthapp-df24f.firebaseio.com",
+    projectId: "healthapp-df24f",
+    storageBucket: "healthapp-df24f.appspot.com",
+    messagingSenderId: "543665550942"
 })
 
 const db = firebaseApp.firestore()
