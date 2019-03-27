@@ -31,8 +31,9 @@ export default {
     'SAVE_MEDICATION' (state, payload) {
        //{medicine: selectedMedDetails[0], userInput: this.$refs.mediRefName.searchInput}
       if(!state.user.medications){
-         console.log("no medication selected ")
-         state.user.medications.push(payload)
+         console.log("adding first medicine ")
+         //state.user.medications.push(payload)
+         state.user.medications = [payload]
          console.log("state.user.medications:: ", state.user.medications )
        }
        else {
@@ -46,7 +47,8 @@ export default {
     'SAVE_ALLERGY' (state, payload) {
       //payload: { allergyDrug: { 'generic': 'ibuprofen', 'brandNames': [ 'Motrin', 'Advil']}, drugReaction: this.reaction, userAllergyInput: ''}
       if(!state.user.allergies){
-        state.user.allergies.push(payload)
+        //state.user.allergies.push(payload)
+       state.user.allergies = [payload]
         console.log("state.user.allergies: ", state.user.allergies )
       }
       else{
