@@ -35,7 +35,7 @@
                 <v-list>
                   <v-list-tile v-for="(item, index) in medList" :key="index">
                     <v-list-tile-content>
-                      <v-list-tile-title v-text="item.userInput"></v-list-tile-title>
+                      <v-list-tile-title v-text="item.userInput.toUpperCase()"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action>
                       <v-btn @click="delMed(index)" fab>
@@ -69,7 +69,7 @@
                       id="reaction-allergy"
                       solo
                       v-model="reaction"
-                      label="Type reaction caused"
+                      label="rash?"
                       required
                     ></v-text-field>
                   </v-flex>
@@ -96,7 +96,7 @@
                     <template v-slot:activator>
                       <v-list-tile>
                         <v-list-tile-content>
-                          <v-list-tile-title>{{allergy.userAllergyInput}}</v-list-tile-title>
+                          <v-list-tile-title>{{allergy.userAllergyInput.toUpperCase()}}: {{allergy.drugReaction}}</v-list-tile-title>
                         </v-list-tile-content>
                         <v-list-tile-action>
                           <v-btn @click="delAllergy(index)" fab>
