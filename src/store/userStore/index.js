@@ -5,7 +5,7 @@ import 'firebase/auth'
 import db from '@/config/firebaseInit'
 import medHistory from '../staticData/medHistory'
 import surgHistory from '../staticData/surgHistory'
-
+import familyHistory from '../staticData/familyHistory'
 export default {
   state: {
     user: null,
@@ -27,6 +27,9 @@ export default {
     },
     'SAVE_SURGICAL_HISTORY' (state, payload) {
       state.user.surgicalHistory = payload
+    },
+    'SAVE_FAMILY_HISTORY' (state, payload) {
+      state.user.familyHistory = payload
     },
     'SAVE_MEDICATION' (state, payload) {
        //{medicine: selectedMedDetails[0], userInput: this.$refs.mediRefName.searchInput}
@@ -84,6 +87,7 @@ export default {
         location: '',
         medicalHistory: medHistory,
         surgicalHistory: surgHistory,
+        familyHistory: familyHistory,
         medications: [],
         allergies: [],
         picture: '',
@@ -111,7 +115,8 @@ export default {
           user.gender = data.gender
           user.role = data.role
           user.medicalHistory = data.medicalHistory
-          user.surgicalHistory = data.surgicalHistory
+          user.surgicalHistory = data.surgicalHistory,
+          user.familyHistory = data.familyHistory,
           user.medications = data.medications
           user.allergies = data.allergies
           commit('setUser', user)
@@ -228,6 +233,31 @@ export default {
         })
 
       commit('SAVE_MEDICAL_HISTORY', payload)
+    },
+    saveFamilyHistory ({commit}, payload) {
+      const userId = firebase.auth().currentUser.uid
+
+      commit('SET_ERROR', null)
+      db.collection('users').where('id', '==', userId).get()
+       .then((snap) => {
+         snap.forEach((doc) => {
+            doc.ref.update({
+              familyHistory: payload
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'Changes were successfully saved!'
+          })
+        })
+        .catch(error => {
+          commit('SET_ERROR', error)
+        })
+
+      commit('SAVE_FAMILY_HISTORY', payload)
     },
     saveMedication ({commit}, payload) {
       //{medicine: selectedMedDetails[0], userInput: this.$refs.mediRefName.searchInput}
