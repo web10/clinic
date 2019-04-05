@@ -1,131 +1,295 @@
-export default {
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable indent */
+export default [
     {
       diagnosis: 'Asthma',
       dx: 'Asthma',
-      checked: false
-    }, {
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
+    },
+    {
       diagnosis: 'Diabetes',
       dx: 'Diabetes',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Back Pain',
       dx: 'Back Pain',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Hypertension',
       dx: 'HTN',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Rheumatoid Arthritis',
       dx: 'RA',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Kidney Stones',
       dx: 'Kidney Stones',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Gallstones',
       dx: 'Gallstones',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Reflux/ Gastritis',
       dx: 'GERD',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Ulcers',
       dx: 'PUD',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Cholesterol',
       dx: 'Dyslipidemia',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Valley Fever',
       dx: 'Coccidiomycosis',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Arthritis',
       dx: 'DJD',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Autoimmune',
       dx: 'Autoimmune',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Lupus',
       dx: 'SLE',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Thyroid Problems',
       dx: 'Thyroid',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Heart Attack',
       dx: 'MI',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Heart Failure',
       dx: 'CHF',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Heart Disease',
       dx: 'CAD',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Hepatitis',
       dx: 'Hepatitis',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'HIV/ AIDS',
       dx: 'HIV',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Stroke',
       dx: 'CVA',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Overweight',
       dx: 'Obesity',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Eczema',
       dx: 'Eczema',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Inflammatory Bowels',
       dx: 'IBD',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Irritable Bowels',
       dx: 'IBS',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Depression',
       dx: 'Depression',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Anxiety',
       dx: 'Anxiety',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Bipolar',
       dx: 'Bipolar',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Schizophrenia',
       dx: 'Schizophrenia',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Stress',
       dx: 'Stress',
-      checked: false
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
     }, {
       diagnosis: 'Insomnia',
       dx: 'Insomnia',
-      checked: false
-    }, {
+      grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
+    },
+    {
      diagnosis: 'Cancer',
      dx: 'cancer',
-     checked: false
+     grandparents: false,
+      mom: false,
+      dad: false,
+      siblings: false,
+      children: false,
+      auntuncle: false
    }
-}
+  ]

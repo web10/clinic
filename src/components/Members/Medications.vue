@@ -33,7 +33,7 @@
               <v-card-text>
                 <h3 class="text-xs-center">My Current Medications</h3>
                 <v-list>
-                  <v-list-tile v-for="(item, index) in medList" :key="index">
+                  <v-list-tile v-for="(item, index) in getUserMedi" :key="index">
                     <v-list-tile-content>
                       <v-list-tile-title v-text="item.userInput.toUpperCase()"></v-list-tile-title>
                     </v-list-tile-content>
@@ -92,7 +92,7 @@
 
                 </div>
                 <v-list v-show="!noAllergy">
-                  <v-list-group v-for="(allergy, index) in allergiesList" :key="index" no-action>
+                  <v-list-group v-for="(allergy, index) in getUserAllergy" :key="index" no-action>
                     <template v-slot:activator>
                       <v-list-tile>
                         <v-list-tile-content>
@@ -139,7 +139,6 @@ export default {
     return {
       newMed: "",
       medicaList: medications,
-      medList: [],
       filteredOptions: [],
       selected: "",
       medSelected: false,
@@ -150,7 +149,6 @@ export default {
       },
       newAllergy: "",
       reaction: "",
-      allergiesList: [],
       allergySelected: "",
       filteredAllergyOptions: [],
       inputPropsAllergy: {
@@ -166,7 +164,7 @@ export default {
   computed: {
     ...mapState({
       user: state => {
-        console.log("map satte: ", state.userStore.user);
+        console.log("map state: ", state.userStore.user);
         return state.userStore.user;
       }
     }),
@@ -179,32 +177,28 @@ export default {
         return item.brandNames;
       });
       return [].concat(...brandNames, genericNames);
-    }
-  },
-  watch: {
-    // user is async and we can't access medicalHistory instantly
-    user(val) {
-      if (val) {
-        this.medList = this.user.medications;
-        console.log("in watcher: ", this.user.medications);
-        this.allergiesList = this.user.allergies;
-        console.log("in watcher: ", this.user.allergies);
+    },
+    getUserMedi() {
+      if(this.user) {
+       // console.log("user getters: ", this.$store.getters)
+      //console.log("user: ", this.user)
+      return this.$store.getters.getUser.medications;
+      }
+
+    },
+    getUserAllergy() {
+      if(this.user) {
+      return this.$store.getters.getUser.allergies;
       }
     }
   },
-  created() {
-    if (this.user) {
-      this.medList = this.user.medications;
-      console.log("created: ", this.user.medications);
-      this.allergiesList = this.user.allergies;
-      console.log("created: ", this.user.allergies);
-    }
-  },
+
   methods: {
     addMedication() {
+      console.log("in add")
       const mediInputVal = this.$refs.mediRefName.searchInput;
       if (this.$refs.mediRefName.searchInput) {
-        if (this.medSelected) {
+        if (this.medSelected && this.filteredOptions[0].data.length) {
           console.log("this.selected in add method: ", this.selected);
           const selectedMedDetails = medications.medications.filter(item => {
             return (
@@ -240,7 +234,7 @@ export default {
       }
     },
     delMed(index) {
-      const deleteMedication = this.medList[index];
+      const deleteMedication = this.getUserMedi[index];
       console.log("deleMed: ", deleteMedication);
 
       this.$store.dispatch("delMedication", { deleteMedication, index });
@@ -255,12 +249,13 @@ export default {
           return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
         })
         .slice(0, this.limit);
-      console.log("filtered data: ", filteredData);
+      //console.log("filtered data: ", filteredData);
       this.filteredOptions = [
         {
           data: filteredData
         }
       ];
+      console.log("filtered data: ",  this.filteredOptions[0].data);
     },
     onSelected(option) {
       this.medSelected = true;
@@ -303,11 +298,11 @@ export default {
     },
     addAllergy() {
       if (!this.$refs.mediAllergyName.searchInput || !this.reaction) {
-        console.log("rectio: ", this.reaction);
+        // console.log("rectio: ", this.reaction);
         console.log("nothing selected");
         return;
       } else {
-        if (this.medAllergySelected) {
+        if (this.medAllergySelected && this.filteredAllergyOptions[0].data.length) {
           console.log(
             "this.allergySelected in add method: ",
             this.allergySelected
@@ -358,7 +353,7 @@ export default {
       }
     },
     delAllergy(index) {
-      const deleteAllergyMedication = this.allergiesList[index];
+      const deleteAllergyMedication = this.getUserAllergy[index];
       console.log("delAllergy: ", deleteAllergyMedication);
       //{ allergyDrug: { 'generic': 'ibuprofen', 'brandNames': [ 'Motrin', 'Advil']}, drugReaction: this.reaction}
       this.$store.dispatch("delAllergyMedication", {

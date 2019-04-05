@@ -85,7 +85,8 @@
       <v-container fluid>
         <!-- global notifications -->
         <error-notification></error-notification>
-        <notifications />
+        <notifications group="base"/>
+
 
         <router-view></router-view>
 
@@ -190,4 +191,5 @@ export default {
     max-height: 500px;
     overflow-y: auto;
   }
+
 </style>
