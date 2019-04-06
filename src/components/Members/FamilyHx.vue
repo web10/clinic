@@ -1,20 +1,19 @@
 <template>
-  <v-container >
+  <v-container fluid>
+
     <v-layout>
-      <v-flex xs12>
-        <div class="text-xs-center">
-          <h1 > My Family's History </h1>
-          <p class="center">Some diseases can run in the family. Let us know what other family members have so we can help you screen potential problems for you.</p>
-        </div>
-      </v-flex>
-    </v-layout>
+          <v-flex class="heading-sec">
+            <h1 class="medication-header">My Family's History</h1>
+            <p>Some diseases can run in the family. Let us know what other family members have so we can help you screen potential problems for you.</p>
+          </v-flex>
+        </v-layout>
     <v-layout style="margin-top: 20px;">
-      <v-flex xs12 m4>
+      <v-flex xs12 m4 class="family-table">
 
          <v-data-table
       :headers="headers"
       :items="familyHistory"
-      class="elevation-1"
+      class="elevation-1 fixed-header"
       hide-actions
     >
       <template v-slot:items="props">
@@ -41,6 +40,7 @@
 /* eslint-disable */
 import familyHx from '@/store/staticData/familyHistory.js'
 import { mapState } from 'vuex'
+
   export default {
     name: 'FamilyHx',
     data () {
@@ -49,7 +49,7 @@ import { mapState } from 'vuex'
         {
           text: 'Diagnosis',
           align: 'left',
-          sortable: false,
+
           value: 'diagnosis'
         },
         { text: 'Grandparents', sortable: false, value: 'grandparents' },
@@ -107,14 +107,10 @@ created() {
 
   }
 </script>
+<style scoped>
 
-<style>
-  .margin_right {
-    margin-right: 5px;
-  }
-  .border {
-    border-style: 1 px solid blue;
-    margin: 5 px;
-    padding: 5 px;
-  }
+.v-datatable .v-input--selection-controls {
+  padding-top: 13px;
+}
+
 </style>

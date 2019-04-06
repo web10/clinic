@@ -8,7 +8,7 @@ export default {
     ticket: {}
   },
   actions: {
-    createTicket({ commit }, {title, body, inbox}) {
+    createTicket ({ commit }, {title, body, inbox}) {
       return messengerService.createTicket({title, body, inbox})
         .then(() => {
           Vue.notify({
@@ -19,21 +19,21 @@ export default {
         })
         .catch(error => commit('SET_ERROR', error))
     },
-    getTickets({ commit }) {
+    getTickets ({ commit }) {
       return messengerService.getTickets()
         .then(tickets => commit('SET_TICKETS', tickets))
         .catch(error => commit('SET_ERROR', error))
     },
-    getTicket({commit}, payload) {
+    getTicket ({commit}, payload) {
       return messengerService.getTicket(payload)
         .then(ticket => commit('SET_TICKET', ticket))
     },
-    sendMessage({ commit }, {message, ticketId}) {
+    sendMessage ({ commit }, {message, ticketId}) {
       return messengerService.sendMessage({message, ticketId})
         .then((currentMessage) => commit('SEND_MESSAGE', currentMessage))
         .catch(error => commit('SET_ERROR', error))
     },
-    updateTicket({ commit }, {ticket, fieldName, value}) {
+    updateTicket ({ commit }, {ticket, fieldName, value}) {
       return messengerService.updateTicket({ticket, fieldName, value})
         .then((tickets) => {
           // update application state with new set of tickets
@@ -44,13 +44,13 @@ export default {
     }
   },
   mutations: {
-    'SET_TICKET'(state, payload) {
+    'SET_TICKET' (state, payload) {
       state.ticket = payload
     },
-    'SET_TICKETS'(state, payload) {
+    'SET_TICKETS' (state, payload) {
       state.tickets = payload
     },
-    'SEND_MESSAGE'(state, payload) {
+    'SEND_MESSAGE' (state, payload) {
       state.ticket.messages = [...state.ticket.messages, payload]
     }
   },

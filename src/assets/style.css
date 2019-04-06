@@ -1,0 +1,9 @@
+ .theme--light.v-table thead th{
+   color: rgba(0,0,0,.87);
+ }
+ .heading-sec {
+  margin: 5px;
+}
+.medication-header {
+  margin-bottom: 5px;
+}
