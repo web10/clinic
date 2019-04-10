@@ -10,7 +10,8 @@ import Notifications from 'vue-notification'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import ImageUploader from 'vue-image-upload-resize'
-
+import './assets/style.css';
+import './assets/css.styl';
 Vue.use(ImageUploader)
 Vue.use(Vuetify)
 Vue.use(Notifications)

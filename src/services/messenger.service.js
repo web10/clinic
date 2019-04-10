@@ -1,3 +1,4 @@
+/* eslint-disable standard/object-curly-even-spacing */
 import store from '@/store'
 import db from '@/config/firebaseInit'
 
@@ -12,7 +13,7 @@ export function createTicket ({title, body, inbox}) {
     const user = store.getters.getUser
     const ticket = {
       createdByUserId: user.id,
-      creatorFullName: `${user.firstName} ${user.lastName}`, 
+      creatorFullName: `${user.firstName} ${user.lastName}`,
       avatar: user.picture.dataUrl || '',
       inbox: inbox,
       title: title,

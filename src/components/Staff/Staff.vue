@@ -143,6 +143,7 @@ import { mapState } from 'vuex'
 import TicketsList from './TicketsList'
 
 export default {
+  name: 'Staff',
   data () {
     return {
       active: 0,
@@ -167,7 +168,7 @@ export default {
   },
   created () {
     this.$store.dispatch('getAllUse')
-    this.$store.dispatch('getTickets')
+     this.$store.dispatch('getTickets')
   },
   methods: {
     tickets(inbox) {

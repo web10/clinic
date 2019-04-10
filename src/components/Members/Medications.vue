@@ -495,10 +495,5 @@ export default {
 .v-btn--floating:not(.v-btn--depressed):not(.v-btn--flat) {
   box-shadow: none;
 }
-.heading-sec {
-  margin: 5px;
-}
-.medication-header {
-  margin-bottom: 5px;
-}
+
 </style>
