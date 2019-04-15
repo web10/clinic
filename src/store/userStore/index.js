@@ -91,7 +91,12 @@ export default {
         medications: [],
         allergies: [],
         picture: '',
-        gender: ''
+        gender: '',
+        emergContact1: [],
+        emergContact2: [],
+        familyAdult: [],
+        familyChild1: [],
+        familyChild2: []
       }).then(snapshot => {
         return user
       })

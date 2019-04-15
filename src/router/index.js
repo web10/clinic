@@ -157,6 +157,14 @@ const router = new Router({
       }
     },
     {
+      path: '/enroll',
+      name: 'Enroll',
+      component: () => import('@/components/Members/Enroll.vue'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
       path: '/signin',
       name: 'Signin',
       component: () => import('@/components/Signin.vue'),

@@ -146,6 +146,7 @@ export default {
       { icon: 'list_alt', text: 'My Labs', name: 'Labs', link: '/labs' }
     ],
     dashItems: [
+      { icon: 'how_to_reg', text: 'Enroll', name: 'enroll', link: '/enroll', auth: true },
       { icon: 'person', text: 'My Profile', name: 'profile', link: '/profile', auth: true },
       { icon: 'chat_bubble', text: 'My Inbox', name: 'messages', link: '/messages', auth: true },
       { icon: 'help', text: 'Help', name: 'help', link: '/help', auth: true }
