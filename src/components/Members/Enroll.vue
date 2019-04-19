@@ -5,10 +5,10 @@
     <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex xs12 md6>
-        <v-card class="ma-2">
-          <v-toolbar color="primary" dark>
-            <v-toolbar-title>Personal Information</v-toolbar-title>
-          </v-toolbar>
+        <v-card class="ma-2" height="100%">
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Personal Information</h3>
+          </v-card-title>
 
           <v-card-text>
 
@@ -53,13 +53,14 @@
 
           </v-card-text>
         </v-card>
+      </v-flex>
 
-        <v-card class="ma-2">
+      <v-flex xs12 md6>
+        <v-card class="ma-2" height="100%">
 
-          <v-toolbar color="primary" dark>
-            <v-toolbar-title>Contact Information</v-toolbar-title>
-            <v-spacer></v-spacer>
-          </v-toolbar>
+          <v-card-title primary-title class="lighten-4 light-blue">
+            <h3>Contact Information</h3>
+          </v-card-title>
 
           <v-card-text>
 
@@ -117,9 +118,9 @@
         </v-card>
       </v-flex>
     </v-layout>
-
-    <v-divider></v-divider>
-
+  </v-container>
+  <v-divider></v-divider>
+  <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex xs12 md6>
 
@@ -133,53 +134,54 @@
           <v-card-text>
 
             <v-text-field
-              v-model="user.emergContact1.firstName"
+              v-model="user.emergContact1FirstName"
               label="First Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.lastName"
+              v-model="user.emergContact1LastName"
               label="Last Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.relationship"
+              v-model="user.emergContact1Relationship"
               label="Relationship to you"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.addressLine1"
+              v-model="user.emergContact1AddressLine1"
               label="Address"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.addressLine2"
+              v-model="user.emergContact1AddressLine2"
               label=""
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.addressCity"
+              v-model="user.emergContact1AddressCity"
               label="City"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.addressState"
+              v-model="user.emergContact1AddressState"
               label="State"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.addressZip"
+              v-model="user.emergContact1AddressZip"
               label="Zip"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact1.phone"
+              v-model="user.emergContact1Phone"
               label="Phone Number"
             ></v-text-field>
 
           </v-card-text>
         </v-card>
-
+      </v-flex>
+      <v-flex xs12 md6>
         <v-card class="ma-2">
 
           <v-toolbar color="primary" dark>
@@ -189,47 +191,47 @@
 
           <v-card-text>
             <v-text-field
-              v-model="user.emergContact2.firstName"
+              v-model="user.emergContact2FirstName"
               label="First Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.lastName"
+              v-model="user.emergContact2LastName"
               label="Last Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.relationship"
+              v-model="user.emergContact2Relationship"
               label="Relationship to you"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.addressLine1"
+              v-model="user.emergContact2AddressLine1"
               label="Address"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.addressLine2"
+              v-model="user.emergContact2AddressLine2"
               label=""
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.addressCity"
+              v-model="user.emergContact2AddressCity"
               label="City"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.addressState"
+              v-model="user.emergContact2AddressState"
               label="State"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.addressZip"
+              v-model="user.emergContact2AddressZip"
               label="Zip"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.emergContact2.phone"
+              v-model="user.emergContact2Phone"
               label="Phone Number"
             ></v-text-field>
 
@@ -241,7 +243,7 @@
     <v-divider></v-divider>
     <h2 class="text-sm-left text-md-center ma-2"> Enroll Other Family Members </h2>
     <v-layout row wrap>
-      <v-flex xs12 md6 Lg4>
+      <v-flex xs12 md6 lg4>
         <v-card class="ma-2">
 
           <v-toolbar color="primary" dark>
@@ -251,53 +253,54 @@
           <v-card-text>
 
             <v-text-field
-              v-model="user.familyAdult.firstName"
+              v-model="user.familyAdultFirstName"
               label="First Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyAdult.lastName"
+              v-model="user.familyAdultLastName"
               label="Last Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyAdult.middleInitial"
+              v-model="user.familyAdultMI"
               label="M.I."
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyAdult.dob"
+              v-model="user.familyAdultDob"
               label="Date of Birth"
             ></v-text-field>
 
             <v-select
               :items="genders"
-              v-model="user.familyAdult.gender"
+              v-model="user.familyAdultGender"
               label="Gender"
             ></v-select>
 
             <v-text-field
-              v-model="user.familyAdult.phoneCell"
+              v-model="user.familyAdultPhoneCell"
               label="Cell Phone"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyAdult.phoneWork"
+              v-model="user.familyAdultPhoneWork"
               label="Work Phone"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyAdult.email"
+              v-model="user.familyAdultEmail"
               label="Email"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyAdult.occupation"
+              v-model="user.familyAdultOccupation"
               label="Occupation"
             ></v-text-field>
           </v-card-text>
         </v-card>
-
+      </v-flex>
+      <v-flex xs12 md4 lg4>
         <v-card class="ma-2">
           <v-toolbar color="primary" dark>
             <v-toolbar-title>Child #1</v-toolbar-title>
@@ -305,33 +308,34 @@
 
           <v-card-text>
             <v-text-field
-              v-model="user.familyChild1.firstName"
+              v-model="user.familyChild1FirstName"
               label="First Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyChild1.lastName"
+              v-model="user.familyChild1LastName"
               label="Last Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyChild1.middleInitial"
+              v-model="user.familyChild1MI"
               label="M.I."
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyChild1.dob"
+              v-model="user.familyChild1Dob"
               label="Date of Birth"
             ></v-text-field>
 
             <v-select
               :items="genders"
-              v-model="user.familyChild1.gender"
+              v-model="user.familyChild1Gender"
               label="Gender"
             ></v-select>
           </v-card-text>
         </v-card>
-
+      </v-flex>
+      <v-flex xs12 md4 lg4>
         <v-card class="ma-2">
           <v-toolbar color="primary" dark>
             <v-toolbar-title>Child #2</v-toolbar-title>
@@ -339,28 +343,28 @@
 
           <v-card-text>
             <v-text-field
-              v-model="user.familyChild2.firstName"
+              v-model="user.familyChild2FirstName"
               label="First Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyChild2.lastName"
+              v-model="user.familyChild2LastName"
               label="Last Name"
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyChild2.middleInitial"
+              v-model="user.familyChild2MI"
               label="M.I."
             ></v-text-field>
 
             <v-text-field
-              v-model="user.familyChild2.dob"
+              v-model="user.familyChild2Dob"
               label="Date of Birth"
             ></v-text-field>
 
             <v-select
               :items="genders"
-              v-model="user.familyChild2.gender"
+              v-model="user.familyChild2Gender"
               label="Gender"
             ></v-select>
           </v-card-text>
@@ -409,6 +413,7 @@ export default {
         phoneCell: '',
         phoneWork: '',
         email: '',
+        /*
         emergContact1: {
           firstName: '',
           lastName: '',
@@ -420,6 +425,17 @@ export default {
           addressZip: '',
           phone: ''
         },
+        */
+        emergContact1FirstName: '',
+        emergContact1LastName: '',
+        emergContact1Relationship: '',
+        emergContact1AddressLine1: '',
+        emergContact1AddressLine2: '',
+        emergContact1AddressCity: '',
+        emergContact1AddressState: '',
+        emergContact1AddressZip: '',
+        emergContact1Phone: '',
+        /*
         emergContact2: {
           firstName: '',
           lastName: '',
@@ -431,6 +447,17 @@ export default {
           addressZip: '',
           phone: ''
         },
+        */
+        emergContact2FirstName: '',
+        emergContact2LastName: '',
+        emergContact2Relationship: '',
+        emergContact2AddressLine1: '',
+        emergContact2AddressLine2: '',
+        emergContact2AddressCity: '',
+        emergContact2AddressState: '',
+        emergContact2AddressZip: '',
+        emergContact2Phone: '',
+        /*
         familyAdult: {
           firstName: '',
           lastName: '',
@@ -442,6 +469,17 @@ export default {
           email: '',
           occupation: ''
         },
+        */
+        familyAdultFirstName: '',
+        familyAdultLastName: '',
+        familyAdultMI: '',
+        familyAdultDob: '',
+        familyAdultGender: '',
+        familyAdultPhoneCell: '',
+        familyAdultPhoneWork: '',
+        familyAdultEmail: '',
+        familyAdultOccupation: '',
+        /*
         familyChild1: {
           firstName: '',
           lastName: '',
@@ -449,6 +487,13 @@ export default {
           dob: '',
           gender: ''
         },
+        */
+        familyChild1FirstName: '',
+        familyChild1LastName: '',
+        familyChild1MI: '',
+        familyChild1Dob: '',
+        familyChild1Gender: '',
+        /*
         familyChild2: {
           firstName: '',
           lastName: '',
@@ -456,8 +501,16 @@ export default {
           dob: '',
           gender: ''
         },
+        */
+        familyChild2FirstName: '',
+        familyChild2LastName: '',
+        familyChild2MI: '',
+        familyChild2Dob: '',
+        familyChild2Gender: '',
         enrollmentCertifyTrue: '',
-        enrollmentSigned: ''
+        enrollmentSigned: '',
+        enrollmentDate: ''
+        //need to add timestamp in code
       }
     }
   },
