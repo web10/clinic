@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form @submit.prevent="enrollUser">
+    <v-form @submit.prevent="submitEnrollment">
     <h2 class="text-sm-left text-md-center"> Patient Enrollment Form </h2>
     <v-container grid-list-md>
     <v-layout row wrap>
@@ -16,12 +16,14 @@
               v-model="user.firstName"
               label="First Name"
               required
+              readonly
             ></v-text-field>
 
             <v-text-field
               v-model="user.lastName"
               label= "Last Name"
               required
+              readonly
             ></v-text-field>
 
             <v-text-field
@@ -112,6 +114,7 @@
               v-model="user.email"
               label="Email"
               required
+              readonly
             ></v-text-field>
 
           </v-card-text>
@@ -123,8 +126,65 @@
   <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex xs12 md6>
-
+        <!-- card using emergcontact as an array
         <v-card class="ma-2">
+
+          <v-toolbar color="primary" dark>
+            <v-toolbar-title>Emergency Contact 1 (Optional)</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+
+          <v-card-text>
+
+            <v-text-field
+              v-model="user.emergContact1.firstName"
+              label="First Name"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.lastName"
+              label="Last Name"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.relationship"
+              label="Relationship to you"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.addressLine1"
+              label="Address"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.addressLine2"
+              label=""
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.addressCity"
+              label="City"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.addressState"
+              label="State"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.addressZip"
+              label="Zip"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact1.phone"
+              label="Phone Number"
+            ></v-text-field>
+
+          </v-card-text>
+        </v-card>
+-->
+      <v-card class="ma-2">
 
           <v-toolbar color="primary" dark>
             <v-toolbar-title>Emergency Contact 1 (Optional)</v-toolbar-title>
@@ -180,8 +240,66 @@
 
           </v-card-text>
         </v-card>
+
       </v-flex>
       <v-flex xs12 md6>
+        <!--
+        <v-card class="ma-2">
+
+          <v-toolbar color="primary" dark>
+            <v-toolbar-title>Emergency Contact 2 (Optional)</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+
+          <v-card-text>
+            <v-text-field
+              v-model="user.emergContact2.firstName"
+              label="First Name"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.lastName"
+              label="Last Name"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.relationship"
+              label="Relationship to you"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.addressLine1"
+              label="Address"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.addressLine2"
+              label=""
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.addressCity"
+              label="City"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.addressState"
+              label="State"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.addressZip"
+              label="Zip"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="user.emergContact2.phone"
+              label="Phone Number"
+            ></v-text-field>
+
+          </v-card-text>
+        </v-card>
+      -->
         <v-card class="ma-2">
 
           <v-toolbar color="primary" dark>
@@ -237,6 +355,7 @@
 
           </v-card-text>
         </v-card>
+      
       </v-flex>
     </v-layout>
 
@@ -386,7 +505,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+
 export default {
   name: 'Enroll',
   data() {
@@ -413,9 +532,9 @@ export default {
         phoneCell: '',
         phoneWork: '',
         email: '',
-        /*
+/*
         emergContact1: {
-          firstName: '',
+          // firstNameemergcont: '',
           lastName: '',
           relationship: '',
           addressLine1: '',
@@ -425,7 +544,8 @@ export default {
           addressZip: '',
           phone: ''
         },
-        */
+*/
+
         emergContact1FirstName: '',
         emergContact1LastName: '',
         emergContact1Relationship: '',
@@ -435,19 +555,20 @@ export default {
         emergContact1AddressState: '',
         emergContact1AddressZip: '',
         emergContact1Phone: '',
-        /*
-        emergContact2: {
-          firstName: '',
-          lastName: '',
-          relationship: '',
-          addressLine1: '',
-          addressLine2: '',
-          addressCity: '',
-          addressState: '',
-          addressZip: '',
-          phone: ''
-        },
-        */
+/*
+        emergContact2: [
+          {firstName: ''},
+          {lastName: ''},
+          {relationship: ''},
+          {addressLine1: ''},
+          {addressLine2: ''},
+          {addressCity: ''},
+          {addressState: ''},
+          {addressZip: ''},
+          {phone: ''}
+        ],
+*/
+
         emergContact2FirstName: '',
         emergContact2LastName: '',
         emergContact2Relationship: '',
@@ -457,6 +578,7 @@ export default {
         emergContact2AddressState: '',
         emergContact2AddressZip: '',
         emergContact2Phone: '',
+
         /*
         familyAdult: {
           firstName: '',
@@ -510,7 +632,7 @@ export default {
         enrollmentCertifyTrue: '',
         enrollmentSigned: '',
         enrollmentDate: ''
-        //need to add timestamp in code
+        // need to add timestamp in code
       }
     }
   },
@@ -520,8 +642,8 @@ export default {
     }
   },
   methods: {
-    enrollUser () {
-      this.$store.dispatch('updateUser', this.user)
+    submitEnrollment () {
+      this.$store.dispatch('enrollUser', this.user)
     }
   },
   watch: {

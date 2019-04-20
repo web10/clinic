@@ -81,7 +81,7 @@ export default {
         id: userId,
         firstName: payload.firstName,
         lastName: payload.lastName,
-        mail: payload.email,
+        email: payload.email,
         'role': 0,
         phoneNumber: '',
         location: '',
@@ -96,7 +96,59 @@ export default {
         emergContact2: [],
         familyAdult: [],
         familyChild1: [],
-        familyChild2: []
+        familyChild2: [],
+        middleInitial: '',
+        dob: '',
+        occupation: '',
+        preferredPharmacy: '',
+        addressLine1: '',
+        addressLine2: '',
+        addressCity: '',
+        addressState: '',
+        addressZip: '',
+        phoneHome: '',
+        phoneCell: '',
+        phoneWork: '',
+        emergContact1FirstName: '',
+        emergContact1LastName: '',
+        emergContact1Relationship: '',
+        emergContact1AddressLine1: '',
+        emergContact1AddressLine2: '',
+        emergContact1AddressCity: '',
+        emergContact1AddressState: '',
+        emergContact1AddressZip: '',
+        emergContact1Phone: '',
+        emergContact2FirstName: '',
+        emergContact2LastName: '',
+        emergContact2Relationship: '',
+        emergContact2AddressLine1: '',
+        emergContact2AddressLine2: '',
+        emergContact2AddressCity: '',
+        emergContact2AddressState: '',
+        emergContact2AddressZip: '',
+        emergContact2Phone: '',
+        familyAdultFirstName: '',
+        familyAdultLastName: '',
+        familyAdultMI: '',
+        familyAdultDob: '',
+        familyAdultGender: '',
+        familyAdultPhoneCell: '',
+        familyAdultPhoneWork: '',
+        familyAdultEmail: '',
+        familyAdultOccupation: '',
+        familyChild1FirstName: '',
+        familyChild1LastName: '',
+        familyChild1MI: '',
+        familyChild1Dob: '',
+        familyChild1Gender: '',
+        familyChild2FirstName: '',
+        familyChild2LastName: '',
+        familyChild2MI: '',
+        familyChild2Dob: '',
+        familyChild2Gender: '',
+        enrollmentCertifyTrue: '',
+        enrollmentSigned: '',
+        enrollmentDate: ''
       }).then(snapshot => {
         return user
       })
@@ -164,6 +216,132 @@ export default {
         })
         .catch((error) => commit('SET_ERROR', error))
     },
+
+    enrollUser ({commit, getters}, payload) {
+      const user = getters.getUser;
+
+      const updatedUser =  {
+        ...user,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        gender: payload.gender,
+        middleInitial: payload.middleInitial,
+        dob: payload.dob,
+        occupation: payload.occupation,
+        preferredPharmacy: payload.preferredPharmacy,
+        addressLine1: payload.addressLine1,
+        addressLine2: payload.addressLine2,
+        addressCity: payload.addressCity,
+        addressState: payload.addressState,
+        addressZip: payload.addressZip,
+        phoneHome: payload.phoneHome,
+        phoneCell: payload.phoneCell,
+        phoneWork: payload.phoneWork,
+        email: payload.email,
+        /* emergContact1: {
+          firstName: payload.emergContact1.firstName,
+          lastName: payload.emergContact1.lastName,
+          relationship: payload.emergContact1.relationship,
+          addressLine1: payload.emergContact1.addressLine1,
+          addressLine2: payload.emergContact1.addressLine2,
+          addressCity: payload.emergContact1.addressCity,
+          addressState: payload.emergContact1.addressState,
+          addressZip: payload.emergContact1.addressZip,
+          phone: payload.emergContact1.phone
+        } */
+        emergContact1FirstName: payload.emergContact1FirstName,
+        emergContact1LastName: payload.emergContact1LastName,
+        emergContact1Relationship: payload.emergContact1Relationship,
+        emergContact1AddressLine1: payload.emergContact1AddressLine1,
+        emergContact1AddressLine2: payload.emergContact1AddressLine2,
+        emergContact1AddressCity: payload.emergContact1AddressCity,
+        emergContact1AddressState: payload.emergContact1AddressState,
+        emergContact1AddressZip: payload.emergContact1AddressZip,
+        emergContact1Phone: payload.emergContact1Phone,
+        emergContact2: [
+          {firstName: payload.emergContact2.firstName},
+          {lastName: payload.emergContact2.lastName},
+          {relationship: payload.emergContact2.relationship},
+          {addressLine1: payload.emergContact2.addressLine1},
+          {addressLine2: payload.emergContact2.addressLine2},
+          {addressCity: payload.emergContact2.addressCity},
+          {addressState: payload.emergContact2.addressState},
+          {addressZip: payload.emergContact2.addressZip},
+          {phone: payload.emergContact2.phone}
+        ]
+      }
+      db.collection('users').where('id', '==', user.id).get()
+        .then((snap) => {
+          snap.forEach((doc) => {
+            doc.ref.update({
+              firstName: payload.firstName,
+              lastName: payload.lastName,
+              gender: payload.gender,
+              middleInitial: payload.middleInitial,
+              dob: payload.dob,
+              occupation: payload.occupation,
+              preferredPharmacy: payload.preferredPharmacy,
+              addressLine1: payload.addressLine1,
+              addressLine2: payload.addressLine2,
+              addressCity: payload.addressCity,
+              addressState: payload.addressState,
+              addressZip: payload.addressZip,
+              phoneHome: payload.phoneHome,
+              phoneCell: payload.phoneCell,
+              phoneWork: payload.phoneWork,
+              email: payload.email,
+              /*
+              emergContact1: {
+                firstName: payload.emergContact1.firstName,
+                lastName: payload.emergContact1.lastName,
+                relationship: payload.emergContact1.relationship,
+                addressLine1: payload.emergContact1.addressLine1,
+                addressLine2: payload.emergContact1.addressLine2,
+                addressCity: payload.emergContact1.addressCity,
+                addressState: payload.emergContact1.addressState,
+                addressZip: payload.emergContact1.addressZip,
+                phone: payload.emergContact1.phone
+              } */
+              emergContact1FirstName: payload.emergContact1FirstName,
+              emergContact1LastName: payload.emergContact1LastName,
+              emergContact1Relationship: payload.emergContact1Relationship,
+              emergContact1AddressLine1: payload.emergContact1AddressLine1,
+              emergContact1AddressLine2: payload.emergContact1AddressLine2,
+              emergContact1AddressCity: payload.emergContact1AddressCity,
+              emergContact1AddressState: payload.emergContact1AddressState,
+              emergContact1AddressZip: payload.emergContact1AddressZip,
+              emergContact1Phone: payload.emergContact1Phone,
+              emergContact2: [
+                {firstName: payload.emergContact2.firstName},
+                {lastName: payload.emergContact2.lastName},
+                {relationship: payload.emergContact2.relationship},
+                {addressLine1: payload.emergContact2.addressLine1},
+                {addressLine2: payload.emergContact2.addressLine2},
+                {addressCity: payload.emergContact2.addressCity},
+                {addressState: payload.emergContact2.addressState},
+                {addressZip: payload.emergContact2.addressZip},
+                {phone: payload.emergContact2.phone}
+              ]
+            })
+          })
+        })
+        .then(() => {
+          Vue.notify({
+            group: 'base',
+            type: 'success',
+            text: 'User was successfully updated!'
+          })
+
+          commit('UPDATE_USER', updatedUser)
+          // you can also add some global message property and add here message on success
+          // and show it on UI after profile update
+        })
+        .catch((error) => commit('SET_ERROR', error))
+    },
+
+
+
+
     // just updating users 'picture' property by passing image object from uploader
     setUserImage ({commit}, payload) {
       const userId = firebase.auth().currentUser.uid
