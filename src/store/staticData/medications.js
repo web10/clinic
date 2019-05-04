@@ -56,6 +56,8 @@ export default {
     { 'generic': 'insulin detemir', 'brandNames': [ 'Levemir' ]},
     { 'generic': 'insuline glargine', 'brandNames': [ 'Lantus' ]},
     { 'generic': 'sitagliptin', 'brandNames': [ 'Januvia' ]},
+    { 'generic': 'penicillin', 'brandNames': [ '' ]},
+    { 'generic': 'amoxicillin', 'brandNames': [ '' ]},
     { 'generic': 'sitagliptin/metformin', 'brandNames': [ 'Janumet' ]},
   ]
 }
