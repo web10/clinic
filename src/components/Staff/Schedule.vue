@@ -1,252 +1,727 @@
 <template>
-  <v-container class="text-sm-left text-md-center">
-    <template>
-      <h3> Calendar 1 </h3>
-      <v-layout wrap>
-        <v-flex sm4 xs12 class="text-sm-left text-xs-center">
-          <v-btn @click="$refs.calendar.prev()">
-            <v-icon dark left> keyboard_arrow_left </v-icon>
-            Prev
-          </v-btn>
-        </v-flex>
-        <v-flex sm4 xs12 class="text-xs-center">
-          <v-select v-model="type" :items="typeOptions" label="Type"></v-select>
-        </v-flex>
-        <v-flex sm4 xs12 class="text-sm-right text-xs-center">
-          <v-btn @click="$refs.calendar.next()">
-            Next
-            <v-icon right dark> keyboard_arrow_right </v-icon>
-          </v-btn>
-        </v-flex>
-        <v-flex xs12 class="mb-3">
-          <v-sheet height="500">
-            <v-calendar
-              ref="calendar"
-              v-model="start"
-              :type="type"
-              :end="end"
-              color="primary"
-            ></v-calendar>
-          </v-sheet>
-        </v-flex>
-      </v-layout>
-    </template>
-<!--
-<hr>
-    <template>
-      <h3> Calendar 2 </h3>
-      <v-layout>
-        <v-flex>
-          <v-sheet height="500">
-            <v-calendar
-              :now="today"
-              :value="today"
-              color="primary"
+  <div>
+    <v-app id="dayspan" v-cloak class="ds-calendar-app" ref="app">
+      <v-toolbar
+        app
+        flat
+        fixed
+        class="ds-app-calendar-toolbar"
+        color="white"
+        style="margin-top: 64px;"
+      >
+        <v-toolbar-title class="ml-0">
+          <span class="hidden-sm-and-down">
+            <slot name="title" :calendar="calendar"></slot>
+          </span>
+        </v-toolbar-title>
+
+        <slot name="today" :setToday="setToday" :todayDate="todayDate" :calendar="calendar">
+          <v-tooltip bottom>
+            <v-btn
+              slot="activator"
+              class="ds-skinny-button"
+              depressed
+              :icon="$vuetify.breakpoint.smAndDown"
+              @click="setToday"
             >
-              <template v-slot:day="{ present, past, date }">
-                <v-layout fill-height>
-                  <template v-if="past && tracked[date]">
-                    <v-sheet
-                      v-for="(percent, i) in tracked[date]"
-                      :key="i"
-                      :title="category[i]"
-                      :color="colors[i]"
-                      :width="`${percent}%`"
-                      height="100%"
-                      tile
-                    ></v-sheet>
-                  </template>
-                </v-layout>
-              </template>
-            </v-calendar>
-          </v-sheet>
-        </v-flex>
-      </v-layout>
-    </template>
-<hr>
-<template>
-  <h3>Calendar 3</h3>
-<v-layout>
-<v-flex>
-  <v-sheet height="500">
-    <v-calendar
-      :now="today"
-      :value="today"
-      color="primary"
-    >
-      <template v-slot:day="{ date }">
-        <template v-for="event in eventsMap[date]">
-          <v-menu
-            :key="event.title"
-            v-model="event.open"
-            full-width
-            offset-x
-          >
-            <template v-slot:activator="{ on }">
-              <div
-                v-if="!event.time"
-                v-ripple
-                class="my-event"
-                v-on="on"
-                v-html="event.title"
-              ></div>
-            </template>
-            <v-card
-              color="grey lighten-4"
-              min-width="350px"
-              flat
+              <span v-if="$vuetify.breakpoint.mdAndUp">{{ labels.today }}</span>
+              <v-icon v-else>{{ labels.todayIcon }}</v-icon>
+            </v-btn>
+            <span>{{ todayDate }}</span>
+          </v-tooltip>
+        </slot>
+
+        <slot name="prev" :prev="prev" :prevLabel="prevLabel" :calendar="calendar">
+          <v-tooltip bottom>
+            <v-btn
+              slot="activator"
+              icon
+              depressed
+              class="ds-light-forecolor ds-skinny-button"
+              @click="prev"
             >
-              <v-toolbar
-                color="primary"
-                dark
-              >
-                <v-btn icon>
-                  <v-icon>edit</v-icon>
-                </v-btn>
-                <v-toolbar-title v-html="event.title"></v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn icon>
-                  <v-icon>favorite</v-icon>
-                </v-btn>
-                <v-btn icon>
-                  <v-icon>more_vert</v-icon>
-                </v-btn>
-              </v-toolbar>
-              <v-card-title primary-title>
-                <span v-html="event.details"></span>
-              </v-card-title>
-              <v-card-actions>
-                <v-btn
-                  flat
-                  color="secondary"
-                >
-                  Cancel
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+              <v-icon>keyboard_arrow_left</v-icon>
+            </v-btn>
+            <span>{{ prevLabel }}</span>
+          </v-tooltip>
+        </slot>
+        <slot name="next" :next="next" :nextLabel="nextLabel" :calendar="calendar">
+          <v-tooltip bottom>
+            <v-btn
+              slot="activator"
+              icon
+              depressed
+              class="ds-light-forecolor ds-skinny-button"
+              @click="next"
+            >
+              <v-icon>keyboard_arrow_right</v-icon>
+            </v-btn>
+            <span>{{ nextLabel }}</span>
+          </v-tooltip>
+        </slot>
+
+        <slot name="summary" :summary="summary" :calendar="calendar">
+          <h1 class="title ds-light-forecolor">{{ summary }}</h1>
+        </slot>
+
+        <v-spacer></v-spacer>
+
+        <slot name="view" :currentType="currentType" :types="types">
+          <v-menu>
+            <v-btn flat slot="activator">
+              {{ currentType.label }}
+              <v-icon>arrow_drop_down</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile v-for="type in types" :key="type.id" @click="currentType = type">
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ type.label }}</v-list-tile-title>
+                </v-list-tile-content>
+                <v-list-tile-action>{{ type.shortcut }}</v-list-tile-action>
+              </v-list-tile>
+            </v-list>
           </v-menu>
-        </template>
-      </template>
-    </v-calendar>
-  </v-sheet>
-</v-flex>
-</v-layout>
-</template>
--->
-  </v-container>
+        </slot>
+
+        <slot name="menuRight"></slot>
+      </v-toolbar>
+      <v-content class="ds-expand">
+        <v-container fluid fill-height class="ds-calendar-container">
+          <ds-gestures @swipeleft="next" @swiperight="prev">
+            <div v-if="currentType.schedule" class="ds-expand">
+              <slot
+                name="calendarAppAgenda"
+                v-bind="{$scopedSlots, $listeners, calendar, add, edit, viewDay}"
+              >
+                <ds-agenda
+                  v-bind="{$scopedSlots}"
+                  v-on="$listeners"
+                  :calendar="calendar"
+                  @add="add"
+                  @edit="edit"
+                  @view-day="viewDay"
+                ></ds-agenda>
+              </slot>
+            </div>
+
+            <div v-else class="ds-expand">
+              <slot
+                name="calendarAppCalendar"
+                v-bind="{$scopedSlots, $listeners, calendar, add, addAt, edit, viewDay, handleAdd, handleMove}"
+              >
+                <ds-calendar
+                  ref="calendar"
+                  v-bind="{$scopedSlots}"
+                  v-on="$listeners"
+                  :calendar="calendar"
+                  @add="add"
+                  @add-at="addAt"
+                  @edit="edit"
+                  @view-day="viewDay"
+                  @added="handleAdd"
+                  @moved="handleMove"
+                ></ds-calendar>
+              </slot>
+            </div>
+          </ds-gestures>
+
+          <slot
+            name="calendarAppEventDialog"
+            v-bind="{$scopedSlots, $listeners, calendar, eventFinish}"
+          >
+            <ds-event-dialog
+              ref="eventDialog"
+              v-bind="{$scopedSlots}"
+              v-on="$listeners"
+              :calendar="calendar"
+              @saved="eventFinish"
+              :clientsList="getTotalClients"
+              @actioned="eventFinish"
+							@event-create = "ceratingEvent"
+              @event-remove="cancelClientEvent"
+            >
+              <template
+                slot="eventPopoverBodyTop"
+                v-bind="{$scopedSlots}"
+                v-on="$listeners"
+                :calendar="calendar"
+                @saved="eventFinish"
+              >
+                <h1>EXAMPLE CONTENT</h1>
+              </template>
+            </ds-event-dialog>
+          </slot>
+
+          <slot
+            name="calendarAppOptions"
+            v-bind="{optionsVisible, optionsDialog, options, chooseOption}"
+          >
+            <v-dialog
+              ref="optionsDialog"
+              v-model="optionsVisible"
+              v-bind="optionsDialog"
+              :fullscreen="$dayspan.fullscreenDialogs"
+            >
+              <v-list>
+                <template v-for="option in options">
+                  <v-list-tile :key="option.text" @click="chooseOption( option )">{{ option.text }}</v-list-tile>
+                </template>
+              </v-list>
+            </v-dialog>
+          </slot>
+
+          <slot
+            name="calendarAppPrompt"
+            v-bind="{promptVisible, promptDialog, promptQuestion, choosePrompt}"
+          >
+            <v-dialog ref="promptDialog" v-model="promptVisible" v-bind="promptDialog">
+              <v-card>
+                <v-card-title>
+                  {{ promptQuestion }} Reason:
+                  <v-text-field label="reason" v-model="removeReason"></v-text-field>
+                </v-card-title>
+                <v-card-actions>
+                  <v-btn
+                    color="primary"
+                    flat
+                    @click="choosePrompt( true )"
+                  >{{ labels.promptConfirm }}</v-btn>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="secondary"
+                    flat
+                    @click="choosePrompt( false )"
+                  >{{ labels.promptCancel }}</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </slot>
+
+          <slot name="calendarAppAdd" v-bind="{allowsAddToday, addToday}">
+
+          </slot>
+
+          <slot name="containerInside" v-bind="{events, calendar}"></slot>
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
 </template>
 
 <script>
 /* eslint-disable */
-  export default {
-    data: () => ({
-      // for calendar 1
-      type: 'month',
-      start: '2019-01-01',
-      end: '2019-01-06',
-      typeOptions: [
-        { text: 'Day', value: 'day' },
-        { text: '4 Day', value: '4day' },
-        { text: 'Week', value: 'week' },
-        { text: 'Month', value: 'month' },
-        { text: 'Custom Daily', value: 'custom-daily' },
-        { text: 'Custom Weekly', value: 'custom-weekly' }
-      ],
-      // for calendar 2
-      today: '2019-01-10',
-      tracked: {
-       '2019-01-09': [23, 45, 10],
-       '2019-01-08': [10],
-       '2019-01-07': [0, 78, 5],
-       '2019-01-06': [0, 0, 50],
-       '2019-01-05': [0, 10, 23],
-       '2019-01-04': [2, 90],
-       '2019-01-03': [10, 32],
-       '2019-01-02': [80, 10, 10],
-       '2019-01-01': [20, 25, 10]
-     },
-     colors: ['#1867c0', '#fb8c00', '#000000'],
-     category: ['Development', 'Meetings', 'Slacking'],
-     events: [
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2018-12-30',
-          open: false
-        },
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2018-12-31',
-          open: false
-        },
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2019-01-01',
-          open: false
-        },
-        {
-          title: 'Meeting',
-          details: 'Spending time on how we do not have enough time',
-          date: '2019-01-07',
-          open: false
-        },
-        {
-          title: '30th Birthday',
-          details: 'Celebrate responsibly',
-          date: '2019-01-03',
-          open: false
-        },
-        {
-          title: 'New Year',
-          details: 'Eat chocolate until you pass out',
-          date: '2019-01-01',
-          open: false
-        },
-        {
-          title: 'Conference',
-          details: 'Mute myself the whole time and wonder why I am on this call',
-          date: '2019-01-21',
-          open: false
-        },
-        {
-          title: 'Hackathon',
-          details: 'Code like there is no tommorrow',
-          date: '2019-02-01',
-          open: false
-        }
-      ]
-    }),
-    computed: {
-      // convert the list of events into a map of lists keyed by date
-      eventsMap () {
-        const map = {}
-        this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
-        return map
+import {
+  Constants,
+  Sorts,
+  Calendar,
+  Day,
+  Units,
+  Weekday,
+  Month,
+  DaySpan,
+  PatternMap,
+  Time,
+  Op
+} from "dayspan";
+import firebase from "firebase/app";
+import "firebase/auth";
+import db from "@/config/firebaseInit";
+
+export default {
+  name: "dsCalendarApp",
+  props: {
+    events: {
+      type: Array
+    },
+    calendar: {
+      type: Calendar,
+      default() {
+        return Calendar.months();
       }
     },
-    methods: {
-      open (event) {
-        alert(event.title)
+    types: {
+      type: Array,
+      default() {
+        return this.$dsDefaults().types;
+      }
+    },
+    allowsAddToday: {
+      type: Boolean,
+      default() {
+        return this.$dsDefaults().allowsAddToday;
+      }
+    },
+    formats: {
+      validate(x) {
+        return this.$dsValidate(x, "formats");
+      },
+      default() {
+        return this.$dsDefaults().formats;
+      }
+    },
+    labels: {
+      validate(x) {
+        return this.$dsValidate(x, "labels");
+      },
+      default() {
+        return this.$dsDefaults().labels;
+      }
+    },
+    styles: {
+      validate(x) {
+        return this.$dsValidate(x, "styles");
+      },
+      default() {
+        return this.$dsDefaults().styles;
+      }
+    },
+    optionsDialog: {
+      validate(x) {
+        return this.$dsValidate(x, "optionsDialog");
+      },
+      default() {
+        return this.$dsDefaults().optionsDialog;
+      }
+    },
+    promptDialog: {
+      validate(x) {
+        return this.$dsValidate(x, "promptDialog");
+      },
+      default() {
+        return this.$dsDefaults().promptDialog;
       }
     }
+  },
+  data: vm => ({
+    drawer: null,
+    optionsVisible: false,
+    options: [],
+    promptVisible: false,
+    promptQuestion: "",
+    promptCallback: null,
+    removeReason: ""
+  }),
+  watch: {
+    events: "applyEvents",
+    calendar: "applyEvents"
+  },
+  computed: {
+    currentType: {
+      get() {
+        return (
+          this.types.find(
+            type =>
+              type.type === this.calendar.type &&
+              type.size === this.calendar.size
+          ) || this.types[0]
+        );
+      },
+      set(type) {
+        this.rebuild(undefined, true, type);
+      }
+    },
+
+    summary() {
+      let small = this.$vuetify.breakpoint.xs;
+      if (small) {
+        return this.calendar.start.format(this.formats.xs);
+      }
+      let large = this.$vuetify.breakpoint.mdAndUp;
+      return this.calendar.summary(false, !large, false, !large);
+    },
+    todayDate() {
+      return this.$dayspan.today.format(this.formats.today);
+    },
+    nextLabel() {
+      return this.labels.next(this.currentType);
+    },
+    prevLabel() {
+      return this.labels.prev(this.currentType);
+    },
+    toolbarStyle() {
+      let large = this.$vuetify.breakpoint.lgAndUp;
+      return large ? this.styles.toolbar.large : this.styles.toolbar.small;
+    },
+    hasCreatePopover() {
+      return !!this.$scopedSlots.eventCreatePopover;
+    },
+    getTotalClients() {
+      if (this.$store.getters.getAllUsers.length) {
+        console.log(
+          "getters all users: ",
+          this.$store.getters.getAllUsers.filter(item => item.role === 0)
+        );
+        return this.$store.getters.getAllUsers.filter(item => item.role === 0);
+      }
+    }
+  },
+  mounted() {
+    this.loadState();
+    if (!this.$dayspan.promptOpen) {
+      this.$dayspan.promptOpen = (question, callback) => {
+        this.promptVisible = false;
+        this.promptQuestion = question;
+        this.promptCallback = callback;
+        this.promptVisible = true;
+      };
+    }
+  },
+  created() {
+    //console.log("in created this.calendar: ", this.calendar.toInput(true))
+    //console.log("this.events: ", this.events)
+    this.$store.dispatch("getAllUse");
+    //this.$store.dispatch("saveCalenderEvents", this.calendar.toInput(true));
+  },
+  methods: {
+    setState(state) {
+      state.eventSorter = state.listTimes
+        ? Sorts.List([Sorts.FullDay, Sorts.Start])
+        : Sorts.Start;
+      this.calendar.set(state);
+      this.triggerChange();
+    },
+    applyEvents() {
+      if (this.events) {
+        console.log("in if for getter ",this.events)
+        this.calendar.removeEvents();
+        this.calendar.addEvents(this.events);
+      }
+
+    },
+    isType(type, aroundDay) {
+      let cal = this.calendar;
+      return (
+        cal.type === type.type &&
+        cal.size === type.size &&
+        (!aroundDay || cal.span.matchesDay(aroundDay))
+      );
+    },
+    rebuild(aroundDay, force, forceType) {
+      let type = forceType || this.currentType || this.types[2];
+      if (this.isType(type, aroundDay) && !force) {
+        return;
+      }
+      let input = {
+        type: type.type,
+        size: type.size,
+        around: aroundDay,
+        eventsOutside: true,
+        preferToday: false,
+        listTimes: type.listTimes,
+        updateRows: type.updateRows,
+        updateColumns: type.listTimes,
+        fill: !type.listTimes,
+        otherwiseFocus: type.focus,
+        repeatCovers: type.repeat
+      };
+      this.setState(input);
+    },
+    next() {
+      this.calendar.unselect().next();
+      this.triggerChange();
+    },
+    prev() {
+      this.calendar.unselect().prev();
+      this.triggerChange();
+    },
+    setToday() {
+      this.rebuild(this.$dayspan.today);
+    },
+    viewDay(day) {
+      this.rebuild(day, false, this.types[0]);
+    },
+    edit(calendarEvent) {
+      console.log("EDITING");
+      let eventDialog = this.$refs.eventDialog;
+      eventDialog.edit(calendarEvent);
+    },
+    editPlaceholder(createEdit) {
+      let placeholder = createEdit.calendarEvent;
+      let details = createEdit.details;
+      let eventDialog = this.$refs.eventDialog;
+      let calendar = this.$refs.calendar;
+      eventDialog.addPlaceholder(placeholder, details);
+      eventDialog.$once("close", calendar.clearPlaceholder);
+    },
+    add(day) {
+      if (!this.$dayspan.features.addDay) {
+        return;
+      }
+      let eventDialog = this.$refs.eventDialog;
+      let calendar = this.$refs.calendar;
+      let useDialog = !this.hasCreatePopover;
+      calendar.addPlaceholder(day, true, useDialog);
+      if (useDialog) {
+        eventDialog.add(day);
+        eventDialog.$once("close", calendar.clearPlaceholder);
+      }
+    },
+    addAt(dayHour) {
+      if (!this.$dayspan.features.addTime) {
+        return;
+      }
+      let eventDialog = this.$refs.eventDialog;
+      let calendar = this.$refs.calendar;
+      let useDialog = !this.hasCreatePopover;
+      let at = dayHour.day.withHour(dayHour.hour);
+      calendar.addPlaceholder(at, false, useDialog);
+      if (useDialog) {
+        eventDialog.addAt(dayHour.day, dayHour.hour);
+        eventDialog.$once("close", calendar.clearPlaceholder);
+      }
+    },
+    addToday() {
+      if (!this.$dayspan.features.addDay) {
+        return;
+      }
+      let eventDialog = this.$refs.eventDialog;
+      let calendar = this.$refs.calendar;
+      let useDialog = !this.hasCreatePopover || !calendar;
+      let day = this.$dayspan.today;
+      if (!this.calendar.filled.matchesDay(day)) {
+        let first = this.calendar.days[0];
+        let last = this.calendar.days[this.calendar.days.length - 1];
+        let firstDistance = Math.abs(first.currentOffset);
+        let lastDistance = Math.abs(last.currentOffset);
+        day = firstDistance < lastDistance ? first : last;
+      }
+      calendar && calendar.addPlaceholder(day, true, useDialog);
+      if (useDialog) {
+        eventDialog.add(day);
+        calendar && eventDialog.$once("close", calendar.clearPlaceholder);
+      }
+    },
+    handleAdd(addEvent) {
+      let eventDialog = this.$refs.eventDialog;
+      let calendar = this.$refs.calendar;
+      addEvent.handled = true;
+      if (!this.hasCreatePopover) {
+        if (addEvent.placeholder.fullDay) {
+          eventDialog.add(addEvent.span.start, addEvent.span.days(Op.UP));
+        } else {
+          eventDialog.addSpan(addEvent.span);
+        }
+        eventDialog.$once("close", addEvent.clearPlaceholder);
+      } else {
+        calendar.placeholderForCreate = true;
+      }
+    },
+    handleMove(moveEvent) {
+      let calendarEvent = moveEvent.calendarEvent;
+      let target = moveEvent.target;
+      let targetStart = target.start;
+      let sourceStart = calendarEvent.time.start;
+      let schedule = calendarEvent.schedule;
+      let options = [];
+      moveEvent.handled = true;
+      let callbacks = {
+        cancel: () => {
+          moveEvent.clearPlaceholder();
+        },
+        single: () => {
+          calendarEvent.move(targetStart);
+          this.eventsRefresh();
+          moveEvent.clearPlaceholder();
+          this.$emit("event-update", calendarEvent.event);
+        },
+        instance: () => {
+          calendarEvent.move(targetStart);
+          this.eventsRefresh();
+          moveEvent.clearPlaceholder();
+          this.$emit("event-update", calendarEvent.event);
+        },
+        duplicate: () => {
+          schedule.setExcluded(targetStart, false);
+          this.eventsRefresh();
+          moveEvent.clearPlaceholder();
+          this.$emit("event-update", calendarEvent.event);
+        },
+        all: () => {
+          schedule.moveTime(sourceStart.asTime(), targetStart.asTime());
+          this.eventsRefresh();
+          moveEvent.clearPlaceholder();
+          this.$emit("event-update", calendarEvent.event);
+        }
+      };
+      options.push({
+        text: this.labels.moveCancel,
+        callback: callbacks.cancel
+      });
+      if (schedule.isSingleEvent()) {
+        options.push({
+          text: this.labels.moveSingleEvent,
+          callback: callbacks.single
+        });
+        if (this.$dayspan.features.moveDuplicate) {
+          options.push({
+            text: this.labels.moveDuplicate,
+            callback: callbacks.duplicate
+          });
+        }
+      } else {
+        if (this.$dayspan.features.moveInstance) {
+          options.push({
+            text: this.labels.moveOccurrence,
+            callback: callbacks.instance
+          });
+        }
+        if (this.$dayspan.features.moveDuplicate) {
+          options.push({
+            text: this.labels.moveDuplicate,
+            callback: callbacks.duplicate
+          });
+        }
+        if (
+          this.$dayspan.features.moveAll &&
+          !schedule.isFullDay() &&
+          targetStart.sameDay(sourceStart)
+        ) {
+          options.push({
+            text: this.labels.moveAll,
+            callback: callbacks.all
+          });
+        }
+      }
+      this.options = options;
+      this.optionsVisible = true;
+    },
+    chooseOption(option) {
+      if (option) {
+        option.callback();
+      }
+      this.optionsVisible = false;
+    },
+    choosePrompt(yes) {
+
+      this.promptCallback(yes);
+      this.promptVisible = false;
+    },
+    eventFinish(ev) {
+
+      this.triggerChange(ev);
+    },
+    eventsRefresh() {
+      this.calendar.refreshEvents();
+      this.triggerChange(ev);
+    },
+    triggerChange(ev) {
+
+      this.saveState(ev);
+      this.$emit("change", {
+        calendar: this.calendar
+      });
+		},
+		ceratingEvent(createEv) {
+			console.log("created event: ", createEv)
+		},
+    saveState(ev) {
+      let state = this.calendar.toInput(true); //{around: '', events: [], ...}
+
+      this.$store.dispatch("saveCalenderEvents", state);
+
+      if (ev && ev.type !== "remove") {
+        if (state.events.length) {
+          //	{cal: state, visitStatus: 'scheduled', bookingTimeStamp: Date.now}
+          this.$store.dispatch("saveUserCalenderEvent", {
+            clinicCal: state,
+            visitStatus: "Scheduled",
+            bookingTimeStamp: new Date(),
+            id: Date.now()
+          });
+        } else {
+          console.log("no lenght in state.events");
+        }
+      }
+    },
+    loadState() {
+      let state = {};
+			console.log("~~~~my savedState: ");
+			const storeKey = this.storeKey;
+let docData = {};
+const self = this;
+      try {
+
+
+          db.collection("clinicCalendar")
+      .get()
+      .then(snap => {
+        snap.forEach(doc => {
+
+          db.collection("clinicCalendar")
+            .doc(doc.id)
+            .get()
+            .then(function(mdoc) {
+
+              if (mdoc.exists) {
+
+                 docData = mdoc.data().events;
+                  if (!state.events || !state.events.length) {
+        state.events = docData;
+      }
+      state.events.forEach(ev => {
+        let defaults = self.$dayspan.getDefaultEventDetails();
+        ev.data = Object.assign(defaults, ev.data);
+      });
+      self.setState(state);
+console.log("self satte: ", state);
+              } else {
+
+                console.log("No such document!");
+              }
+
+            })
+            .catch(function(error) {
+              console.log("Error getting document:", error);
+            });
+        });
+      })
+      .catch(error => commit("SET_ERROR", error));
+
+      } catch (e) {
+        // eslint-disable-next-line
+        console.log(e);
+      }
+
+    },
+    cancelClientEvent(event) {
+      console.log("schedulepage canceled event: ", this.removeReason);
+
+      this.$store.dispatch('removeUserEvent', {removeEvent: event, visitStatus: 'Cancelled', reason :this.removeReason})
+    }
   }
+};
 </script>
 
-<style lang="stylus" scoped>
-  .my-event {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-radius: 2px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    width: 100%;
-    font-size: 12px;
-    padding: 3px;
-    cursor: pointer;
-    margin-bottom: 1px;
+<style lang="scss" scoped>
+.ds-app-calendar-toolbar {
+  .v-toolbar__content {
+    border-bottom: 1px solid rgb(224, 224, 224);
   }
+}
+
+.ds-skinny-button {
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+}
+
+.ds-expand {
+  width: 100%;
+  height: 100%;
+}
+
+.ds-calendar-container {
+  padding: 0px !important;
+  position: relative;
+}
+
+.v-btn--floating.ds-add-event-today {
+  .v-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+main {
+  padding-left: 0px !important;
+}
 </style>

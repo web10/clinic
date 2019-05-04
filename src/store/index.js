@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import UserStore from './userStore'
 import AdminStore from './adminStore'
 import ChatModule from './chatModule'
+import CalenderStore from './calenderStore'
 Vue.use(Vuex)
 
 export default new Vuex.Store(
@@ -11,11 +12,14 @@ export default new Vuex.Store(
     modules: {
       userStore: UserStore,
       adminStore: AdminStore,
-    chatModule: ChatModule
+    chatModule: ChatModule,
+    calenderStore: CalenderStore
     },
     state: {
       loading: false,
-      error: null
+      error: null,
+      location: undefined,
+	  access_token: localStorage.access_token
     },
     mutations: {
       setLoadin(state, payload) {

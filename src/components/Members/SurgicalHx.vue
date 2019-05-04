@@ -60,7 +60,13 @@ import { mapState } from 'vuex'
     },
     created() {
       if(this.user) {
+        // if(this.user.surgicalHistory){
+        console.log("this.user.surgicalHistory: ", this.user)
         this.surgicalHistory = this.user.surgicalHistory
+      //}
+      // else {
+      //   this.surgicalHistory = surgeryHxCheckList
+      // }
       }
     },
     methods: {
