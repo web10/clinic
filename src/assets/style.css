@@ -7,3 +7,6 @@
 .medication-header {
   margin-bottom: 5px;
 }
+.ds-calendar-event-menu .v-menu__activator .ds-calendar-event {
+  position: relative !important;
+}

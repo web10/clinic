@@ -12,19 +12,20 @@ const firebaseApp = firebase.initializeApp({
   // messagingSenderId: '266774888215'
 
   // Danh's local db settings
-  // apiKey: 'AIzaSyB9VlaclsP5nyK0HM8-WWfchx6KOwtdtYU',
-  // authDomain: 'clinic-f47af.firebaseapp.com',
-  // databaseURL: 'https://clinic-f47af.firebaseio.com',
-  // projectId: 'clinic-f47af',
-  // storageBucket: 'clinic-f47af.appspot.com',
-  // messagingSenderId: '363467074888'
+  apiKey: 'AIzaSyB9VlaclsP5nyK0HM8-WWfchx6KOwtdtYU',
+  authDomain: 'clinic-f47af.firebaseapp.com',
+  databaseURL: 'https://clinic-f47af.firebaseio.com',
+  projectId: 'clinic-f47af',
+  storageBucket: 'clinic-f47af.appspot.com',
+  messagingSenderId: '363467074888'
+
   //Anjali local db settings
-  apiKey: "AIzaSyBBbhc4GcsLU2DzQx164G9Wk-Keuff5M6s",
-    authDomain: "healthapp-df24f.firebaseapp.com",
-    databaseURL: "https://healthapp-df24f.firebaseio.com",
-    projectId: "healthapp-df24f",
-    storageBucket: "healthapp-df24f.appspot.com",
-    messagingSenderId: "543665550942"
+  // apiKey: "AIzaSyBBbhc4GcsLU2DzQx164G9Wk-Keuff5M6s",
+  //   authDomain: "healthapp-df24f.firebaseapp.com",
+  //   databaseURL: "https://healthapp-df24f.firebaseio.com",
+  //   projectId: "healthapp-df24f",
+  //   storageBucket: "healthapp-df24f.appspot.com",
+  //   messagingSenderId: "543665550942"
 })
 
 const db = firebaseApp.firestore()

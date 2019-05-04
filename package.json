@@ -1,5 +1,5 @@
 {
-  "name": "vuetify-spa-template",
+  "name": "Clinic Web App",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "dayspan-vuetify": "https://github.com/anjali89r/dayspan/raw/master/dayspan-vuetify-0.4.0.tgz",
     "firebase": "^5.9.0",
     "firebase-admin": "^7.1.0",
     "http2": "^3.3.7",

@@ -6,6 +6,7 @@ import db from '@/config/firebaseInit'
 import medHistory from '../staticData/medHistory'
 import surgHistory from '../staticData/surgHistory'
 import familyHistory from '../staticData/familyHistory'
+import * as objectEquality  from '@/services/objectEquality'
 export default {
   state: {
     user: null,
@@ -60,6 +61,9 @@ export default {
    },
    'DEL_ALLERGY' (state, payload) {
     state.user.allergies.splice(payload.index, 1);
+  },
+  'SEE_USER_EVENT' (state, payload) {
+   console.log("users list after event in mutation: ", payload)
   }
   },
   actions: {
@@ -90,6 +94,8 @@ export default {
         familyHistory: familyHistory,
         medications: [],
         allergies: [],
+
+        userEvents: {},
         picture: '',
         gender: ''
       }).then(snapshot => {
@@ -102,7 +108,7 @@ export default {
       .then(querySnapshot => {
         const user = {
           id: payload.uid,
-          email: payload.email
+          mail: payload.email// changed to mail from email
         }
 
         querySnapshot.forEach(doc => {
@@ -115,10 +121,12 @@ export default {
           user.gender = data.gender
           user.role = data.role
           user.medicalHistory = data.medicalHistory
-          user.surgicalHistory = data.surgicalHistory,
-          user.familyHistory = data.familyHistory,
+          user.surgicalHistory = data.surgicalHistory
+          user.familyHistory = data.familyHistory
           user.medications = data.medications
           user.allergies = data.allergies
+
+          user.userEvents = data.userEvents
           commit('setUser', user)
         })
       })
@@ -366,6 +374,122 @@ export default {
         })
 
       commit('DEL_ALLERGY', payload)
+    },
+    saveUserCalenderEvent({commit, rootGetters, state}, payload) {
+      //{clinicCal: state, visitStatus: 'scheduled', bookingTimeStamp: Date.now, id:Date.now()}
+      //state = {around: '', events: [], ...}
+
+const stateId = payload.id;
+       const allUsers = rootGetters.getAllUsers
+       console.log("allUsers: ", allUsers)
+       const selectedUser = allUsers.find(user => {
+        return user.firstName + ' ' + user.lastName === payload.clinicCal.events[(payload.clinicCal.events.length)-1].data.title
+      })
+      //console.log("selectedUser: ", selectedUser)
+
+       const payloaddayEvent = payload.clinicCal.events[(payload.clinicCal.events.length)-1].schedule.dayOfMonth + payload.clinicCal.events[(payload.clinicCal.events.length)-1].schedule.month + payload.clinicCal.events[(payload.clinicCal.events.length)-1].schedule.year
+       const payloadtimeEvent = payload.clinicCal.events[(payload.clinicCal.events.length)-1].schedule.times[0]
+
+    //db state stored
+    const storeData = {...payload.clinicCal.events[(payload.clinicCal.events.length)-1], visitStatus: payload.visitStatus, bookingTimeStamp: payload.bookingTimeStamp}
+
+//check if the selectedUser has already that event registered
+if(selectedUser.userEvents) {
+
+  console.log("selectedUser has events: ", selectedUser)
+
+    db.collection('users').where('id', '==', selectedUser.id).get()
+    .then((snap) => {
+      snap.forEach((doc) => {
+         doc.ref.set({
+
+          userEvents: {[stateId]: {...payload.clinicCal.events[(payload.clinicCal.events.length)-1], visitStatus: payload.visitStatus, bookingTimeStamp: payload.bookingTimeStamp}
+         }}, { merge: true })
+        })
+      })
+     .then(() => {
+       Vue.notify({
+         group: 'base',
+         type: 'success',
+         text: 'Changes was successfully saved!'
+       })
+     })
+     .catch(error => {
+       commit('SET_ERROR', error)
+     })
+
+   selectedUser.userEvents = {...selectedUser.userEvents, [stateId]: {...payload.clinicCal.events[(payload.clinicCal.events.length)-1], visitStatus: payload.visitStatus, bookingTimeStamp: payload.bookingTimeStamp}}
+
+  }
+ else {
+   //console.log("selected user has no events yet")
+
+   db.collection('users').where('id', '==', selectedUser.id).get()
+   .then((snap) => {
+     snap.forEach((doc) => {
+        doc.ref.set({
+
+         userEvents: {[stateId]: {...payload.clinicCal.events[(payload.clinicCal.events.length)-1], visitStatus: payload.visitStatus, bookingTimeStamp: payload.bookingTimeStamp}
+        }}, { merge: true })
+      })
+    })
+    .then(() => {
+      Vue.notify({
+        group: 'base',
+        type: 'success',
+        text: 'Changes was successfully saved!'
+      })
+    })
+    .catch(error => {
+      commit('SET_ERROR', error)
+    })
+
+
+
+         selectedUser.userEvents = {[stateId]: {...payload.clinicCal.events[(payload.clinicCal.events.length)-1], visitStatus: payload.visitStatus, bookingTimeStamp: payload.bookingTimeStamp}}
+        // console.log("selected user has no events after event: ", selectedUser)
+        // console.log("getters users after adding calendar events: ", rootGetters.getAllUsers)
+
+ }
+        commit('SEE_USER_EVENT', rootGetters.getAllUsers)
+    },
+    removeUserEvent({commit, rootGetters}, payload) {
+      //payload:{removeEvent: event, visitStatus: 'Cancelled', reason :'not interested'}
+      // payload.removeEvent:{data: {title: '', busy: '', description}, schedule: fn, id: ''}
+      const allUsers = rootGetters.getAllUsers
+       const selectedUser = allUsers.find(user => {
+        return user.firstName + ' ' + user.lastName === payload.removeEvent.data.title
+      })
+     // console.log("cancelled selectedUser: ", selectedUser)
+       const canceledUserEvent = objectEquality.objFil(selectedUser.userEvents, event => {return objectEquality.isEquivalent(event.data, payload.removeEvent.data)})
+      // console.log("delete: ", selectedUser.userEvents[Object.keys(canceledUserEvent)])
+       delete selectedUser.userEvents[Object.keys(canceledUserEvent)]
+
+       canceledUserEvent[Object.keys(canceledUserEvent)].visitStatus = "Cancelled";
+       canceledUserEvent[Object.keys(canceledUserEvent)].reason = payload.reason;
+
+     selectedUser.userEvents = {...selectedUser.userEvents, ...canceledUserEvent}
+      //console.log("UPDATED cancelled selectedUser: ", selectedUser)
+
+
+    db.collection('users').where('id', '==', selectedUser.id).get()
+   .then((snap) => {
+     snap.forEach((doc) => {
+        doc.ref.set(selectedUser)
+      })
+    })
+    .then(() => {
+         Vue.notify({
+           group: 'base',
+           type: 'success',
+           text: 'Changes was successfully saved!'
+         })
+       })
+       .catch(error => {
+         commit('SET_ERROR', error)
+       })
+
+
     },
     signOut ({commit}) {
       firebase.auth().signOut()

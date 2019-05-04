@@ -10,6 +10,7 @@ export default {
   mutations: {
     'GET_USERS' (state, payload) {
       state.users = payload
+      console.log("get users state.users: ", state.users)
     },
     'DELETE_USER' (state, payload) {
       state.users = state.users.filter((user) => user.id != payload)
@@ -40,6 +41,7 @@ export default {
 //            userList.push(user)
 //          }
         })
+        console.log("action getUse userList: ", userList)
         commit('GET_USERS', userList)
       })
       .catch((error) => commit('SET_ERROR', error))
@@ -68,5 +70,8 @@ export default {
         commit('DELETE_USER', payload)
       })
     }
+  },
+  getters: {
+    getAllUsers: (state) => state.users
   }
 }

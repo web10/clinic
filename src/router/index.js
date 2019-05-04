@@ -200,7 +200,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else if (to.matched.some(record => record.meta.requireAdmin)) {
-    // check this condition
+    // check this condition if (firebase.auth().currentUser.email !== 'danhnguyenmd@gmail.com,')
     if (firebase.auth().currentUser.email !== 'danhnguyenmd@gmail.com') {
     // if(user.role == 2) {
       next({
