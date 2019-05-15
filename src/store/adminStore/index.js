@@ -20,6 +20,7 @@ export default {
       state.users.find(user => user.id == payload.id).role = payload.role
     }
   },
+
   actions: {
     getAllUse ({commit}) {
       const currentUser = firebase.auth().currentUser

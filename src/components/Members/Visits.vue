@@ -18,6 +18,7 @@
               v-for="(value,name) in userEvents"
               :key="name"
             >
+
               <template v-slot:header>
                 <h4>Date: {{value.schedule.month[0]}}/{{value.schedule.dayOfMonth[0]}}/{{value.schedule.year[0]}} <v-spacer></v-spacer>
                 Time: <span>{{checkTimeofAppt(value.schedule.times[0])}} </span>
