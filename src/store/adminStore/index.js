@@ -10,6 +10,7 @@ export default {
   mutations: {
     'GET_USERS' (state, payload) {
       state.users = payload
+      console.log("my payload ",payload)
       console.log("get users state.users: ", state.users)
     },
     'DELETE_USER' (state, payload) {
@@ -32,8 +33,9 @@ export default {
             id: data.id,
             firstName: data.firstName,
             lastName: data.lastName,
-            email: data.mail,
-            role: data.role
+            mail: data.email,
+            role: data.role,
+            userEvents: data.userEvents
           }
           userList.push(user)
 //        comment out,  will push all users to list including me
