@@ -1,148 +1,16 @@
 <template>
   <v-container>
-    <h3> Your Current SHC Direct Care Benefits- brought to you by SHC Parters</h3>
-    <hr>
-    <v-container grid-list-md>
-    <v-layout row wrap>
-      <v-flex xs12 md6 lg4>
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Primary Care - <span class="green--text">Covered</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Unlimited Access to your team</li>
-              <li>Personalized Physician Care</li>
-              <li>Patient Care Instructions</li>
-              <li>Common In-Office Labs <b>FREE</b></li>
-              <li>Common In-Office Procedures <b>FREE</b></li>
-              <li>Urgent Care Procedures <b>FREE</b></li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
+    <h2 class="text-xs-center"> Welcome to Sendas Direct Care! </h2>
+    <h3 class="text-xs-center"> "Your Health Simplified" </h3><br>
+    <p >As a member, you have full control of your medical records and easy access to your healthcare team via text messages. </p>
 
-      <v-flex xs12 md6 lg4>
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Work and School Physicals - <span class="green--text">Covered</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Sports Physicals</li>
-              <li>New Job Physicals</li>
-              <li>Annual Physical Requirements</li>
-              <li>DOT Physicals</li>
-              <li>Work and School Excuse Notes for Illness</li>
-              <li>Return to Work/School Notes</li>
-              <li>TB Screening</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
+    <p class="text-center"><span class="font-weight-bold">Got a problem?</span> Get your questions answered by opening a <span class="green--text">CONSULTATION</span> ticket. Many problems can be solved via text and telemedicine so you can avoid wasting time in <span class="red--text">WAITING ROOMS </span> and avoid <span class="red--text">PAYING CO-PAYS.</span> </p>
 
-      <v-flex xs12 md6 lg4>
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Urgent Care - <span class="green--text">Covered</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Infection Treatments</li>
-              <li>Injury Care</li>
-              <li>X-rays</li>
-              <li>Splinting</li>
-              <li>Antibiotics</li>
-              <li>Rapid Diagnostic Tests</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
+    <p ><span class="font-weight-bold">In Person Visits:</span> New problems will need to be evaluated wtih a physical exam and confirmed with tests. Your team can schedule an in person appointment for you. Members will get <span class="green--text">DISCOUNTS</span> for in-person exams and <span class="green--text">LOWER COST TESTING</span> within our network.</p>
 
-      <v-flex xs12 md6 lg4>
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Skin Care - <span class="green--text">Covered</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Skin Tag Removals</li>
-              <li>Acne Care</li>
-              <li>Skin Biopsies</li>
-              <li>Warts and Molluscum</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
+    <p ><span class="font-weight-bold">Your Benefits:</span> You now have easy and quick access to your <span class="green--text">PRIMARY CARE</span>, <span class="green--text">URGENT CARE</span>, <span class="green--text">SKIN CARE</span>, as well as some <span class="green--text">AESTHETICS</span>...</p>
 
-      <v-flex xs12 md6 lg4>
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Skin Esthetics - <span class="green--text">Discounts</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Facials</li>
-              <li>Microderm Abrasions</li>
-              <li>Microneedling</li>
-              <li>Photofacials</li>
-              <li>Hair Removal</li>
-              <li>Laser Treatment for Blemishes</li>
-              <li>Microblading - coming soon</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs12 md6 lg4>
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Weight Management - <span class="red--text">Coming Soon</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Periodic labs</li>
-              <li>Personal Coaching</li>
-              <li>Dietary Counseling</li>
-              <li>Healthy Meal Plans</li>
-              <li>Phentermine Management</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs12 md6 lg4 >
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Personal Fitness - <span class="red--text">Coming Soon</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Initial assessment and consultation</li>
-              <li>Personal coaching and guidance</li>
-              <li>Health surveillence parellel to training</li>
-              <li>Massage Therapy</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs12 md6 lg4 >
-        <v-card class="ma-1" height="100%">
-          <v-card-title primary-title class="lighten-4 light-blue">
-            <h3>Eye Care - <span class="red--text">Coming Soon</span></h3>
-          </v-card-title>
-          <v-card-content class="pa-1">
-            <ul class="px-5">
-              <li>Annual Optometry Exam</li>
-              <li>Discount on eyeglasses</li>
-            </ul>
-          </v-card-content>
-        </v-card>
-      </v-flex>
-
-    </v-layout>
-  </v-container>
+    <v-btn color="success" block to="/benefits">Next, See All Your Benefits</v-btn>
   </v-container>
 </template>
 

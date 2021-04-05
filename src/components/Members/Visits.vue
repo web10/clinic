@@ -7,7 +7,7 @@
         </h1>
         <h3 v-show="!userEvents" class="text-xs-center red--text">
           You do not have any visits yet.
-        </h3><br/>
+        </h3>
       </v-flex>
     </v-layout>
 

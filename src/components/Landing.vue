@@ -3,8 +3,8 @@
     <v-layout  class="darkblue--text" row wrap>
       <v-flex xs12 md6 lg8 >
         <v-container>
-          <h1 class="display-2 font-weight-thin mb-3">SHC Direct Care</h1>
-          <h4 class="subheading">Get Direct Access to All Your Total Care</h4>
+          <h1 class="display-2 font-weight-thin mb-3 text-xs-center">Sendas Direct Care</h1>
+          <h2 class="subheading text-xs-center">"Your Healthcare Simplified"</h2>
         </v-container>
       </v-flex>
       <v-flex xs12 md6 lg4>
@@ -25,6 +25,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-btn color="blue" light @click="signIn()" :disabled="!valid" left>Login</v-btn>
+                  <v-btn color="red--text" light @click="" :disabled="!valid" left>Forgot Password</v-btn>
                 </v-card-actions>
               </v-form>
             </v-tab-item>

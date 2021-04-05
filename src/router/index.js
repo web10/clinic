@@ -61,6 +61,14 @@ const router = new Router({
       }
     },
     {
+      path: '/benefits',
+      name: 'Benefits',
+      component: () => import('@/components/Members/Benefits.vue'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
       path: '/medicalhx',
       name: 'MedicalHx',
       component: () => import('@/components/Members/MedicalHx.vue'),
@@ -183,7 +191,7 @@ const router = new Router({
   ]
 })
 
-// runs for each route and checkes the condition
+// runs for each route and checks the condition
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)) {
     if (!firebase.auth().currentUser) {

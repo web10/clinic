@@ -1,11 +1,10 @@
 <template>
-  <v-card>
-    <v-layout>
+  <v-container>
+    <v-layout pb-4>
       <v-flex xs12>
-        <div class="text-xs-center">
-          <h3 > My Surgeries </h3>
-          <h4> Next, let us know if you have had any surgeries.</h4>
-        </div>
+        <span class="title-inline">
+          <b> My Surgeries: </b> Let us know which surgeries you have had in the past. This will help us know which organs may or may not be a part of your current problems.</p>
+        </span>
       </v-flex>
     </v-layout>
 
@@ -22,14 +21,14 @@
                 </v-layout>
               </v-card-text>
               <div class="text-xs-center mt-3">
-                <v-btn color="success" form="surgicalhxform" type="submit">Save</v-btn>
+                <v-btn color="success" form="surgicalhxform" block to="/medications" type="submit">Save Surgeries and Go To Medications</v-btn>
               </div>
             </v-card>
           </form>
         </v-card>
       </v-flex>
     </v-layout>
-  </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -86,5 +85,9 @@ import { mapState } from 'vuex'
     border-style: 1px solid blue;
     margin: 5px;
     padding: 5px;
+  }
+
+  .title-inline {
+    font-size: 1.5em;
   }
 </style>

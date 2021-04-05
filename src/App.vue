@@ -35,10 +35,10 @@
       clipped-left
       v-if="user"
     >
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-1">
         <v-toolbar-side-icon class="indigo--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon >
         <router-link to="/" style="cursor: pointer" class="hidden-sm-and-down" tag="span">
-          <span class="white--text">SHC Direct Care</span>
+          <span class="white--text">Sendas Direct Care</span>
         </router-link>
       </v-toolbar-title>
 
@@ -74,11 +74,6 @@
       <span v-if="user">{{user.email}}, role: {{user.role}}</span>
       <v-btn color="red" dark v-if="auth" @click="signOut()">Logout</v-btn>
 
-      <!-- no longer using button to signup page
-      <router-link to="/signin" style="cursor: pointer">
-        <v-btn color="green" dark v-show="!auth">Login</v-btn>
-      </router-link> -->
-
     </v-toolbar>
     <!-- if you will add all this specific markup before router-view - then all your pages will inherit this and customization will be a really hard -->
     <v-content>
@@ -106,7 +101,7 @@
     <v-footer app class="blue pa-3 indigo--text " light v-if="user">
       <v-layout justify-center row wrap>
         <div>
-          <strong>SHC Direct Care</strong> {{ new Date().getFullYear() }}
+          <strong>Sendas Direct Care</strong> {{ new Date().getFullYear() }}
         </div>
       </v-layout>
     </v-footer>
@@ -136,7 +131,8 @@ export default {
   data: () => ({
     drawer: false,
     menuItems: [
-      { icon: 'home', text: 'Benefits', name: 'intro', link: '/intro' },
+      { icon: 'mdi-home', text: 'Intro', name: 'intro', link: '/intro' },
+      { icon: 'benefit', text: 'Benefits', name: 'benefits', link: '/benefits' },
       { icon: 'favorite', text: 'My Health', name: 'MedicalHx', link: '/medicalhx' },
       { icon: 'work', text: 'My Surgeries', name: 'SurgicalHx', link: '/surgicalhx' },
       { icon: 'format_color_fill', text: 'My Medications', name: 'Medications', link: '/medications' },
@@ -146,7 +142,7 @@ export default {
       { icon: 'list_alt', text: 'My Labs', name: 'Labs', link: '/labs' }
     ],
     dashItems: [
-      { icon: 'how_to_reg', text: 'Enroll', name: 'enroll', link: '/enroll', auth: true },
+      { icon: 'add', text: 'Enroll', name: 'enroll', link: '/enroll', auth: true },
       { icon: 'person', text: 'My Profile', name: 'profile', link: '/profile', auth: true },
       { icon: 'chat_bubble', text: 'My Inbox', name: 'messages', link: '/messages', auth: true },
       { icon: 'help', text: 'Help', name: 'help', link: '/help', auth: true }

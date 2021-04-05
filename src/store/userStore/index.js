@@ -678,6 +678,7 @@ if(selectedUser.userEvents) {
       firebase.auth().signOut()
       commit('UNSET_USER')
       firebase.database().goOffline()
+      router.push('/')
     }
   },
   getters: {

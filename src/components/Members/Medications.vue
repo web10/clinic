@@ -1,37 +1,18 @@
 <template>
   <v-container>
+    <v-layout>
+      <span class="title-inline"><b>My Medications:</b> Enter your medications and allergies so we can avoid unwanted medical interactions or side effects. </span>
+    </v-layout>
     <v-layout row wrap>
       <v-container fluid>
-        <v-layout>
-          <v-flex class="heading-sec">
-            <h1 class="medication-header">Medications</h1>
-            <p>Let us know your current medications and allergies.</p>
-          </v-flex>
-        </v-layout>
+        
         <v-layout row wrap>
           <v-flex sm12 md6>
-            <v-card class="card medication-card">
+            <v-card class="card medication-card ma-2">
               <v-card-title>
-                <v-layout>
-                  <v-flex xs12 md8>
-
-                    <label for="autosuggest__input">Medication</label>
-                    <vue-autosuggest
-                      :suggestions="filteredOptions"
-                      @selected="onSelected"
-                      :limit="limit"
-                      :input-props="inputProps"
-                      ref="mediRefName"
-                    ></vue-autosuggest>
-                  </v-flex>
-                  <v-flex xs12 md4 class="add-btn">
-                    <v-btn color="blue" @click="addMedication">Add</v-btn>
-                  </v-flex>
-                </v-layout>
+                <h3>My Medication List</h3>
               </v-card-title>
-              <hr>
               <v-card-text>
-                <h3 class="text-xs-center">My Current Medications</h3>
                 <v-list>
                   <v-list-tile v-for="(item, index) in getUserMedi" :key="index">
                     <v-list-tile-content>
@@ -44,6 +25,21 @@
                     </v-list-tile-action>
                   </v-list-tile>
                 </v-list>
+                <v-layout>
+                  <v-flex xs12 md8>
+                    <vue-autosuggest
+                      :suggestions="filteredOptions"
+                      @selected="onSelected"
+                      :limit="limit"
+                      :input-props="inputProps"
+                      ref="mediRefName"
+                    ></vue-autosuggest>
+                  </v-flex>
+                  <v-flex xs12 md4 class="add-btn">
+                    <v-btn color="green" @click="addMedication">Add</v-btn>
+                  </v-flex>
+                </v-layout>
+                
               </v-card-text>
             </v-card>
           </v-flex>
@@ -51,6 +47,9 @@
           <v-flex sm12 md6>
             <v-card class="card">
               <v-card-title class="allergy-card">
+                <h3>My Allergies</h3>
+              </v-card-title>
+              <v-card-text>
                 <v-layout row wrap>
                   <v-flex xs12 md4>
                     <label for="autosuggest__allergy">Medication</label>
@@ -84,9 +83,8 @@
                   label="No Known Drug Allergy"
                   v-model="noAllergy"
                 ></v-checkbox>
-              </v-card-title>
-              <hr>
-              <v-card-text>
+              </v-card-text>
+
                 <div class="text-xs-center">
                   <h3>My Drug Allergies</h3>
 
@@ -145,7 +143,7 @@ export default {
       inputProps: {
         id: "autosuggest__input",
         onInputChange: this.onInputChange,
-        placeholder: "Type your medication"
+        placeholder: "Add new medicine"
       },
       newAllergy: "",
       reaction: "",
@@ -154,7 +152,7 @@ export default {
       inputPropsAllergy: {
         id: "autosuggest__allergy",
         onInputChange: this.onAllergyInputChange,
-        placeholder: "Type your medication"
+        placeholder: "Add new medicine"
       },
       medAllergySelected: false,
       noAllergy: false,
@@ -374,8 +372,8 @@ export default {
 .bglightblue {
   background-color: lightblue;
 }
-.redborder {
-  border: red 2px solid;
+.title-inline {
+  font-size: 1.5em;
 }
 #autosuggest__input,
 #autosuggest__allergy {

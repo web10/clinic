@@ -2,10 +2,9 @@
   <v-container>
     <v-layout pb-4>
       <v-flex xs12>
-        <div class="text-xs-center">
-          <h3> My Medical History </h3>
-          <p >We make it easy for you to get in touch with a your doctor.  First thing is to let us know what medical problems you have had in the past or present.</p>
-        </div>
+        <span class="title-inline">
+          <b> My Medical History: </b> First, let us know what medical problems you have had in the past or present. This will help us screen for problems.</p>
+        </span>
       </v-flex>
     </v-layout>
     <v-layout row wrap>
@@ -45,7 +44,7 @@
           </v-tab-item>
         </v-tabs>
         <div class="text-xs-center mt-3">
-          <v-btn color="success" form="medicalForm" type="submit">Save</v-btn>
+          <v-btn color="success" block to="/surgicalhx" form="medicalForm" type="submit">Save Medical History and Go To Surgical History</v-btn>
         </div>
       </v-flex>
     </v-layout>
@@ -91,3 +90,9 @@ import { mapState } from 'vuex'
     }
   }
 </script>
+
+<style scoped>
+  .title-inline {
+    font-size: 1.5em;
+  }
+</style>

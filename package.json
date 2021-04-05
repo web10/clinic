@@ -1,5 +1,4 @@
 {
-
   "name": "clinic-web-app",
   "version": "1.0.0",
   "private": true,
@@ -83,10 +82,10 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "description": "Clinic App by SHC Partner",
+  "description": "Sendas Direct Care",
   "author": "Danh Nguyen <danh1975@yahoo.com>",
   "engines": {
-    "node": ">= 6.0.0",
+    "node": ">= 6.0.0", 
     "npm": ">= 3.0.0"
   }
 }
